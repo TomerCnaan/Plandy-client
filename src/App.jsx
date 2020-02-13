@@ -1,11 +1,11 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Route, Redirect, Switch } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import auth from "./services/authService";
 
 //libraries
+import { useSelector, useDispatch } from "react-redux";
+import { Route, Redirect, Switch } from "react-router-dom";
+import styled from "styled-components";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 //components
 import ProtectedRoute from "./components/common/protectedRoute";
@@ -17,7 +17,29 @@ import LoginForm from "./components/loginForm";
 import Logout from "./components/logout";
 import NotFound from "./components/notFound";
 
-import "./App.css";
+// style
+import GlobalStyle from "./global-styles";
+import "react-toastify/dist/ReactToastify.css";
+
+const AppWrapper = styled.div`
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+	position: relative;
+`;
+
+const Surface = styled.div`
+	position: absolute;
+	background-color: #1e3d6b;
+	z-index: 1;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+`;
 
 function App() {
 	useEffect(() => {
@@ -25,11 +47,16 @@ function App() {
 		// TODO: add user to redux store
 	});
 
+	const user = 0; //remove this after adding redux functionality
 	return (
 		<Fragment>
-			<ToastContainer />
-			{user ? <NavBar /> : null}
-			<main className="container">
+			<AppWrapper>
+				<ToastContainer />
+				{user && (
+					<Surface>
+						<NavBar />
+					</Surface>
+				)}
 				<Switch>
 					<Route path="/register" component={RegisterForm} />
 					<Route path="/login" component={LoginForm} />
@@ -39,11 +66,13 @@ function App() {
 						path="/board/:id"
 						render={props => <Board {...props} />}
 					/>
+					{/* TODO: add missing routes */}
 					<Route path="/not-found" component={NotFound} />
 					<Redirect from="/" exact to="/home-page" />
 					<Redirect to="/not-found" />
 				</Switch>
-			</main>
+				<GlobalStyle />
+			</AppWrapper>
 		</Fragment>
 	);
 }
