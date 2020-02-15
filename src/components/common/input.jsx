@@ -1,11 +1,12 @@
 import React from "react";
+import { Alert } from "@material-ui/lab";
 
-const Input = ({ name, label, error, ...rest }) => {
+const Input = ({ name, label, error, style, ...rest }) => {
 	return (
 		<div>
 			<label htmlFor="name">{name}</label>
 			<input {...rest} name={name} id={name} />
-			{error && <div> {error} </div>}
+			{error && <Alert severity="error"> {error} </Alert>}
 		</div>
 	);
 };

@@ -68,8 +68,6 @@ const useForm = (initialState, validationSchema, doSubmit) => {
 		);
 	}
 
-	// TODO: finish reusable form component
-
 	return {
 		handleSubmit,
 		renderInput,
