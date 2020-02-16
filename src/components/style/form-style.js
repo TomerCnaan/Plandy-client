@@ -3,8 +3,9 @@ import styled from "styled-components";
 export const FormWrapper = styled.div`
 	position: absolute;
 	display: flex;
-	width: 75%;
-	height: 90%;
+	width: 85%;
+	height: 85%;
+	min-height: 85%;
 	left: 50%;
 	transform: translate(-50%, 0);
 	align-self: center;
@@ -17,7 +18,7 @@ export const FormWrapper = styled.div`
 export const LeftBanner = styled.div`
 	position: relative;
 	display: flex;
-	height: 100%;
+	height: auto;
 	width: 41%;
 	top: 0;
 	left: 0;
@@ -26,10 +27,10 @@ export const LeftBanner = styled.div`
 `;
 
 export const RightContent = styled.div`
-	position: relative;
+	position: absolute;
 	display: flex;
 	flex-direction: column;
-
+	align-content: center;
 	height: 100%;
 	width: 59%;
 	top: 0;
@@ -37,8 +38,18 @@ export const RightContent = styled.div`
 `;
 
 export const H1 = styled.h1`
+	display: flex;
+	justify-content: center;
 	color: #f35f0c;
 	font-size: 48px;
-	text-align: center;
+	line-height: 59px;
 	font-weight: 600;
+	margin-top: 81px;
+	margin-bottom: 73px;
+`;
+
+export const FormContent = styled.div`
+	display: flex;
+	align-content: center;
+	justify-content: center;
 `;

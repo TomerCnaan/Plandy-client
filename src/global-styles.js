@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { Button } from "@material-ui/core";
 
 const GlobalStyle = createGlobalStyle`
 /* ------------------------- */
@@ -11,7 +12,7 @@ html * {
 }
 
 body {
-	font-family: "Roboto", helvetica, arial, sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	font-weight: 300;
 	line-height: 1.5;
 	width: 100%;
@@ -31,6 +32,10 @@ div {
 a {
 	text-decoration: none !important;
 	color: inherit;
+}
+
+button {
+	font-family: 'Montserrat', sans-serif;
 }
 `;
 

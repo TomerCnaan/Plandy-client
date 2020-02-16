@@ -1,0 +1,27 @@
+.submit-btn {
+	background: #f35f0c;
+	width: 307px;
+	height: 80px;
+	border-radius: 45px;
+	font-size: 28px;
+	line-height: 34px;
+	color: #ffffff;
+	border: none;
+	align-items: center;
+	margin-top: 37px;
+	margin-bottom: 60px;
+}
+
+.input-area {
+	flex: 2;
+	width: 570px;
+	height: 66px;
+	background: rgba(212, 181, 152, 0.24);
+	border: none;
+	margin-top: 37px;
+}
+
+.input-area:focus {
+	outline: none !important;
+	border: 0.5px solid #f35f0c;
+}

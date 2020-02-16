@@ -5,7 +5,6 @@ import Joi from "joi-browser";
 
 // components
 import Input from "./input";
-import Select from "./select";
 
 const useForm = (initialState, validationSchema, doSubmit) => {
 	const [data, setData] = useState(initialState);
@@ -52,7 +51,11 @@ const useForm = (initialState, validationSchema, doSubmit) => {
 	}
 
 	function renderButton(label) {
-		return <button disabled={validate()}>{label}</button>;
+		return (
+			<button className="submit-btn" disabled={validate()}>
+				{label}
+			</button>
+		);
 	}
 
 	function renderInput(name, label, type = "text") {

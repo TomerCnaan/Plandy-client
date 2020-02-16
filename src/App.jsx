@@ -32,7 +32,7 @@ const AppWrapper = styled.div`
 
 const Surface = styled.div`
 	position: absolute;
-	background-color: #1e3d6b;
+	background-color: #353761;
 	z-index: 1;
 	top: 0;
 	right: 0;
