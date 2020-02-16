@@ -7,6 +7,11 @@ import Joi from "joi-browser";
 // components
 import useForm from "./common/useForm";
 import auth from "../services/authService";
+import { blue } from "@material-ui/core/colors";
+
+// style
+import { FormWrapper, LeftBanner, RightContent, H1 } from "./style/form-style";
+import banner from "../images/form-banner.png";
 
 const INTITIAL_STATE = {
 	email: "",
@@ -36,14 +41,19 @@ const LoginForm = () => {
 
 	if (auth.getCurrentUser()) return <Redirect to="/" />;
 	return (
-		<div>
-			<h1> Login Form!!!</h1>
-			<form onSubmit={handleSubmit} noValidate>
-				{renderInput("email", "Email")}
-				{renderInput("password", "Password", "password")}
-				{renderButton("Sign in")}
-			</form>
-		</div>
+		<FormWrapper>
+			<LeftBanner>
+				<img src={banner} />
+			</LeftBanner>
+			<RightContent>
+				<H1>Log In</H1>
+				<form onSubmit={handleSubmit} noValidate>
+					{renderInput("email", "Email")}
+					{renderInput("password", "Password", "password")}
+					{renderButton("Sign in")}
+				</form>
+			</RightContent>
+		</FormWrapper>
 	);
 };
 

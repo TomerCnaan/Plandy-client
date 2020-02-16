@@ -47,31 +47,29 @@ function App() {
 		// TODO: add user to redux store
 	});
 
-	const user = 0; //remove this after adding redux functionality
+	const user = false; //remove this after adding redux functionality
 	return (
 		<Fragment>
 			<AppWrapper>
 				<ToastContainer />
-				{user && (
-					<Surface>
-						<NavBar />
-					</Surface>
-				)}
-				<Switch>
-					<Route path="/register" component={RegisterForm} />
-					<Route path="/login" component={LoginForm} />
-					<Route path="/logout" component={Logout} />
-					<ProtectedRoute path="/home-page" component={HomePage} />
-					<ProtectedRoute
-						path="/board/:id"
-						render={props => <Board {...props} />}
-					/>
-					{/* TODO: add missing routes */}
-					<Route path="/not-found" component={NotFound} />
-					<Redirect from="/" exact to="/home-page" />
-					<Redirect to="/not-found" />
-				</Switch>
-				<GlobalStyle />
+				<Surface>
+					{user && <NavBar />}
+					<Switch>
+						<Route path="/register" component={RegisterForm} />
+						<Route path="/login" component={LoginForm} />
+						<Route path="/logout" component={Logout} />
+						<ProtectedRoute path="/home-page" component={HomePage} />
+						<ProtectedRoute
+							path="/board/:id"
+							render={props => <Board {...props} />}
+						/>
+						{/* TODO: add missing routes */}
+						<Route path="/not-found" component={NotFound} />
+						<Redirect from="/" exact to="/home-page" />
+						<Redirect to="/not-found" />
+					</Switch>
+					<GlobalStyle />
+				</Surface>
 			</AppWrapper>
 		</Fragment>
 	);
