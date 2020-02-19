@@ -44,7 +44,6 @@ const Surface = styled.div`
 function App() {
 	useEffect(() => {
 		const user = auth.getCurrentUser();
-		// TODO: add user to redux store
 	});
 
 	const user = false; //remove this after adding redux functionality

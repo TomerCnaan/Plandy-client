@@ -10,51 +10,20 @@ import auth from "../services/authService";
 
 // style
 import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
 import "./style/form-elements.css";
-import { H1 } from "./style/form-style";
-import Banner from "../images/form-banner.png";
+import { useStyles, H1 } from "./style/form-style";
+import Sign from "../images/sign.svg";
 
-// --------------------
-
-const useStyles = makeStyles(theme => ({
-	root: {
-		flexGrow: 1
-	},
-	wrapper: {
-		position: "absolute",
-		left: "50%",
-		top: "50%",
-		transform: "translate(-50%, -50%)",
-		height: "85%",
-		backgroundColor: "white",
-		borderRadius: "24px 24px 24px 24px",
-		boxShadow:
-			"9px 9px 8px rgba(23, 23, 27, 0.36), 15px 15px 10px rgba(0, 0, 0, 0.17)"
-	},
-	image: {
-		backgroundImage: `url(${Banner})`,
-		backgroundRepeat: "no-repeat",
-		backgroundSize: "cover",
-		backgroundPosition: "center",
-		borderRadius: "24px 0px 0px 24px"
-	},
-	form: {
-		textAlign: "center"
-	},
-	link: {
-		fontSize: "20px"
-	}
-}));
+// ---------------------------------------------
 
 const INTITIAL_STATE = {
 	email: "",
 	password: ""
 };
 
-// --------------------
+// ---------------------------------------------
 
-const LoginForm = () => {
+const LoginForm = props => {
 	const schema = {
 		email: Joi.string()
 			.required()
@@ -65,8 +34,18 @@ const LoginForm = () => {
 			.label("Password")
 	};
 
-	const doSubmit = async () => {
-		console.log("submitted");
+	const doSubmit = async (data, errors) => {
+		try {
+			auth.login(data.email, data.password);
+			const { state } = props.location;
+			window.location = state ? state.from.pathname : "/";
+		} catch (ex) {
+			console.log("exception occured");
+			if (ex.response && ex.response.status === 400) {
+				errors.email = ex.response.data;
+				return { ...errors };
+			}
+		}
 	};
 
 	const { handleSubmit, renderInput, renderButton } = useForm(
@@ -76,12 +55,13 @@ const LoginForm = () => {
 	);
 
 	const classes = useStyles();
+
 	if (auth.getCurrentUser()) return <Redirect to="/" />;
 	return (
 		<div className={classes.root}>
 			<Grid container direction="row" xs={10} className={classes.wrapper}>
-				<Grid container direction="column" xs={4}>
-					<Grid item xs={12} className={classes.image}></Grid>
+				<Grid item xs={4} className={classes.image}>
+					<img src={`${Sign}`} className={classes.formLogo} alt="logo" />
 				</Grid>
 				<Grid container direction="column" xs={8} alignContent="center">
 					<H1>Log In</H1>

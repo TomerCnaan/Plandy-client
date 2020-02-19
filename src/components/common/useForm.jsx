@@ -30,16 +30,18 @@ const useForm = (initialState, validationSchema, doSubmit) => {
 	function handleSubmit(e) {
 		e.preventDefault();
 
-		const _errors = validate();
+		let _errors = validate();
 		setErrors({ errors: _errors || {} });
 		if (_errors) return;
 
-		doSubmit();
+		_errors = doSubmit(data, errors);
+		if (_errors) {
+			setErrors({ ..._errors });
+		}
 	}
 
 	function handleChange({ currentTarget: input }) {
 		const { name, value } = input;
-		const _errors = errors;
 		const errorMessage = validateProperty(input);
 		if (errorMessage) setErrors({ ...errors, [name]: errorMessage });
 		else setErrors({ ...errors, [name]: "" });
