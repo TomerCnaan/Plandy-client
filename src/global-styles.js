@@ -36,6 +36,7 @@ a {
 
 button {
 	font-family: 'Montserrat', sans-serif;
+	background: transparent;
 }
 `;
 

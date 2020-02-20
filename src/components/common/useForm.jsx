@@ -60,13 +60,14 @@ const useForm = (initialState, validationSchema, doSubmit) => {
 		);
 	}
 
-	function renderInput(name, label, type = "text") {
+	function renderInput(name, label, placeholder, type = "text") {
 		return (
 			<Input
 				type={type}
 				name={name}
 				value={data[name]}
 				label={label}
+				placeholder={placeholder}
 				onChange={handleChange}
 				error={errors[name]}
 			/>

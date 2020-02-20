@@ -8,12 +8,20 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const Input = ({ name, label, error, style, ...rest }) => {
+const Input = ({ name, label, placeholder, error, style, ...rest }) => {
 	const classes = useStyles();
 	return (
-		<div>
-			<label htmlFor="name">{label}</label>
-			<input className="input-area" {...rest} name={name} id={name} />
+		<div className="space-even">
+			<label htmlFor="name" className="label-form">
+				<img src={label} alt="label" />
+			</label>
+			<input
+				className="input-area"
+				{...rest}
+				name={name}
+				id={name}
+				placeholder={placeholder}
+			/>
 			{error && (
 				<div style={{ marginLeft: "61px" }}>
 					<Alert variant="outlined" severity="error" className={classes.alert}>

@@ -14,6 +14,10 @@ import Grid from "@material-ui/core/Grid";
 import "./style/form-elements.css";
 import { useStyles, H1 } from "./style/form-style";
 import Sign from "../images/sign.svg";
+import nameLabel from "../images/name-label.svg";
+import emailLabel from "../images/email-label.svg";
+import passwordLabel from "../images/password-label.svg";
+import companyLabel from "../images/company-label.svg";
 
 // ---------------------------------------------
 
@@ -70,17 +74,23 @@ const RegiterForm = props => {
 
 	return (
 		<div className={classes.root}>
-			<Grid container direction="row" xs={10} className={classes.wrapper}>
-				<Grid item xs={4} className={classes.image}>
+			<Grid
+				container
+				direction="row"
+				sm={false}
+				lg={10}
+				className={classes.wrapper}
+			>
+				<Grid item sm={false} md={3} lg={4} className={classes.image}>
 					<img src={`${Sign}`} className={classes.formLogo} alt="logo" />
 				</Grid>
-				<Grid container direction="column" xs={8} alignContent="center">
+				<Grid item sm={12} md={9} lg={8} alignContent="center">
 					<H1>Create Account</H1>
 					<form onSubmit={handleSubmit} noValidate className={classes.form}>
-						{renderInput("name", "Name")}
-						{renderInput("email", "Email")}
-						{renderInput("password", "Password", "password")}
-						{renderInput("companyName", "Company Name")}
+						{renderInput("name", nameLabel, "Name")}
+						{renderInput("email", emailLabel, "Email")}
+						{renderInput("password", passwordLabel, "Password", "password")}
+						{renderInput("companyName", companyLabel, "Company Name")}
 						{renderButton("Sign Up")}
 					</form>
 					<Grid item align="center" className={classes.link}>

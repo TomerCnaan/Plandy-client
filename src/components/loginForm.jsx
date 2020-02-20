@@ -13,6 +13,8 @@ import Grid from "@material-ui/core/Grid";
 import "./style/form-elements.css";
 import { useStyles, H1 } from "./style/form-style";
 import Sign from "../images/sign.svg";
+import emailLabel from "../images/email-label.svg";
+import passwordLabel from "../images/password-label.svg";
 
 // ---------------------------------------------
 
@@ -66,8 +68,8 @@ const LoginForm = props => {
 				<Grid container direction="column" xs={8} alignContent="center">
 					<H1>Log In</H1>
 					<form onSubmit={handleSubmit} noValidate className={classes.form}>
-						{renderInput("email", "Email")}
-						{renderInput("password", "Password", "password")}
+						{renderInput("email", emailLabel)}
+						{renderInput("password", passwordLabel, "password")}
 						{renderButton("Sign In")}
 					</form>
 					<Grid item align="center" className={classes.link}>

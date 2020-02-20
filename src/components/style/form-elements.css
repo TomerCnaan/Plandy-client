@@ -14,14 +14,47 @@
 
 .input-area {
 	flex: 2;
-	width: 570px;
+	width: 53%;
+	min-width: 325px;
 	height: 66px;
 	background: rgba(212, 181, 152, 0.24);
 	border: none;
 	margin-top: 37px;
+	margin-left: 24px;
+	padding-left: 21px;
+	padding-top: 19px;
+	padding-bottom: 18px;
+	font-family: "Montserrat", sans-serif;
+	font-weight: 300;
+	font-size: 24px;
+	line-height: 29px;
+
+	color: black;
+}
+
+::placeholder {
+	color: #999999;
 }
 
 .input-area:focus {
 	outline: none !important;
-	border: 0.5px solid #f35f0c;
+	border: 0.5px solid #e4793b;
+}
+
+.label-form {
+	flex: 1;
+}
+
+.space-even {
+	/* display: flex;
+	/* flex-direction: column; 
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-content: center; */
+}
+
+@media (max-width: 767px) {
+	.bgimg {
+		background-image: none;
+	}
 }
