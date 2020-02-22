@@ -1,6 +1,6 @@
 .submit-btn {
 	background: #f35f0c;
-	width: 307px;
+	width: 28%;
 	height: 80px;
 	border-radius: 45px;
 	font-size: 28px;
@@ -8,25 +8,25 @@
 	color: #ffffff;
 	border: none;
 	align-items: center;
-	margin-top: 37px;
-	margin-bottom: 60px;
+	margin-top: 4.3%;
+	margin-bottom: 6.9%;
 }
 
 .input-area {
-	flex: 2;
-	width: 53%;
-	min-width: 325px;
-	height: 66px;
+	width: 50%;
+	min-width: 150px;
+	height: 7.3%;
 	background: rgba(212, 181, 152, 0.24);
 	border: none;
-	margin-top: 37px;
+	/* margin-top: 37px; */
+	margin-top: 4.3%;
 	margin-left: 24px;
 	padding-left: 21px;
 	padding-top: 19px;
 	padding-bottom: 18px;
 	font-family: "Montserrat", sans-serif;
 	font-weight: 300;
-	font-size: 24px;
+	font-size: 20px;
 	line-height: 29px;
 
 	color: black;
@@ -39,22 +39,4 @@
 .input-area:focus {
 	outline: none !important;
 	border: 0.5px solid #e4793b;
-}
-
-.label-form {
-	flex: 1;
-}
-
-.space-even {
-	/* display: flex;
-	/* flex-direction: column; 
-	flex-wrap: wrap;
-	justify-content: space-evenly;
-	align-content: center; */
-}
-
-@media (max-width: 767px) {
-	.bgimg {
-		background-image: none;
-	}
 }

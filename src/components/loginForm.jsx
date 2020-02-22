@@ -61,15 +61,21 @@ const LoginForm = props => {
 	if (auth.getCurrentUser()) return <Redirect to="/" />;
 	return (
 		<div className={classes.root}>
-			<Grid container direction="row" xs={10} className={classes.wrapper}>
-				<Grid item xs={4} className={classes.image}>
+			<Grid
+				container
+				direction="row"
+				sm={10}
+				lg={10}
+				className={classes.wrapper}
+			>
+				<Grid item sm={false} md={3} lg={4} className={classes.image}>
 					<img src={`${Sign}`} className={classes.formLogo} alt="logo" />
 				</Grid>
-				<Grid container direction="column" xs={8} alignContent="center">
+				<Grid item sm={9} md={9} lg={8} alignContent="center">
 					<H1>Log In</H1>
 					<form onSubmit={handleSubmit} noValidate className={classes.form}>
-						{renderInput("email", emailLabel)}
-						{renderInput("password", passwordLabel, "password")}
+						{renderInput("email", emailLabel, "Email")}
+						{renderInput("password", passwordLabel, "Password", "password")}
 						{renderButton("Sign In")}
 					</form>
 					<Grid item align="center" className={classes.link}>

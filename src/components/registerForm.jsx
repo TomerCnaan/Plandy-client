@@ -77,15 +77,17 @@ const RegiterForm = props => {
 			<Grid
 				container
 				direction="row"
-				sm={false}
+				sm={10}
 				lg={10}
 				className={classes.wrapper}
 			>
 				<Grid item sm={false} md={3} lg={4} className={classes.image}>
 					<img src={`${Sign}`} className={classes.formLogo} alt="logo" />
 				</Grid>
-				<Grid item sm={12} md={9} lg={8} alignContent="center">
-					<H1>Create Account</H1>
+				<Grid item sm={9} md={9} lg={8} alignContent="center">
+					<H1 style={{ marginTop: "5.8%", marginBottom: "4.1%" }}>
+						Create Account
+					</H1>
 					<form onSubmit={handleSubmit} noValidate className={classes.form}>
 						{renderInput("name", nameLabel, "Name")}
 						{renderInput("email", emailLabel, "Email")}

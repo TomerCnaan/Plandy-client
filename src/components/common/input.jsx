@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
 const Input = ({ name, label, placeholder, error, style, ...rest }) => {
 	const classes = useStyles();
 	return (
-		<div className="space-even">
+		<div>
 			<label htmlFor="name" className="label-form">
 				<img src={label} alt="label" />
 			</label>
@@ -23,7 +23,7 @@ const Input = ({ name, label, placeholder, error, style, ...rest }) => {
 				placeholder={placeholder}
 			/>
 			{error && (
-				<div style={{ marginLeft: "61px" }}>
+				<div>
 					<Alert variant="outlined" severity="error" className={classes.alert}>
 						{" "}
 						{error}{" "}

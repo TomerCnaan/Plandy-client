@@ -15,18 +15,20 @@ export const useStyles = makeStyles(theme => ({
 		backgroundColor: "white",
 		borderRadius: "24px 24px 24px 24px",
 		boxShadow:
-			"9px 9px 8px rgba(23, 23, 27, 0.36), 15px 15px 10px rgba(0, 0, 0, 0.17)"
+			"9px 9px 8px rgba(23, 23, 27, 0.36), 15px 15px 10px rgba(0, 0, 0, 0.17)",
+		overflow: "hidden"
 	},
 	image: {
 		backgroundImage: `url(${Banner})`,
-		backgroundRepeat: "no-repeat",
-		backgroundSize: "cover",
 		backgroundPosition: "center",
-		borderRadius: "24px 0px 0px 24px"
+		borderRadius: "24px 0px 0px 24px",
+		height: "100%"
 	},
 	form: {
-		textAlign: "center"
+		textAlign: "center",
+		height: "71.5%"
 	},
+	formContainer: {},
 	link: {
 		fontSize: "20px"
 	},
