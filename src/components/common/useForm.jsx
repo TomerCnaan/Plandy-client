@@ -28,13 +28,17 @@ const useForm = (initialState, validationSchema, doSubmit) => {
 	}
 
 	function handleSubmit(e) {
+		console.log("handle submit");
 		e.preventDefault();
 
 		let _errors = validate();
 		setErrors({ errors: _errors || {} });
 		if (_errors) return;
 
-		_errors = doSubmit(data, errors);
+		// doSubmit(data, errors);
+		_errors = doSubmit(data, errors); //FIXME: not getting the errors from do submit
+		console.log("_errors");
+		console.dir(_errors);
 		if (_errors) {
 			setErrors({ ..._errors });
 		}

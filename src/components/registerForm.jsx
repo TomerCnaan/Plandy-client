@@ -47,13 +47,10 @@ const RegiterForm = props => {
 			.label("Company Name")
 	};
 
-	const doSubmit = (data, errors) => {
+	const doSubmit = async (data, errors) => {
 		try {
-			const response = userService.register(data);
-
-			console.log(response.headers["x-auth-token"]); //TODO: fix the function. fails on auth.loginWithJwt
+			const response = await userService.register(data);
 			auth.loginWithJwt(response.headers["x-auth-token"]);
-			console.log("logging in with jwt");
 			window.location = "/";
 		} catch (ex) {
 			console.log("exception occured");
@@ -74,17 +71,11 @@ const RegiterForm = props => {
 
 	return (
 		<div className={classes.root}>
-			<Grid
-				container
-				direction="row"
-				sm={10}
-				lg={10}
-				className={classes.wrapper}
-			>
+			<Grid container direction="row" className={classes.wrapper}>
 				<Grid item sm={false} md={3} lg={4} className={classes.image}>
 					<img src={`${Sign}`} className={classes.formLogo} alt="logo" />
 				</Grid>
-				<Grid item sm={9} md={9} lg={8} alignContent="center">
+				<Grid item sm={9} md={9} lg={8}>
 					<H1 style={{ marginTop: "5.8%", marginBottom: "4.1%" }}>
 						Create Account
 					</H1>

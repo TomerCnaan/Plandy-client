@@ -8,6 +8,7 @@ export const useStyles = makeStyles(theme => ({
 	},
 	wrapper: {
 		position: "absolute",
+		width: "85%",
 		left: "50%",
 		top: "50%",
 		transform: "translate(-50%, -50%)",
@@ -22,11 +23,12 @@ export const useStyles = makeStyles(theme => ({
 		backgroundImage: `url(${Banner})`,
 		backgroundPosition: "center",
 		borderRadius: "24px 0px 0px 24px",
-		height: "100%"
+		height: "100%",
+		backgroundRepeat: "no-repeat"
 	},
 	form: {
-		textAlign: "center",
-		height: "71.5%"
+		textAlign: "center"
+		// height: "71.5%"
 	},
 	formContainer: {},
 	link: {

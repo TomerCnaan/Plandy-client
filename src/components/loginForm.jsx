@@ -38,11 +38,13 @@ const LoginForm = props => {
 
 	const doSubmit = async (data, errors) => {
 		try {
-			auth.login(data.email, data.password);
-			const { state } = props.location;
-			window.location = state ? state.from.pathname : "/";
+			console.log("in login do submit");
+			await auth.login(data.email, data.password);
+			// const { state } = props.location;
+			// window.location = state ? state.from.pathname : "/";
+			window.location = "/";
 		} catch (ex) {
-			console.log("exception occured");
+			console.dir(ex.response);
 			if (ex.response && ex.response.status === 400) {
 				errors.email = ex.response.data;
 				return { ...errors };
@@ -61,17 +63,11 @@ const LoginForm = props => {
 	if (auth.getCurrentUser()) return <Redirect to="/" />;
 	return (
 		<div className={classes.root}>
-			<Grid
-				container
-				direction="row"
-				sm={10}
-				lg={10}
-				className={classes.wrapper}
-			>
+			<Grid container direction="row" className={classes.wrapper}>
 				<Grid item sm={false} md={3} lg={4} className={classes.image}>
 					<img src={`${Sign}`} className={classes.formLogo} alt="logo" />
 				</Grid>
-				<Grid item sm={9} md={9} lg={8} alignContent="center">
+				<Grid item sm={9} md={9} lg={8}>
 					<H1>Log In</H1>
 					<form onSubmit={handleSubmit} noValidate className={classes.form}>
 						{renderInput("email", emailLabel, "Email")}
