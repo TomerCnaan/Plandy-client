@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 // libraries
 import Joi from "joi-browser";
@@ -27,18 +27,14 @@ const useForm = (initialState, validationSchema, doSubmit) => {
 		return error ? error.details[0].message : null;
 	}
 
-	function handleSubmit(e) {
-		console.log("handle submit");
+	async function handleSubmit(e) {
 		e.preventDefault();
 
 		let _errors = validate();
 		setErrors({ errors: _errors || {} });
 		if (_errors) return;
 
-		// doSubmit(data, errors);
-		_errors = doSubmit(data, errors); //FIXME: not getting the errors from do submit
-		console.log("_errors");
-		console.dir(_errors);
+		_errors = await doSubmit(data, errors);
 		if (_errors) {
 			setErrors({ ..._errors });
 		}

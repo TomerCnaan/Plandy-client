@@ -4,7 +4,13 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
 	alert: {
-		width: "570px"
+		display: "inline-flex",
+		minWidth: "58.5%",
+		marginTop: "0px",
+		backgroundColor: "rgb(239, 174, 168)"
+	},
+	label: {
+		verticalAlign: "middle"
 	}
 }));
 
@@ -12,7 +18,7 @@ const Input = ({ name, label, placeholder, error, style, ...rest }) => {
 	const classes = useStyles();
 	return (
 		<div>
-			<label htmlFor="name" className="label-form">
+			<label htmlFor="name" className={classes.label}>
 				<img src={label} alt="label" />
 			</label>
 			<input
@@ -24,7 +30,7 @@ const Input = ({ name, label, placeholder, error, style, ...rest }) => {
 			/>
 			{error && (
 				<div>
-					<Alert variant="outlined" severity="error" className={classes.alert}>
+					<Alert severity="error" className={classes.alert}>
 						{" "}
 						{error}{" "}
 					</Alert>

@@ -3,6 +3,7 @@ import auth from "./services/authService";
 
 //libraries
 import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "./actions/userActions";
 import { Route, Redirect, Switch } from "react-router-dom";
 import styled from "styled-components";
 import { ToastContainer } from "react-toastify";
@@ -42,11 +43,18 @@ const Surface = styled.div`
 `;
 
 function App() {
-	useEffect(() => {
-		const user = auth.getCurrentUser();
-	});
+	// redux set up
+	// const user = useSelector(state => state.users.user);
+	// const dispatch = useDispatch();
 
-	const user = false; //remove this after adding redux functionality
+	const [user, setUser] = useState({});
+
+	useEffect(() => {
+		// dispatch(setUser({ ...auth.getCurrentUser() }));
+		setUser({ ...auth.getCurrentUser() });
+	}, []);
+
+	// const user = false; //remove this after adding redux functionality
 	return (
 		<Fragment>
 			<AppWrapper>

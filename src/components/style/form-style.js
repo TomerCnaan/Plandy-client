@@ -13,11 +13,13 @@ export const useStyles = makeStyles(theme => ({
 		top: "50%",
 		transform: "translate(-50%, -50%)",
 		height: "85%",
+		maxHeight: "902px",
+		minHeight: "590px",
 		backgroundColor: "white",
 		borderRadius: "24px 24px 24px 24px",
 		boxShadow:
 			"9px 9px 8px rgba(23, 23, 27, 0.36), 15px 15px 10px rgba(0, 0, 0, 0.17)",
-		overflow: "hidden"
+		overflowY: "auto"
 	},
 	image: {
 		backgroundImage: `url(${Banner})`,
@@ -37,6 +39,9 @@ export const useStyles = makeStyles(theme => ({
 	formLogo: {
 		marginLeft: "32px",
 		marginTop: "32px"
+	},
+	rightContent: {
+		overflowY: "auto"
 	}
 }));
 

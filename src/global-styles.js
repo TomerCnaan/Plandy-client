@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import { Button } from "@material-ui/core";
 
 const GlobalStyle = createGlobalStyle`
 /* ------------------------- */

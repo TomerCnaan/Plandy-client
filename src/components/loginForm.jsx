@@ -38,13 +38,11 @@ const LoginForm = props => {
 
 	const doSubmit = async (data, errors) => {
 		try {
-			console.log("in login do submit");
 			await auth.login(data.email, data.password);
 			// const { state } = props.location;
 			// window.location = state ? state.from.pathname : "/";
 			window.location = "/";
 		} catch (ex) {
-			console.dir(ex.response);
 			if (ex.response && ex.response.status === 400) {
 				errors.email = ex.response.data;
 				return { ...errors };

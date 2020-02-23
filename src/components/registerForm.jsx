@@ -53,7 +53,6 @@ const RegiterForm = props => {
 			auth.loginWithJwt(response.headers["x-auth-token"]);
 			window.location = "/";
 		} catch (ex) {
-			console.log("exception occured");
 			if (ex.response && ex.response.status === 400) {
 				errors.email = ex.response.data;
 				return { ...errors };
@@ -76,9 +75,7 @@ const RegiterForm = props => {
 					<img src={`${Sign}`} className={classes.formLogo} alt="logo" />
 				</Grid>
 				<Grid item sm={9} md={9} lg={8}>
-					<H1 style={{ marginTop: "5.8%", marginBottom: "4.1%" }}>
-						Create Account
-					</H1>
+					<H1>Create Account</H1>
 					<form onSubmit={handleSubmit} noValidate className={classes.form}>
 						{renderInput("name", nameLabel, "Name")}
 						{renderInput("email", emailLabel, "Email")}
