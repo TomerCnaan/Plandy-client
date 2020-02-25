@@ -47,14 +47,15 @@ function App() {
 	// const user = useSelector(state => state.users.user);
 	// const dispatch = useDispatch();
 
-	const [user, setUser] = useState({});
+	const [user, setUser] = useState();
 
 	useEffect(() => {
 		// dispatch(setUser({ ...auth.getCurrentUser() }));
-		setUser({ ...auth.getCurrentUser() });
+		// setUser({ ..._user });
+		auth.getCurrentUser();
 	}, []);
 
-	// const user = false; //remove this after adding redux functionality
+	const _user = false; //remove this after adding redux functionality
 	return (
 		<Fragment>
 			<AppWrapper>
