@@ -47,21 +47,21 @@ function App() {
 	// const user = useSelector(state => state.users.user);
 	// const dispatch = useDispatch();
 
-	const [user, setUser] = useState();
+	const [user, setUser] = useState("");
 
 	useEffect(() => {
 		// dispatch(setUser({ ...auth.getCurrentUser() }));
 		// setUser({ ..._user });
-		auth.getCurrentUser();
+		const user = auth.getCurrentUser();
+		setUser(user);
 	}, []);
 
-	const _user = false; //remove this after adding redux functionality
 	return (
 		<Fragment>
 			<AppWrapper>
 				<ToastContainer />
 				<Surface>
-					{user && <NavBar />}
+					<NavBar user={user} />
 					<Switch>
 						<Route path="/register" component={RegisterForm} />
 						<Route path="/login" component={LoginForm} />

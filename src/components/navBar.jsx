@@ -4,6 +4,10 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 
+// style
+import navLogo from "../images/nav-logo.svg";
+import navNotif from "../images/nav-notif.svg";
+
 const SideNav = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -14,16 +18,43 @@ const SideNav = styled.div`
 	left: 0;
 	flex-shrink: 0;
 	color: #ffffff;
-	background-color: #1e3d6b;
+	background-color: #353761;
 `;
 
-const NavBar = () => {
+const NavItems = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	height: 100%;
+`;
+
+const Logo = styled.div`
+	margin: 22px 28px 41px 28px;
+`;
+
+const NavBar = userObj => {
+	const { user } = userObj;
 	return (
-		<SideNav>
-			<Link className="" to="/">
-				P
-			</Link>
-		</SideNav>
+		<div>
+			{user && (
+				<SideNav>
+					<NavItems>
+						<Logo>
+							<Link className="" to="/">
+								<img src={navLogo} alt="logo" width="41px" height="51.42px" />
+							</Link>
+						</Logo>
+						<img
+							src={navNotif}
+							alt="notifications"
+							width="40px"
+							height="40px"
+						/>
+					</NavItems>
+				</SideNav>
+			)}
+		</div>
 	);
 };
 
