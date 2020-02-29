@@ -10,13 +10,15 @@ import { ToastContainer } from "react-toastify";
 
 //components
 import ProtectedRoute from "./components/common/protectedRoute";
-import NavBar from "./components/navBar";
+import NavBar from "./components/NavBar/navBar";
 import HomePage from "./components/homePage";
 import Board from "./components/board";
 import RegisterForm from "./components/registerForm";
 import LoginForm from "./components/loginForm";
 import Logout from "./components/logout";
 import NotFound from "./components/notFound";
+import TeamPage from "./components/teamPage";
+import ProfilePage from "./components/profilePage";
 
 // style
 import GlobalStyle from "./global-styles";
@@ -66,6 +68,8 @@ function App() {
 						<Route path="/register" component={RegisterForm} />
 						<Route path="/login" component={LoginForm} />
 						<Route path="/logout" component={Logout} />
+						<ProtectedRoute path="/company" component={TeamPage} />
+						<ProtectedRoute path="/profile" component={ProfilePage} />
 						<ProtectedRoute path="/home-page" component={HomePage} />
 						<ProtectedRoute
 							path="/board/:id"
