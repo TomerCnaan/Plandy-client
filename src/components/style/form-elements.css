@@ -43,6 +43,16 @@
 	border: 0.5px solid #e4793b;
 }
 
+.submit-btn:disabled {
+	cursor: not-allowed;
+	pointer-events: all !important;
+	background-color: #ff8c4a;
+}
+
+.submit-btn:enabled {
+	cursor: pointer;
+}
+
 /* scrollbar */
 
 ::-webkit-scrollbar {
@@ -58,4 +68,30 @@
 ::-webkit-scrollbar-track {
 	border-radius: 10px;
 	background-color: rgb(53, 53, 53);
+}
+
+/* modal */
+
+.modal-submit-btn {
+	background: #f35f0c;
+	width: 28%;
+	height: 60px;
+	border-radius: 45px;
+	font-size: 18px;
+	line-height: 28px;
+	color: #ffffff;
+	border: none;
+	align-items: center;
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
+.modal-submit-btn:disabled {
+	cursor: not-allowed;
+	pointer-events: all !important;
+	background-color: #ff8c4a;
+}
+
+.modal-submit-btn:enabled {
+	cursor: pointer;
 }

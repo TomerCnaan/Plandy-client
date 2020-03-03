@@ -2,8 +2,8 @@ import React, { useState, useEffect, Fragment } from "react";
 import auth from "./services/authService";
 
 //libraries
-import { useSelector, useDispatch } from "react-redux";
-import { setUser } from "./actions/userActions";
+// import { useSelector, useDispatch } from "react-redux";
+// import { setUser } from "./actions/userActions";
 import { Route, Redirect, Switch } from "react-router-dom";
 import styled from "styled-components";
 import { ToastContainer } from "react-toastify";
@@ -14,6 +14,7 @@ import NavBar from "./components/NavBar/navBar";
 import HomePage from "./components/homePage";
 import Board from "./components/board";
 import RegisterForm from "./components/registerForm";
+import JoinForm from "./components/joinForm";
 import LoginForm from "./components/loginForm";
 import Logout from "./components/logout";
 import NotFound from "./components/notFound";
@@ -66,6 +67,7 @@ function App() {
 					<NavBar user={user} />
 					<Switch>
 						<Route path="/register" component={RegisterForm} />
+						<Route path="/join/:token" component={JoinForm} />
 						<Route path="/login" component={LoginForm} />
 						<Route path="/logout" component={Logout} />
 						<ProtectedRoute path="/company" component={TeamPage} />

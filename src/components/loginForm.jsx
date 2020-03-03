@@ -1,6 +1,6 @@
 import React from "react";
 
-// libraried
+// libraries
 import { NavLink, Redirect } from "react-router-dom";
 import Joi from "joi-browser";
 
@@ -70,7 +70,7 @@ const LoginForm = props => {
 					<form onSubmit={handleSubmit} noValidate className={classes.form}>
 						{renderInput("email", emailLabel, "Email")}
 						{renderInput("password", passwordLabel, "Password", "password")}
-						{renderButton("Sign In")}
+						{renderButton("Sign In", "submit-btn")}
 					</form>
 					<Grid item align="center" className={classes.link}>
 						<span>

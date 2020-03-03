@@ -17,20 +17,18 @@ import Sign from "../images/sign.svg";
 import nameLabel from "../images/name-label.svg";
 import emailLabel from "../images/email-label.svg";
 import passwordLabel from "../images/password-label.svg";
-import companyLabel from "../images/company-label.svg";
 
 // ---------------------------------------------
 
 const INTITIAL_STATE = {
 	name: "",
 	email: "",
-	password: "",
-	companyName: ""
+	password: ""
 };
 
 // ---------------------------------------------
 
-const RegiterForm = props => {
+const JoinForm = ({ match }) => {
 	const schema = {
 		name: Joi.string()
 			.required()
@@ -41,15 +39,12 @@ const RegiterForm = props => {
 			.label("Email"),
 		password: Joi.string()
 			.required()
-			.label("Password"),
-		companyName: Joi.string()
-			.required()
-			.label("Company Name")
+			.label("Password")
 	};
 
 	const doSubmit = async (data, errors) => {
 		try {
-			const response = await userService.register(data);
+			const response = await userService.addUser(data, match.params.token);
 			auth.loginWithJwt(response.headers["x-auth-token"]);
 			window.location = "/";
 		} catch (ex) {
@@ -76,12 +71,11 @@ const RegiterForm = props => {
 					<img src={`${Sign}`} className={classes.formLogo} alt="logo" />
 				</Grid>
 				<Grid item sm={9} md={9} lg={8}>
-					<H1>Create Account</H1>
+					<H1>Create User</H1>
 					<form onSubmit={handleSubmit} noValidate className={classes.form}>
 						{renderInput("name", nameLabel, "Name")}
 						{renderInput("email", emailLabel, "Email")}
 						{renderInput("password", passwordLabel, "Password", "password")}
-						{renderInput("companyName", companyLabel, "Company Name")}
 						{renderButton("Sign Up", "submit-btn")}
 					</form>
 					<Grid item align="center" className={classes.link}>
@@ -98,4 +92,4 @@ const RegiterForm = props => {
 	);
 };
 
-export default RegiterForm;
+export default JoinForm;

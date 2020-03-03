@@ -11,4 +11,18 @@ function register(user) {
 	});
 }
 
-export default { register };
+function sendInvitation(user) {
+	return http.post(`${apiEndpoint}/add`, {
+		email: user.email
+	});
+}
+
+function addUser(user, token) {
+	return http.post(`${apiEndpoint}/add/${token}`, {
+		name: user.name,
+		email: user.email,
+		password: user.password
+	});
+}
+
+export default { register, sendInvitation, addUser };

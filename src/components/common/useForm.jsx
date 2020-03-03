@@ -52,9 +52,9 @@ const useForm = (initialState, validationSchema, doSubmit) => {
 		});
 	}
 
-	function renderButton(label) {
+	function renderButton(label, style) {
 		return (
-			<button className="submit-btn" disabled={validate()}>
+			<button className={style} disabled={validate()}>
 				{label}
 			</button>
 		);
