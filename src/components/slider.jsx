@@ -3,9 +3,11 @@ import React, { useState } from "react";
 // libraries
 import { useSpring, animated } from "react-spring";
 
+// components
+import BoardNav from "./BoardNav/boardNav";
+
 // style
-import { SliderContent } from "./slider-style";
-import Arrow from "../../images/slider-arrow.svg";
+import Arrow from "../images/slider-arrow.svg";
 
 const Slider = () => {
 	const [isHovered, setIsHovered] = useState(false);
@@ -59,9 +61,7 @@ const Slider = () => {
 				<img src={Arrow} alt="arrow" />
 			</animated.div>
 			<animated.div style={showContent}>
-				<SliderContent>
-					<h1>boards</h1>
-				</SliderContent>
+				<BoardNav />
 			</animated.div>
 		</animated.div>
 	);

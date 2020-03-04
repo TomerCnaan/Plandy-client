@@ -1,7 +1,7 @@
 import React from "react";
 
 // components
-import Slider from "./slider/slider";
+import Slider from "./slider";
 
 // style
 import { MainWrapper, MainContent } from "./style/main-app";

@@ -56,18 +56,15 @@
 /* scrollbar */
 
 ::-webkit-scrollbar {
-	width: 8px;
-	background-color: rgb(53, 53, 53);
+	width: 0.25rem;
 }
 
 ::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	background-color: #999999;
+	background-color: #f35f0c;
 }
 
 ::-webkit-scrollbar-track {
-	border-radius: 10px;
-	background-color: rgb(53, 53, 53);
+	background-color: #1e1e24;
 }
 
 /* modal */
