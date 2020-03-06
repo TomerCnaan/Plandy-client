@@ -5,6 +5,7 @@ import Joi from "joi-browser";
 
 // components
 import Input from "./input";
+import Select from "./select";
 
 const useForm = (initialState, validationSchema, doSubmit) => {
 	const [data, setData] = useState(initialState);
@@ -74,10 +75,25 @@ const useForm = (initialState, validationSchema, doSubmit) => {
 		);
 	}
 
+	function renderSelect(name, label, placeholder, options) {
+		return (
+			<Select
+				name={name}
+				value={data[name]}
+				label={label}
+				placeholder={placeholder}
+				options={options}
+				onChange={handleChange}
+				error={errors[name]}
+			/>
+		);
+	}
+
 	return {
 		handleSubmit,
 		renderInput,
-		renderButton
+		renderButton,
+		renderSelect
 	};
 };
 
