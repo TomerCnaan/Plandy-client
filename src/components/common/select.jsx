@@ -18,7 +18,11 @@ const Select = ({ name, label, placeholder, options, error, ...rest }) => {
 	const classes = useStyles();
 	return (
 		<div>
-			<label htmlFor={name} className={classes.label}>
+			<label
+				htmlFor={name}
+				className={classes.label}
+				style={{ fontWeight: "bold", fontSize: "14px" }}
+			>
 				{label}
 			</label>
 			<select name={name} id={name} {...rest} className="input-area">
