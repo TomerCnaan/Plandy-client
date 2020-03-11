@@ -14,6 +14,7 @@ const BoardNav = () => {
 		<SliderContent>
 			<Header>
 				<Title>Boards</Title>
+				{/* TODO: conditionaly render AddBoardModal - save user to redux store */}
 				<AddBoardModal />
 			</Header>
 		</SliderContent>

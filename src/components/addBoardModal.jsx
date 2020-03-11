@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 // components
 import useForm from "./common/useForm";
 import userService from "../services/userService";
+import boardService from "../services/boardService";
 
 // style
 import "./style/form-elements.css";
@@ -75,7 +76,9 @@ const AddBoardModal = () => {
 
 	const doSubmit = async (data, errors) => {
 		try {
-			// await userService.sendInvitation(data); TODO: add board service (first add routed on the server)
+			console.log(data);
+			const board = await boardService.createBoard(data); //TODO: add board service (first add routed on the server)
+			console.log(board);
 			toast.success("🚀 The board was added successfully!", {
 				position: toast.POSITION.TOP_RIGHT
 			});

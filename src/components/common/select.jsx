@@ -28,7 +28,7 @@ const Select = ({ name, label, placeholder, options, error, ...rest }) => {
 			<select name={name} id={name} {...rest} className="input-area">
 				<option value=""></option>
 				{options.map(option => (
-					<option key={option._id} value={option._id}>
+					<option key={option._id} value={option.name}>
 						{option.name}
 					</option>
 				))}
