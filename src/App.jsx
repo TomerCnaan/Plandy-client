@@ -2,11 +2,12 @@ import React, { useState, useEffect, Fragment } from "react";
 import auth from "./services/authService";
 
 //libraries
-// import { useSelector, useDispatch } from "react-redux";
-// import { setUser } from "./actions/userActions";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "./actions/userActions";
 import { Route, Redirect, Switch } from "react-router-dom";
 import styled from "styled-components";
 import { ToastContainer } from "react-toastify";
+import _ from "lodash";
 
 //components
 import ProtectedRoute from "./components/common/protectedRoute";
@@ -47,16 +48,12 @@ const Surface = styled.div`
 
 function App() {
 	// redux set up
-	// const user = useSelector(state => state.users.user);
-	// const dispatch = useDispatch();
-
-	const [user, setUser] = useState("");
+	const user = useSelector(state => state.users.user);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		// dispatch(setUser({ ...auth.getCurrentUser() }));
-		// setUser({ ..._user });
 		const user = auth.getCurrentUser();
-		setUser(user);
+		if (!_.isEmpty(user)) dispatch(setUser({ ...user }));
 	}, []);
 
 	return (

@@ -1,5 +1,5 @@
 // action types
-import { SET_USER } from "../actions/actionTypes";
+import { SET_USER, REMOVE_USER } from "../actions/actionTypes";
 
 // libraries
 import _ from "lodash";
@@ -9,8 +9,12 @@ const users = (state = {}, action) => {
 		case SET_USER:
 			return {
 				...state,
-				user: _.get(action.payload, ["_id", "name", "email", "role"])
+				user: action.payload
 			};
+
+		case REMOVE_USER:
+			let st = { ...state };
+			return delete st.user;
 
 		default:
 			return state;

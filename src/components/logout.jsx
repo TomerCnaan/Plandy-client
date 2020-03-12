@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import auth from "../services/authService";
-// import { useDispatch } from "react-redux";
-// import { setUser } from "../actions/userActions";
+import { useDispatch } from "react-redux";
+import { removeUser } from "../actions/userActions";
 
 const Logout = () => {
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	useEffect(() => {
 		auth.logout();
-		// dispatch(removeUser({}));
+		dispatch(removeUser());
 		window.location = "/";
 	});
 	return null;
