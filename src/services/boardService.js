@@ -9,4 +9,8 @@ function createBoard(data) {
 	});
 }
 
-export default { createBoard };
+function getBoards() {
+	return http.get(apiEndpoint);
+}
+
+export default { createBoard, getBoards };

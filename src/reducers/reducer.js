@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import todos from "./todoReducer";
 import users from "./usersReducer";
+import boards from "./boardsReducer";
 
 export const mainReducer = combineReducers({
-	todos,
+	boards,
 	users
 });

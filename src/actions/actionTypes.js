@@ -1,5 +1,6 @@
-//todoActions
-export const ADD_TODO = "ADD_TODO";
+//boardActions
+export const SET_BOARD_NAMES = "SET_BOARD_NAMES";
+export const LOADING = "LOADING";
 
 //userActions
 export const SET_USER = "SET_USER";
