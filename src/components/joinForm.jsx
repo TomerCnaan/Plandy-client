@@ -67,10 +67,10 @@ const JoinForm = ({ match }) => {
 	return (
 		<div className={classes.root}>
 			<Grid container direction="row" className={classes.wrapper}>
-				<Grid item sm={false} md={3} lg={4} className={classes.image}>
+				<Grid item xs={12} sm={12} md={4} lg={4} className={classes.image}>
 					<img src={`${Sign}`} className={classes.formLogo} alt="logo" />
 				</Grid>
-				<Grid item sm={9} md={9} lg={8}>
+				<Grid item xs={12} sm={12} md={8} lg={8}>
 					<H1>Create User</H1>
 					<form onSubmit={handleSubmit} noValidate className={classes.form}>
 						{renderInput("name", nameLabel, "Name")}
