@@ -1,6 +1,11 @@
-import { SET_BOARD_NAMES, LOADING } from "./actionTypes";
+import { SET_BOARD_NAMES, LOADING, ADD_BOARD_NAME } from "./actionTypes";
 
 import boardService from "../services/boardService";
+
+export const addBoardName = board => ({
+	type: ADD_BOARD_NAME,
+	payload: board
+});
 
 export const setBoardNames = boardsList => ({
 	type: SET_BOARD_NAMES,

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 // libraries
+import { useDispatch } from "react-redux";
+import { addBoardName } from "../actions/boardActions";
 import Joi from "joi-browser";
 import styled from "styled-components";
 import { toast } from "react-toastify";
@@ -73,11 +75,12 @@ const AddBoardModal = () => {
 			.label("Label")
 	};
 
+	const dispatch = useDispatch();
+
 	const doSubmit = async (data, errors) => {
 		try {
-			console.log(data);
-			const board = await boardService.createBoard(data); //TODO: add board service (first add routed on the server)
-			console.log(board);
+			const board = await boardService.createBoard(data);
+			dispatch(addBoardName(board.data));
 			toast.success("🚀 The board was added successfully!", {
 				position: toast.POSITION.TOP_RIGHT
 			});

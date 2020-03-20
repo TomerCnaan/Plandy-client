@@ -29,6 +29,11 @@ const BoardNav = () => {
 	const boards = useSelector(state => state.boards.boardsList);
 	const dispatch = useDispatch();
 
+	const [_boards, set_boards] = useState(boards);
+	useEffect(() => {
+		set_boards(boards);
+	}, [boards]);
+
 	useEffect(() => {
 		dispatch(fetchBoardNames());
 	}, []);
@@ -50,7 +55,7 @@ const BoardNav = () => {
 				<SearchBox value={searchQuery} onChange={handleSearch} />
 			</Search>
 			<Seperator />
-			{loading ? <Spinner /> : boards && <Boards query={searchQuery} />}
+			{loading ? <Spinner /> : _boards && <Boards query={searchQuery} />}
 		</SliderContent>
 	);
 };
