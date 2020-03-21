@@ -1,11 +1,14 @@
 import {
 	SET_BOARD_NAMES,
 	LOADING,
-	ADD_BOARD_NAME
+	ADD_BOARD_NAME,
+	LOADING_BOARD,
+	SET_BOARD_DATA
 } from "../actions/actionTypes";
 
 const intialState = {
-	boardsList: []
+	boardsList: [],
+	boardsData: {}
 };
 
 const boards = (state = intialState, action) => {
@@ -27,6 +30,18 @@ const boards = (state = intialState, action) => {
 			return {
 				...state,
 				isLoading: action.payload
+			};
+		case LOADING_BOARD:
+			return {
+				...state,
+				isLoadingBoard: action.payload
+			};
+		case SET_BOARD_DATA:
+			return {
+				...state,
+				boardsData: {
+					[action.payload.name]: action.payload
+				}
 			};
 		default:
 			return state;

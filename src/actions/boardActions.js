@@ -1,4 +1,10 @@
-import { SET_BOARD_NAMES, LOADING, ADD_BOARD_NAME } from "./actionTypes";
+import {
+	SET_BOARD_NAMES,
+	LOADING,
+	ADD_BOARD_NAME,
+	LOADING_BOARD,
+	SET_BOARD_DATA
+} from "./actionTypes";
 
 import boardService from "../services/boardService";
 
@@ -30,4 +36,26 @@ export const fetchBoardNames = () => {
 	};
 };
 
-// TODO: finish adding redux thunk logic to fetching data
+// fetch board data from server async
+export const fetchBoardData = id => {
+	return dispatch => {
+		dispatch(isLoadingBoard(true));
+
+		boardService
+			.getBoardData(id)
+			.then(res => dispatch(setBoardData(res.data)))
+			.then(dispatch(isLoadingBoard(false)));
+	};
+};
+
+export const isLoadingBoard = bool => {
+	return {
+		type: LOADING_BOARD,
+		payload: bool
+	};
+};
+
+export const setBoardData = data => ({
+	type: SET_BOARD_DATA,
+	payload: data
+});

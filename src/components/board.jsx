@@ -1,4 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+// libraries
+import { useDispatch } from "react-redux";
+
+// actions
+import { fetchBoardData } from "./../actions/boardActions";
 
 // components
 import Slider from "./slider";
@@ -7,7 +13,12 @@ import Slider from "./slider";
 import { MainWrapper, MainContent } from "./style/main-app";
 
 const Board = ({ match }) => {
-	console.log(match.params.id);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(fetchBoardData(match.params.id));
+	}, []);
+
 	return (
 		<MainWrapper>
 			<Slider />

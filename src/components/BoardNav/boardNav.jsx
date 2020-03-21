@@ -19,7 +19,6 @@ import {
 	Search,
 	Seperator
 } from "./board-nav-style";
-import SearchIcon from "@material-ui/icons/Search";
 
 const BoardNav = () => {
 	const [searchQuery, setSearchQuery] = useState("");
