@@ -7,6 +7,7 @@ import {
 } from "./actionTypes";
 
 import boardService from "../services/boardService";
+import { toast } from "react-toastify";
 
 export const addBoardName = board => ({
 	type: ADD_BOARD_NAME,
@@ -43,8 +44,16 @@ export const fetchBoardData = id => {
 
 		boardService
 			.getBoardData(id)
-			.then(res => dispatch(setBoardData(res.data)))
-			.then(dispatch(isLoadingBoard(false)));
+			.then(res => {
+				dispatch(setBoardData(res.data));
+			})
+			.catch(err => {
+				if (err.response && err.response.status === 400)
+					toast.error(err.response.data);
+			})
+			.then(() => {
+				dispatch(isLoadingBoard(false));
+			});
 	};
 };
 

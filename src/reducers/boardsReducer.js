@@ -15,7 +15,6 @@ const boards = (state = intialState, action) => {
 	switch (action.type) {
 		case ADD_BOARD_NAME:
 			const updatedArr = state.boardsList;
-			console.log(updatedArr);
 			updatedArr.push(action.payload);
 			return {
 				...state,
@@ -40,7 +39,8 @@ const boards = (state = intialState, action) => {
 			return {
 				...state,
 				boardsData: {
-					[action.payload.name]: action.payload
+					...state.boardsData,
+					[action.payload._id]: action.payload
 				}
 			};
 		default:
