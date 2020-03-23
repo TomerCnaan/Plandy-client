@@ -13,7 +13,7 @@ import _ from "lodash";
 import ProtectedRoute from "./components/common/protectedRoute";
 import NavBar from "./components/NavBar/navBar";
 import HomePage from "./components/homePage";
-import Board from "./components/board";
+import Board from "./components/Board/board";
 import RegisterForm from "./components/registerForm";
 import JoinForm from "./components/joinForm";
 import LoginForm from "./components/loginForm";

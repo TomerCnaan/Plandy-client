@@ -5,20 +5,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 // actions
-import { fetchBoardData } from "./../actions/boardActions";
+import { fetchBoardData } from "../../actions/boardActions";
+import { setNewGroupsOrder } from "../../actions/boardActions";
 
 // components
-import Slider from "./slider";
-import Spinner from "./common/spinner";
+import Slider from "../slider";
+import Spinner from "../common/spinner";
 import Group from "./group";
+import BoardHeader from "./boardHeader";
 
 // style
-import { MainWrapper, MainContent } from "./style/main-app";
+import { MainWrapper, MainContent } from "../style/main-app";
 import styled from "styled-components";
 
 const Container = styled.div`
 	display: flex;
-	border: 1px solid black;
+	flex-direction: column;
+	/* border: 1px solid black; */
 	width: 100%;
 	height: 100%;
 `;
@@ -34,31 +37,47 @@ const Board = ({ match }) => {
 	}, [match.params.id]);
 
 	const onDragEnd = result => {
+		//TODO: handle task drop
 		console.log(result);
+
+		if (!result.destination) return;
+
+		if (result.destination.index === result.source.index) return;
+
+		const newGroups = Array.from(boardData.groups);
+		const [removed] = newGroups.splice(result.source.index, 1);
+		newGroups.splice(result.destination.index, 0, removed);
+
+		dispatch(setNewGroupsOrder(boardData._id, newGroups));
 	};
 
 	return (
 		<MainWrapper>
 			<Slider />
 			{loading ? (
-				<Spinner />
+				<MainContent>
+					<Spinner />
+				</MainContent>
 			) : (
 				boardData && (
 					<MainContent>
-						<h1>{boardData.name}</h1>
-						<h3>{boardData.description}</h3>
+						<BoardHeader data={boardData} />
+
 						<DragDropContext onDragEnd={onDragEnd}>
 							<Droppable droppableId="all-groups">
-								{provided => (
+								{(provided, snapshot) => (
 									<Container
 										{...provided.droppableProps}
-										innerRef={provided.innerRef}
+										ref={provided.innerRef}
 									>
-										{boardData.groups.map(group => {
+										{boardData.groups.map((group, index) => {
 											const groupId = group._id;
 
-											return <Group key={groupId} group={group} />;
+											return (
+												<Group key={groupId} group={group} index={index} />
+											);
 										})}
+										{provided.placeholder}
 									</Container>
 								)}
 							</Droppable>

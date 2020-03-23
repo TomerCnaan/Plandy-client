@@ -3,7 +3,8 @@ import {
 	LOADING,
 	ADD_BOARD_NAME,
 	LOADING_BOARD,
-	SET_BOARD_DATA
+	SET_BOARD_DATA,
+	SET_NEW_GROUPS_ORDER
 } from "./actionTypes";
 
 import boardService from "../services/boardService";
@@ -67,4 +68,10 @@ export const isLoadingBoard = bool => {
 export const setBoardData = data => ({
 	type: SET_BOARD_DATA,
 	payload: data
+});
+
+// set new groups order for a specific board
+export const setNewGroupsOrder = (boardId, newGroupsArr) => ({
+	type: SET_NEW_GROUPS_ORDER,
+	payload: { boardId, newGroupsArr }
 });
