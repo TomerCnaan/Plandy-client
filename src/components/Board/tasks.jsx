@@ -10,12 +10,17 @@ import Task from "./task";
 import styled from "styled-components";
 
 const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	min-height: 50px;
+
 	/* border: 1px solid skyblue; */
 `;
 
 const Tasks = ({ tasks, groupTitle }) => {
 	return (
-		<Droppable droppableId={groupTitle}>
+		<Droppable droppableId={groupTitle} type={groupTitle}>
 			{(provided, snapshot) => (
 				<Container {...provided.droppableProps} ref={provided.innerRef}>
 					{tasks.map((task, index) => {

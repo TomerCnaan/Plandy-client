@@ -40,15 +40,26 @@ const Board = ({ match }) => {
 		//TODO: handle task drop
 		console.log(result);
 
-		if (!result.destination) return;
+		const { destination, source, draggableId } = result;
 
-		if (result.destination.index === result.source.index) return;
+		if (!destination) return;
 
-		const newGroups = Array.from(boardData.groups);
-		const [removed] = newGroups.splice(result.source.index, 1);
-		newGroups.splice(result.destination.index, 0, removed);
+		if (
+			destination.index === source.index &&
+			destination.droppableId === source.droppableId
+		)
+			return;
 
-		dispatch(setNewGroupsOrder(boardData._id, newGroups));
+		const start = boardData.groups[source.droppableId];
+		const finish = boardData[destination.droppableId];
+
+		if (start === finish) {
+			const newGroups = Array.from(boardData.groups);
+			const [removed] = newGroups.splice(source.index, 1);
+			newGroups.splice(destination.index, 0, removed);
+
+			dispatch(setNewGroupsOrder(boardData._id, newGroups));
+		}
 	};
 
 	return (
@@ -64,7 +75,7 @@ const Board = ({ match }) => {
 						<BoardHeader data={boardData} />
 
 						<DragDropContext onDragEnd={onDragEnd}>
-							<Droppable droppableId="all-groups">
+							<Droppable droppableId="all-groups" type="GROUPS">
 								{(provided, snapshot) => (
 									<Container
 										{...provided.droppableProps}

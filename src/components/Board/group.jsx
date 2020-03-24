@@ -13,11 +13,16 @@ import GripDrag from "../../images/grip-group.svg";
 const Container = styled.div`
 	display: flex;
 	align-self: flex-start;
+	flex-flow: column nowrap;
 	min-height: 50px;
 	width: 800px;
 	margin: 8px;
 	/* border: 1px solid lightgray;
 	border-radius: 5px; */
+`;
+
+const Header = styled.div`
+	display: flex;
 `;
 
 const Title = styled.h3`
@@ -37,10 +42,12 @@ const Group = ({ group, index }) => {
 		<Draggable draggableId={_id} index={index}>
 			{(provided, snapshot) => (
 				<Container ref={provided.innerRef} {...provided.draggableProps}>
-					<Span {...provided.dragHandleProps}>
-						<img src={GripDrag} alt="grip" />
-					</Span>
-					<Title>{title}</Title>
+					<Header>
+						<Span {...provided.dragHandleProps}>
+							<img src={GripDrag} alt="grip" />
+						</Span>
+						<Title>{title}</Title>
+					</Header>
 
 					<Tasks tasks={tasks} groupTitle={title} />
 				</Container>
