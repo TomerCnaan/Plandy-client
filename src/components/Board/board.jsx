@@ -100,7 +100,12 @@ const Board = ({ match }) => {
 											const groupId = group._id;
 
 											return (
-												<Group key={groupId} group={group} index={index} />
+												<Group
+													key={groupId}
+													group={group}
+													index={index}
+													boardId={boardData._id}
+												/>
 											);
 										})}
 										{provided.placeholder}

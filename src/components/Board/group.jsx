@@ -5,6 +5,7 @@ import { Draggable } from "react-beautiful-dnd";
 
 // components
 import Tasks from "./tasks";
+import ColumnList from "./columnList";
 
 // style
 import styled from "styled-components";
@@ -15,7 +16,7 @@ const Container = styled.div`
 	align-self: flex-start;
 	flex-flow: column nowrap;
 	min-height: 50px;
-	width: 800px;
+	width: 1100px;
 	margin: 8px;
 	/* border: 1px solid lightgray;
 	border-radius: 5px; */
@@ -23,19 +24,18 @@ const Container = styled.div`
 
 const Header = styled.div`
 	display: flex;
+	align-items: center;
 `;
 
 const Title = styled.h3`
 	padding: 9px;
-	align-self: center;
 `;
 
 const Span = styled.span`
-	align-self: center;
 	padding: 9px;
 `;
 
-const Group = ({ group, index }) => {
+const Group = ({ group, index, boardId }) => {
 	const { _id, title, tasks } = group;
 
 	return (
@@ -47,6 +47,8 @@ const Group = ({ group, index }) => {
 							<img src={GripDrag} alt="grip" />
 						</Span>
 						<Title>{title}</Title>
+
+						<ColumnList boardId={boardId} />
 					</Header>
 
 					<Tasks tasks={tasks} groupIndex={index.toString()} />

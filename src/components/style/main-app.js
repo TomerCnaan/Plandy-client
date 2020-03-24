@@ -26,6 +26,7 @@ export const MainContent = styled.div`
 	margin-left: 70px;
 	margin-top: 20px;
 	transition: margin-left 200ms ease, visibility 200ms ease, opacity 200ms ease;
+	overflow: auto;
 `;
 
 export default MainWrapper;

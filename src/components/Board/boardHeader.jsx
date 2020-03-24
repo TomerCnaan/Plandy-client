@@ -8,15 +8,21 @@ const Container = styled.div`
 `;
 
 const Title = styled.h2`
-	font-size: 38px;
+	font-size: 34px;
 	font-weight: medium;
 	text-transform: capitalize;
+	color: #2d2d2d;
 `;
 
 const Description = styled.h3`
+	width: 50%;
 	font-weight: lighter;
-	font-size: 20px;
+	font-size: 14px;
 	text-transform: capitalize;
+	color: #b5b5b5;
+	:hover {
+		border: 0.5px dashed lightgrey;
+	}
 `;
 
 const BoardHeader = ({ data }) => {
@@ -25,7 +31,7 @@ const BoardHeader = ({ data }) => {
 	return (
 		<Container>
 			<Title>{name}</Title>
-			<Description>{description}</Description>
+			<Description contentEditable="true">{description}</Description>
 		</Container>
 	);
 };

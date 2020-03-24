@@ -10,8 +10,10 @@ import GripDrag from "../../images/grip-task.svg";
 const Container = styled.div`
 	/* border: 1px solid green; */
 	display: flex;
-	margin: 8px;
+	padding: 8px;
 	align-items: center;
+	flex-grow: 1;
+	flex-shrink: 0;
 `;
 
 const Name = styled.h5`
