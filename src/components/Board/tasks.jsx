@@ -18,9 +18,9 @@ const Container = styled.div`
 	/* border: 1px solid skyblue; */
 `;
 
-const Tasks = ({ tasks, groupTitle }) => {
+const Tasks = ({ tasks, groupIndex }) => {
 	return (
-		<Droppable droppableId={groupTitle} type={groupTitle}>
+		<Droppable droppableId={groupIndex} type="TASKS">
 			{(provided, snapshot) => (
 				<Container {...provided.droppableProps} ref={provided.innerRef}>
 					{tasks.map((task, index) => {

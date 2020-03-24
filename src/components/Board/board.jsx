@@ -40,7 +40,7 @@ const Board = ({ match }) => {
 		//TODO: handle task drop
 		console.log(result);
 
-		const { destination, source, draggableId } = result;
+		const { destination, source, type } = result;
 
 		if (!destination) return;
 
@@ -51,15 +51,30 @@ const Board = ({ match }) => {
 			return;
 
 		const start = boardData.groups[source.droppableId];
-		const finish = boardData[destination.droppableId];
+		const finish = boardData.groups[destination.droppableId];
+
+		const newGroups = Array.from(boardData.groups);
 
 		if (start === finish) {
-			const newGroups = Array.from(boardData.groups);
-			const [removed] = newGroups.splice(source.index, 1);
-			newGroups.splice(destination.index, 0, removed);
+			if (type === "GROUPS") {
+				const [removed] = newGroups.splice(source.index, 1);
+				newGroups.splice(destination.index, 0, removed);
+			} else if (type === "TASKS") {
+				const groupIndex = Number(source.droppableId);
+				const [removed] = newGroups[groupIndex].tasks.splice(source.index, 1);
+				newGroups[groupIndex].tasks.splice(destination.index, 0, removed);
+			}
 
 			dispatch(setNewGroupsOrder(boardData._id, newGroups));
+			return;
 		}
+
+		const startGroupIndex = Number(source.droppableId);
+		const endGroupIndex = Number(destination.droppableId);
+		const [removed] = newGroups[startGroupIndex].tasks.splice(source.index, 1);
+		newGroups[endGroupIndex].tasks.splice(destination.index, 0, removed);
+
+		dispatch(setNewGroupsOrder(boardData._id, newGroups));
 	};
 
 	return (

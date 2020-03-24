@@ -49,7 +49,7 @@ const Group = ({ group, index }) => {
 						<Title>{title}</Title>
 					</Header>
 
-					<Tasks tasks={tasks} groupTitle={title} />
+					<Tasks tasks={tasks} groupIndex={index.toString()} />
 				</Container>
 			)}
 		</Draggable>
