@@ -14,6 +14,7 @@ const Container = styled.div`
 	display: flex;
 	justify-content: flex-end;
 	flex-grow: 1;
+	align-items: flex-end;
 `;
 
 const ColumnList = ({ boardId }) => {

@@ -31,15 +31,13 @@ const Board = ({ match }) => {
 	const dispatch = useDispatch();
 	const loading = useSelector(state => state.boards.isLoadingBoard);
 	const boardData = useSelector(state => state.boards.boardsData[boardId]);
+	// const isPermitted = boardData.isPermitted TODO: send from server if client is permitted
 
 	useEffect(() => {
 		dispatch(fetchBoardData(match.params.id));
 	}, [match.params.id]);
 
 	const onDragEnd = result => {
-		//TODO: handle task drop
-		console.log(result);
-
 		const { destination, source, type } = result;
 
 		if (!destination) return;

@@ -14,7 +14,7 @@ const Container = styled.div`
 	flex-grow: 1;
 	flex-shrink: 0;
 	background-color: #f5f5f5;
-	border: 0.5px solid #dad3d3;
+	border-right: 0.5px solid #dad3d3;
 	margin-left: 35px;
 	margin-bottom: 1.5px;
 `;

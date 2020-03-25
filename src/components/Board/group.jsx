@@ -24,7 +24,7 @@ const Container = styled.div`
 
 const Header = styled.div`
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 `;
 
 const Title = styled.h3`
