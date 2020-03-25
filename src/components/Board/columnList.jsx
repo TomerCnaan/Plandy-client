@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const Container = styled.div`
+	position: relative;
 	display: flex;
 	justify-content: flex-end;
 	flex-grow: 1;

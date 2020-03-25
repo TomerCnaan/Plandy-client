@@ -13,31 +13,39 @@ const Container = styled.div`
 	align-items: center;
 	flex-grow: 1;
 	flex-shrink: 0;
-	background-color: #e6e6e6;
+	background-color: #f5f5f5;
 	border: 0.5px solid #dad3d3;
 	margin-left: 35px;
+	margin-bottom: 1.5px;
 `;
 
 const Name = styled.h5`
-	padding: 8px;
+	font-weight: 500;
+	/* padding: 8px; */
+	font-size: 14px;
+	color: #171717;
 `;
 
-const Span = styled.span`
-	padding: 8px;
-	padding-left: 5px;
-	padding-right: 25px;
+const LeftEdge = styled.div`
+	width: 6px;
+	background-color: ${props => props.fill};
+	height: 38px;
+	margin-right: 20px;
 `;
 
-const Task = ({ task, index }) => {
+const Task = ({ task, index, color }) => {
 	const { _id, name } = task;
 
 	return (
 		<Draggable draggableId={_id} index={index}>
 			{(provided, snapshot) => (
-				<Container ref={provided.innerRef} {...provided.draggableProps}>
-					<Span {...provided.dragHandleProps}>
-						<img src={GripDrag} alt="grip" />
-					</Span>
+				<Container
+					ref={provided.innerRef}
+					{...provided.draggableProps}
+					{...provided.dragHandleProps}
+				>
+					<LeftEdge fill={color}></LeftEdge>
+
 					<Name>{name}</Name>
 				</Container>
 			)}

@@ -1,0 +1,13 @@
+.slider-closed {
+	height: 100%;
+	position: absolute;
+	border-right: 1px solid #e1e1e1;
+	z-index: 10001;
+	background-color: #ffffff;
+	transition: width 200ms ease;
+	width: 30px;
+}
+
+.slider-closed:hover {
+	width: 255px;
+}

@@ -13,12 +13,12 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
-	min-height: 45px;
+	min-height: 40px;
 
 	/* border: 1px solid skyblue; */
 `;
 
-const Tasks = ({ tasks, groupIndex }) => {
+const Tasks = ({ tasks, groupIndex, color }) => {
 	return (
 		<Droppable droppableId={groupIndex} type="TASKS">
 			{(provided, snapshot) => (
@@ -26,7 +26,9 @@ const Tasks = ({ tasks, groupIndex }) => {
 					{tasks.map((task, index) => {
 						const taskId = task._id;
 
-						return <Task key={taskId} task={task} index={index} />;
+						return (
+							<Task key={taskId} task={task} index={index} color={color} />
+						);
 					})}
 					{provided.placeholder}
 				</Container>

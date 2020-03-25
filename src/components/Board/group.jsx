@@ -29,6 +29,7 @@ const Header = styled.div`
 
 const Title = styled.h3`
 	padding: 9px;
+	color: ${props => props.groupColor};
 `;
 
 const Span = styled.span`
@@ -41,7 +42,6 @@ const Span = styled.span`
 
 const Img = styled.img`
 	display: flex;
-	background: ${props => props.groupColor};
 `;
 
 const Group = ({ group, index, boardId }) => {
@@ -54,14 +54,18 @@ const Group = ({ group, index, boardId }) => {
 				<Container ref={provided.innerRef} {...provided.draggableProps}>
 					<Header>
 						<Span groupColor={group.color} {...provided.dragHandleProps}>
-							<Img src={GripDrag} alt="grip" /> //TODO: change color of group
-						</Span>
-						<Title>{title}</Title>
-
+							<Img src={GripDrag} alt="grip" />
+						</Span>{" "}
+						{/* TODO: center icon */}
+						<Title groupColor={group.color}>{title}</Title>
 						<ColumnList boardId={boardId} />
 					</Header>
 
-					<Tasks tasks={tasks} groupIndex={index.toString()} />
+					<Tasks
+						tasks={tasks}
+						groupIndex={index.toString()}
+						color={group.color}
+					/>
 				</Container>
 			)}
 		</Draggable>
