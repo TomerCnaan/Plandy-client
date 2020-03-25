@@ -51,6 +51,7 @@ const Board = ({ match }) => {
 		const start = boardData.groups[source.droppableId];
 		const finish = boardData.groups[destination.droppableId];
 
+		const originalGroups = boardData.groups;
 		const newGroups = Array.from(boardData.groups);
 
 		if (start === finish) {
