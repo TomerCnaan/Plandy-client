@@ -13,7 +13,7 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
-	min-height: 50px;
+	min-height: 45px;
 
 	/* border: 1px solid skyblue; */
 `;

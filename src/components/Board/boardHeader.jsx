@@ -31,7 +31,7 @@ const BoardHeader = ({ data }) => {
 	return (
 		<Container>
 			<Title>{name}</Title>
-			<Description contentEditable="true">{description}</Description>
+			<Description>{description}</Description>
 		</Container>
 	);
 };

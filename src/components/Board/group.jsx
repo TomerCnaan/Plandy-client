@@ -32,19 +32,29 @@ const Title = styled.h3`
 `;
 
 const Span = styled.span`
+	display: flex;
 	padding: 9px;
+	text-align: "center";
+	align-items: center;
+	justify-content: center;
+`;
+
+const Img = styled.img`
+	display: flex;
+	background: ${props => props.groupColor};
 `;
 
 const Group = ({ group, index, boardId }) => {
 	const { _id, title, tasks } = group;
+	console.log(group.color);
 
 	return (
 		<Draggable draggableId={_id} index={index}>
 			{(provided, snapshot) => (
 				<Container ref={provided.innerRef} {...provided.draggableProps}>
 					<Header>
-						<Span {...provided.dragHandleProps}>
-							<img src={GripDrag} alt="grip" />
+						<Span groupColor={group.color} {...provided.dragHandleProps}>
+							<Img src={GripDrag} alt="grip" /> //TODO: change color of group
 						</Span>
 						<Title>{title}</Title>
 
