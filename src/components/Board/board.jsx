@@ -14,9 +14,13 @@ import Spinner from "../common/spinner";
 import Group from "./group";
 import BoardHeader from "./boardHeader";
 
+// services
+import groupService from "../../services/groupService";
+
 // style
 import { MainWrapper, MainContent } from "../style/main-app";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
 	display: flex;
@@ -56,15 +60,20 @@ const Board = ({ match }) => {
 
 		if (start === finish) {
 			if (type === "GROUPS") {
-				const [removed] = newGroups.splice(source.index, 1);
-				newGroups.splice(destination.index, 0, removed);
+				handleGroupReorder(
+					boardData._id,
+					originalGroups,
+					newGroups,
+					source,
+					destination
+				);
 			} else if (type === "TASKS") {
 				const groupIndex = Number(source.droppableId);
 				const [removed] = newGroups[groupIndex].tasks.splice(source.index, 1);
 				newGroups[groupIndex].tasks.splice(destination.index, 0, removed);
+				dispatch(setNewGroupsOrder(boardData._id, newGroups));
 			}
 
-			dispatch(setNewGroupsOrder(boardData._id, newGroups));
 			return;
 		}
 
@@ -74,6 +83,30 @@ const Board = ({ match }) => {
 		newGroups[endGroupIndex].tasks.splice(destination.index, 0, removed);
 
 		dispatch(setNewGroupsOrder(boardData._id, newGroups));
+	};
+
+	const handleGroupReorder = async (
+		boardId,
+		originalGroups,
+		newGroups,
+		source,
+		destination
+	) => {
+		const [removed] = newGroups.splice(source.index, 1);
+		newGroups.splice(destination.index, 0, removed);
+		dispatch(setNewGroupsOrder(boardId, newGroups));
+
+		if (boardData.isPermitted) {
+			try {
+				await groupService.reorderGroups({ boardId, newGroups });
+			} catch (ex) {
+				if (ex.response && ex.response.status < 500) {
+					toast.error(ex.response.data);
+				}
+
+				dispatch(setNewGroupsOrder(boardId, originalGroups));
+			}
+		}
 	};
 
 	return (
