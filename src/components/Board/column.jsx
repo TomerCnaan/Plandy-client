@@ -1,5 +1,8 @@
 import React from "react";
 
+// libraries
+import { Draggable } from "react-beautiful-dnd";
+
 // style
 import styled from "styled-components";
 
@@ -18,14 +21,21 @@ const Container = styled.div`
 	}
 `;
 
-const Column = ({ column }) => {
+const Column = ({ column, index, groupName }) => {
 	const { name } = column;
 
 	return (
-		<Container>
-			{name}
-			<span></span>
-		</Container>
+		<Draggable draggableId={`${groupName}-${name}`} index={index}>
+			{(provided, snapshot) => (
+				<Container
+					ref={provided.innerRef}
+					{...provided.draggableProps}
+					{...provided.dragHandleProps}
+				>
+					{name}
+				</Container>
+			)}
+		</Draggable>
 	);
 };
 

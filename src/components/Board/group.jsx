@@ -58,7 +58,11 @@ const Group = ({ group, index, boardId }) => {
 						</Span>{" "}
 						{/* TODO: center icon */}
 						<Title groupColor={group.color}>{title}</Title>
-						<ColumnList boardId={boardId} />
+						<ColumnList
+							boardId={boardId}
+							groupIndex={index.toString()}
+							groupName={group.title}
+						/>
 					</Header>
 
 					<Tasks

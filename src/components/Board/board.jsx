@@ -16,6 +16,7 @@ import BoardHeader from "./boardHeader";
 
 // services
 import groupService from "../../services/groupService";
+import auth from "../../services/authService";
 
 // style
 import { MainWrapper, MainContent } from "../style/main-app";
@@ -35,13 +36,14 @@ const Board = ({ match }) => {
 	const dispatch = useDispatch();
 	const loading = useSelector(state => state.boards.isLoadingBoard);
 	const boardData = useSelector(state => state.boards.boardsData[boardId]);
-	// const isPermitted = boardData.isPermitted TODO: send from server if client is permitted
+	const userId = auth.getCurrentUser()._id;
 
 	useEffect(() => {
 		dispatch(fetchBoardData(match.params.id));
 	}, [match.params.id]);
 
 	const onDragEnd = result => {
+		console.log(result);
 		const { destination, source, type } = result;
 
 		if (!destination) return;
@@ -96,7 +98,7 @@ const Board = ({ match }) => {
 		newGroups.splice(destination.index, 0, removed);
 		dispatch(setNewGroupsOrder(boardId, newGroups));
 
-		if (boardData.isPermitted) {
+		if (boardData.owner === userId) {
 			try {
 				await groupService.reorderGroups({ boardId, newGroups });
 			} catch (ex) {
