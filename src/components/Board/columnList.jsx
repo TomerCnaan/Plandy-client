@@ -11,7 +11,6 @@ import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 const Container = styled.div`
-	position: relative;
 	display: flex;
 	justify-content: flex-end;
 	flex-grow: 1;
@@ -20,21 +19,29 @@ const Container = styled.div`
 
 const ColumnList = ({ boardId, groupIndex, groupName }) => {
 	const columnOrder = useSelector(
-		state => state.boards.boardsData[boardId].column_order
+		(state) => state.boards.boardsData[boardId].column_order
 	);
 
 	return (
-		<Droppable droppableId={groupIndex} type="COLUMNS" direction="horizontal">
+		<Droppable
+			droppableId={groupName}
+			type={`COLUMNS-${groupIndex}`}
+			direction="horizontal"
+		>
 			{(provided, snapshot) => (
 				<Container {...provided.droppableProps} ref={provided.innerRef}>
-					{columnOrder.map((column, index) => (
-						<Column
-							key={index}
-							column={column}
-							index={index}
-							groupName={groupName}
-						/>
-					))}
+					{columnOrder.map((column, index) => {
+						const columnId = column._id;
+						return (
+							<Column
+								key={columnId}
+								column={column}
+								index={index}
+								groupName={groupName}
+							/>
+						);
+					})}
+					{provided.placeholder}
 				</Container>
 			)}
 		</Droppable>

@@ -34,16 +34,17 @@ const Container = styled.div`
 const Board = ({ match }) => {
 	const boardId = match.params.id;
 	const dispatch = useDispatch();
-	const loading = useSelector(state => state.boards.isLoadingBoard);
-	const boardData = useSelector(state => state.boards.boardsData[boardId]);
+	const loading = useSelector((state) => state.boards.isLoadingBoard);
+	const boardData = useSelector((state) => state.boards.boardsData[boardId]);
 	const userId = auth.getCurrentUser()._id;
 
 	useEffect(() => {
 		dispatch(fetchBoardData(match.params.id));
 	}, [match.params.id]);
 
-	const onDragEnd = result => {
+	const onDragEnd = (result) => {
 		console.log(result);
+		console.log("destination:", result.destination);
 		const { destination, source, type } = result;
 
 		if (!destination) return;

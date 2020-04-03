@@ -10,15 +10,23 @@ const Container = styled.div`
 	display: flex;
 	align-items: flex-end;
 	justify-content: center;
-	position: relative;
 	width: 140px;
 	height: 40px;
+	background-color: ${(props) => (props.isDragging ? " #f5f5f5" : "white")};
+	flex-shrink: 0;
 	:hover {
 		background-color: #f5f5f5;
 		border: 0.5px solid #dad3d3;
 		border-bottom: 0;
 		border-radius: 10px 10px 0px 0px;
 	}
+`;
+
+const Name = styled.h4`
+	font-weight: 300;
+	/* padding: 8px; */
+	font-size: 16px;
+	color: #171717;
 `;
 
 const Column = ({ column, index, groupName }) => {
@@ -31,8 +39,10 @@ const Column = ({ column, index, groupName }) => {
 					ref={provided.innerRef}
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}
+					isDragging={snapshot.isDragging}
 				>
-					{name}
+					<span></span>
+					<Name>{name}</Name>
 				</Container>
 			)}
 		</Draggable>

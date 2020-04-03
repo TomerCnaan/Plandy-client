@@ -4,12 +4,12 @@ import {
 	ADD_BOARD_NAME,
 	LOADING_BOARD,
 	SET_BOARD_DATA,
-	SET_NEW_GROUPS_ORDER
+	SET_NEW_GROUPS_ORDER,
 } from "../actions/actionTypes";
 
 const intialState = {
 	boardsList: [],
-	boardsData: {}
+	boardsData: {},
 };
 
 const boards = (state = intialState, action) => {
@@ -19,43 +19,42 @@ const boards = (state = intialState, action) => {
 			updatedArr.push(action.payload);
 			return {
 				...state,
-				boardsList: updatedArr
+				boardsList: updatedArr,
 			};
 		case SET_BOARD_NAMES:
 			return {
 				...state,
-				boardsList: action.payload
+				boardsList: action.payload,
 			};
 		case LOADING:
 			return {
 				...state,
-				isLoading: action.payload
+				isLoading: action.payload,
 			};
 		case LOADING_BOARD:
 			return {
 				...state,
-				isLoadingBoard: action.payload
+				isLoadingBoard: action.payload,
 			};
 		case SET_BOARD_DATA:
 			return {
 				...state,
 				boardsData: {
 					...state.boardsData,
-					[action.payload._id]: action.payload
-				}
+					[action.payload._id]: action.payload,
+				},
 			};
 		case SET_NEW_GROUPS_ORDER:
 			const id = action.payload.boardId;
-			console.log(state.boardsData[id]);
 			return {
 				...state,
 				boardsData: {
 					...state.boardsData,
 					[id]: {
 						...state.boardsData[id],
-						groups: action.payload.newGroupsArr
-					}
-				}
+						groups: action.payload.newGroupsArr,
+					},
+				},
 			};
 		default:
 			return state;

@@ -29,7 +29,7 @@ const Header = styled.div`
 
 const Title = styled.h3`
 	padding: 9px;
-	color: ${props => props.groupColor};
+	color: ${(props) => props.groupColor};
 `;
 
 const Span = styled.span`
@@ -46,7 +46,6 @@ const Img = styled.img`
 
 const Group = ({ group, index, boardId }) => {
 	const { _id, title, tasks } = group;
-	console.log(group.color);
 
 	return (
 		<Draggable draggableId={_id} index={index}>
