@@ -19,6 +19,7 @@ import BoardHeader from "./boardHeader";
 
 // services
 import groupService from "../../services/groupService";
+import columnService from "../../services/columnService";
 import auth from "../../services/authService";
 
 // style
@@ -83,10 +84,13 @@ const Board = ({ match }) => {
 				const originalColumns = boardData.column_order;
 				const newColumns = Array.from(boardData.column_order);
 
-				const [removed] = newColumns.splice(source.index, 1);
-				newColumns.splice(destination.index, 0, removed);
-
-				dispatch(setNewColumnsOrder(boardData._id, newColumns));
+				handleColumnReorder(
+					boardData._id,
+					originalColumns,
+					newColumns,
+					source,
+					destination
+				);
 			}
 
 			return;
@@ -123,6 +127,30 @@ const Board = ({ match }) => {
 				}
 
 				dispatch(setNewGroupsOrder(boardId, originalGroups));
+			}
+		}
+	};
+
+	const handleColumnReorder = async (
+		boardId,
+		originalColumns,
+		newColumns,
+		source,
+		destination
+	) => {
+		const [removed] = newColumns.splice(source.index, 1);
+		newColumns.splice(destination.index, 0, removed);
+		dispatch(setNewColumnsOrder(boardId, newColumns));
+
+		if (boardData.owner === userId) {
+			try {
+				await columnService.reorderColumns({ boardId, newColumns });
+			} catch (ex) {
+				if (ex.response && ex.response.status < 500) {
+					toast.error(ex.response.data);
+				}
+
+				dispatch(setNewColumnsOrder(boardId, originalColumns));
 			}
 		}
 	};
