@@ -6,7 +6,10 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 // actions
 import { fetchBoardData } from "../../actions/boardActions";
-import { setNewGroupsOrder } from "../../actions/boardActions";
+import {
+	setNewGroupsOrder,
+	setNewColumnsOrder,
+} from "../../actions/boardActions";
 
 // components
 import Slider from "../slider";
@@ -44,7 +47,7 @@ const Board = ({ match }) => {
 
 	const onDragEnd = (result) => {
 		console.log(result);
-		console.log("destination:", result.destination);
+
 		const { destination, source, type } = result;
 
 		if (!destination) return;
@@ -75,17 +78,29 @@ const Board = ({ match }) => {
 				const [removed] = newGroups[groupIndex].tasks.splice(source.index, 1);
 				newGroups[groupIndex].tasks.splice(destination.index, 0, removed);
 				dispatch(setNewGroupsOrder(boardData._id, newGroups));
+			} else {
+				//column order has changed
+				const originalColumns = boardData.column_order;
+				const newColumns = Array.from(boardData.column_order);
+
+				const [removed] = newColumns.splice(source.index, 1);
+				newColumns.splice(destination.index, 0, removed);
+
+				dispatch(setNewColumnsOrder(boardData._id, newColumns));
 			}
 
 			return;
+		} else if (type === "TASKS") {
+			const startGroupIndex = Number(source.droppableId);
+			const endGroupIndex = Number(destination.droppableId);
+			const [removed] = newGroups[startGroupIndex].tasks.splice(
+				source.index,
+				1
+			);
+			newGroups[endGroupIndex].tasks.splice(destination.index, 0, removed);
+
+			dispatch(setNewGroupsOrder(boardData._id, newGroups));
 		}
-
-		const startGroupIndex = Number(source.droppableId);
-		const endGroupIndex = Number(destination.droppableId);
-		const [removed] = newGroups[startGroupIndex].tasks.splice(source.index, 1);
-		newGroups[endGroupIndex].tasks.splice(destination.index, 0, removed);
-
-		dispatch(setNewGroupsOrder(boardData._id, newGroups));
 	};
 
 	const handleGroupReorder = async (

@@ -5,6 +5,7 @@ import {
 	LOADING_BOARD,
 	SET_BOARD_DATA,
 	SET_NEW_GROUPS_ORDER,
+	SET_NEW_COLUMNS_ORDER,
 } from "../actions/actionTypes";
 
 const intialState = {
@@ -53,6 +54,18 @@ const boards = (state = intialState, action) => {
 					[id]: {
 						...state.boardsData[id],
 						groups: action.payload.newGroupsArr,
+					},
+				},
+			};
+		case SET_NEW_COLUMNS_ORDER:
+			const culId = action.payload.boardId;
+			return {
+				...state,
+				boardsData: {
+					...state.boardsData,
+					[culId]: {
+						...state.boardsData[culId],
+						column_order: action.payload.newColumnsArr,
 					},
 				},
 			};

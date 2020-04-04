@@ -55,7 +55,6 @@ const Group = ({ group, index, boardId }) => {
 						<Span groupColor={group.color} {...provided.dragHandleProps}>
 							<Img src={GripDrag} alt="grip" />
 						</Span>{" "}
-						{/* TODO: center icon */}
 						<Title groupColor={group.color}>{title}</Title>
 						<ColumnList
 							boardId={boardId}

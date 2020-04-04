@@ -14,7 +14,7 @@ const Slider = () => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	const sliderAnimation = useSpring({
-		width: isHovered ? "255px" : "30px"
+		width: isHovered ? "255px" : "30px",
 		// from: {width: "30px"},
 		// enter: {width: "255px"},
 		// leave: {width: "30px"}
@@ -24,7 +24,7 @@ const Slider = () => {
 		height: " 100%",
 		overflowX: "hidden",
 		// transition: "opacity 200ms ease",
-		opacity: isHovered ? 1 : 0
+		opacity: isHovered ? 1 : 0,
 	});
 
 	const sliderOpenArrow = useSpring({
@@ -42,7 +42,7 @@ const Slider = () => {
 		zIndex: 100,
 		display: "flex",
 		// transform: isHovered ? "rotateY(0)" : "rotateY(-180deg)",
-		alignContent: "center"
+		alignContent: "center",
 	});
 
 	return (
@@ -52,7 +52,9 @@ const Slider = () => {
 			onMouseOver={() => setIsHovered(true)}
 			onMouseOut={() => setIsHovered(false)}
 		>
+			{/* TODO: on click hold slider open and change margin to main content */}
 			<animated.div style={sliderOpenArrow}>
+				{" "}
 				<img src={Arrow} alt="arrow" />
 			</animated.div>
 			<animated.div style={showContent}>

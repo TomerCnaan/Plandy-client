@@ -15,6 +15,8 @@ const Container = styled.div`
 	justify-content: flex-end;
 	flex-grow: 1;
 	align-items: flex-end;
+	background-color: ${(props) =>
+		props.isDraggingOver ? "#ff4f4f17" : "white"};
 `;
 
 const ColumnList = ({ boardId, groupIndex, groupName }) => {
@@ -29,7 +31,11 @@ const ColumnList = ({ boardId, groupIndex, groupName }) => {
 			direction="horizontal"
 		>
 			{(provided, snapshot) => (
-				<Container {...provided.droppableProps} ref={provided.innerRef}>
+				<Container
+					{...provided.droppableProps}
+					ref={provided.innerRef}
+					isDraggingOver={snapshot.isDraggingOver}
+				>
 					{columnOrder.map((column, index) => {
 						const columnId = column._id;
 						return (

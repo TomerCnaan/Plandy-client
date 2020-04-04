@@ -28,7 +28,7 @@ const Name = styled.h5`
 
 const LeftEdge = styled.div`
 	width: 6px;
-	background-color: ${props => props.fill};
+	background-color: ${(props) => props.fill};
 	height: 38px;
 	margin-right: 20px;
 `;
@@ -43,6 +43,7 @@ const Task = ({ task, index, color }) => {
 					ref={provided.innerRef}
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}
+					isDragging={snapshot.isDragging}
 				>
 					<LeftEdge fill={color}></LeftEdge>
 
