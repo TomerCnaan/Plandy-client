@@ -20,6 +20,7 @@ import BoardHeader from "./boardHeader";
 // services
 import groupService from "../../services/groupService";
 import columnService from "../../services/columnService";
+import taskService from "../../services/taskService";
 import auth from "../../services/authService";
 
 // style
@@ -75,10 +76,13 @@ const Board = ({ match }) => {
 					destination
 				);
 			} else if (type === "TASKS") {
-				const groupIndex = Number(source.droppableId);
-				const [removed] = newGroups[groupIndex].tasks.splice(source.index, 1);
-				newGroups[groupIndex].tasks.splice(destination.index, 0, removed);
-				dispatch(setNewGroupsOrder(boardData._id, newGroups));
+				handleInnerTaskReorder(
+					boardData._id,
+					originalGroups,
+					newGroups,
+					source,
+					destination
+				);
 			} else {
 				//column order has changed
 				const originalColumns = boardData.column_order;
@@ -151,6 +155,38 @@ const Board = ({ match }) => {
 				}
 
 				dispatch(setNewColumnsOrder(boardId, originalColumns));
+			}
+		}
+	};
+
+	const handleInnerTaskReorder = async (
+		boardId,
+		originalGroups,
+		newGroups,
+		source,
+		destination
+	) => {
+		console.log(originalGroups[0].tasks);
+		const groupIndex = Number(source.droppableId);
+		const [removed] = newGroups[groupIndex].tasks.splice(source.index, 1);
+		newGroups[groupIndex].tasks.splice(destination.index, 0, removed);
+		console.log("newGroups:", newGroups[0].tasks);
+		console.log(originalGroups[0].tasks);
+		dispatch(setNewGroupsOrder(boardId, newGroups));
+
+		if (boardData.owner === userId) {
+			// TODO: undo reordering on error not working (original group value is wrong)
+			try {
+				const newTasks = newGroups[groupIndex].tasks;
+				const groupId = newGroups[groupIndex]._id;
+				// throw new Error("intentional error"); //delete after solving the issue
+				await taskService.reorderInnerTasks({ boardId, groupId, newTasks });
+			} catch (ex) {
+				if (ex.response && ex.response.status < 500) {
+					toast.error(ex.response.data);
+				}
+
+				dispatch(setNewGroupsOrder(boardId, originalGroups));
 			}
 		}
 	};
