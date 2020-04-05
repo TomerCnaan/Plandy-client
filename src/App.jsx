@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useEffect, Fragment } from "react";
 import auth from "./services/authService";
 
 //libraries
@@ -48,7 +48,7 @@ const Surface = styled.div`
 
 function App() {
 	// redux set up
-	const user = useSelector(state => state.users.user);
+	const user = useSelector((state) => state.users.user);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -72,7 +72,7 @@ function App() {
 						<ProtectedRoute path="/home-page" component={HomePage} />
 						<ProtectedRoute
 							path="/board/:id"
-							render={props => <Board {...props} />}
+							render={(props) => <Board {...props} />}
 						/>
 						{/* TODO: add missing routes */}
 						<Route path="/not-found" component={NotFound} />

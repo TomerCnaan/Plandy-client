@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // libraries
-import { useSpring, animated, useTransition } from "react-spring";
+import { useSpring, animated } from "react-spring";
 
 // components
 import BoardNav from "./BoardNav/boardNav";
@@ -13,12 +13,12 @@ import "./style/slider-style.css";
 const Slider = () => {
 	const [isHovered, setIsHovered] = useState(false);
 
-	const sliderAnimation = useSpring({
-		width: isHovered ? "255px" : "30px",
-		// from: {width: "30px"},
-		// enter: {width: "255px"},
-		// leave: {width: "30px"}
-	});
+	// const sliderAnimation = useSpring({
+	// 	width: isHovered ? "255px" : "30px",
+	// 	// from: {width: "30px"},
+	// 	// enter: {width: "255px"},
+	// 	// leave: {width: "30px"}
+	// });
 
 	const showContent = useSpring({
 		height: " 100%",

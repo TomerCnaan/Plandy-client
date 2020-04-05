@@ -5,7 +5,6 @@ import { Draggable } from "react-beautiful-dnd";
 
 // style
 import styled from "styled-components";
-import GripDrag from "../../images/grip-task.svg";
 
 const Container = styled.div`
 	/* border: 1px solid green; */

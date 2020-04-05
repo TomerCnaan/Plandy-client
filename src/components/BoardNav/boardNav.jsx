@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 // libraries
 import { useSelector, useDispatch } from "react-redux";
 import { fetchBoardNames } from "./../../actions/boardActions";
-import { Link } from "react-router-dom";
 
 // components
 import AddBoardModal from "../addBoardModal";
@@ -17,15 +16,15 @@ import {
 	Header,
 	Title,
 	Search,
-	Seperator
+	Seperator,
 } from "./board-nav-style";
 
 const BoardNav = () => {
 	const [searchQuery, setSearchQuery] = useState("");
 
-	const user = useSelector(state => state.users.user);
-	const loading = useSelector(state => state.boards.isLoading);
-	const boards = useSelector(state => state.boards.boardsList);
+	const user = useSelector((state) => state.users.user);
+	const loading = useSelector((state) => state.boards.isLoading);
+	const boards = useSelector((state) => state.boards.boardsList);
 	const dispatch = useDispatch();
 
 	const [_boards, set_boards] = useState(boards);
@@ -37,7 +36,7 @@ const BoardNav = () => {
 		dispatch(fetchBoardNames());
 	}, []);
 
-	const handleSearch = query => {
+	const handleSearch = (query) => {
 		setSearchQuery(query);
 	};
 
