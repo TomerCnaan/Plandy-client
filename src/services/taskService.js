@@ -12,4 +12,15 @@ function reorderInnerTasks(data) {
 	});
 }
 
-export default { reorderInnerTasks };
+// reorder tasks that were moved to a different group
+function reorderOuterTasks(data) {
+	return http.put(`${apiEndpoint}/outer-reorder`, {
+		boardId: data.boardId,
+		sourceGroupId: data.sourceGroupId,
+		destinationGroupId: data.destinationGroupId,
+		taskIdToMove: data.taskIdToMove,
+		newIndex: data.newIndex,
+	});
+}
+
+export default { reorderInnerTasks, reorderOuterTasks };

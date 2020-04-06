@@ -100,15 +100,13 @@ const Board = ({ match }) => {
 
 			return;
 		} else if (type === "TASKS") {
-			const startGroupIndex = Number(source.droppableId);
-			const endGroupIndex = Number(destination.droppableId);
-			const [removed] = newGroups[startGroupIndex].tasks.splice(
-				source.index,
-				1
+			handleOuterTaskReorder(
+				boardData._id,
+				originalGroups,
+				newGroups,
+				source,
+				destination
 			);
-			newGroups[endGroupIndex].tasks.splice(destination.index, 0, removed);
-
-			dispatch(setNewGroupsOrder(boardData._id, newGroups));
 		}
 	};
 
@@ -177,6 +175,42 @@ const Board = ({ match }) => {
 				const newTasks = newGroups[groupIndex].tasks;
 				const groupId = newGroups[groupIndex]._id;
 				await taskService.reorderInnerTasks({ boardId, groupId, newTasks });
+			} catch (ex) {
+				if (ex.response && ex.response.status < 500) {
+					toast.error(ex.response.data);
+				}
+
+				dispatch(setNewGroupsOrder(boardId, originalGroups));
+			}
+		}
+	};
+
+	const handleOuterTaskReorder = async (
+		boardId,
+		originalGroups,
+		newGroups,
+		source,
+		destination
+	) => {
+		const startGroupIndex = Number(source.droppableId);
+		const endGroupIndex = Number(destination.droppableId);
+		const newIndex = destination.index;
+		const [removed] = newGroups[startGroupIndex].tasks.splice(source.index, 1);
+		newGroups[endGroupIndex].tasks.splice(newIndex, 0, removed);
+		dispatch(setNewGroupsOrder(boardData._id, newGroups));
+
+		if (boardData.owner === userId) {
+			try {
+				const sourceGroupId = newGroups[startGroupIndex]._id;
+				const destinationGroupId = newGroups[endGroupIndex]._id;
+				const taskIdToMove = removed._id;
+				await taskService.reorderOuterTasks({
+					boardId,
+					sourceGroupId,
+					destinationGroupId,
+					taskIdToMove,
+					newIndex,
+				});
 			} catch (ex) {
 				if (ex.response && ex.response.status < 500) {
 					toast.error(ex.response.data);
