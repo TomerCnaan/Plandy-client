@@ -29,7 +29,7 @@ const Container = styled.div`
 
 const Name = styled.h4`
 	font-weight: 300;
-	/* padding: 8px; */
+	padding-right: ${(props) => (props.isHovered ? "0" : "20px")};
 	font-size: 16px;
 	color: #171717;
 `;
@@ -62,7 +62,7 @@ const Column = ({ column, index, groupName }) => {
 					<Grip {...provided.dragHandleProps} isHovered={isHovered}>
 						<Img src={DragGrip} alt="grip" />
 					</Grip>
-					<Name>{name}</Name>
+					<Name isHovered={isHovered}>{name}</Name>
 				</Container>
 			)}
 		</Draggable>

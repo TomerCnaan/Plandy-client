@@ -18,7 +18,7 @@ const Container = styled.div`
 	/* border: 1px solid skyblue; */
 `;
 
-const Tasks = ({ tasks, groupIndex, color }) => {
+const Tasks = ({ tasks, groupIndex, color, boardId }) => {
 	return (
 		<Droppable droppableId={groupIndex} type="TASKS">
 			{(provided, snapshot) => (
@@ -27,7 +27,13 @@ const Tasks = ({ tasks, groupIndex, color }) => {
 						const taskId = task._id;
 
 						return (
-							<Task key={taskId} task={task} index={index} color={color} />
+							<Task
+								key={taskId}
+								task={task}
+								index={index}
+								color={color}
+								boardId={boardId}
+							/>
 						);
 					})}
 					{provided.placeholder}

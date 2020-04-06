@@ -18,6 +18,7 @@ const Container = styled.div`
 	min-height: 50px;
 	width: 1100px;
 	margin: 8px;
+	background-color: white;
 	/* border: 1px solid lightgray;
 	border-radius: 5px; */
 `;
@@ -67,6 +68,7 @@ const Group = ({ group, index, boardId }) => {
 						tasks={tasks}
 						groupIndex={index.toString()}
 						color={group.color}
+						boardId={boardId}
 					/>
 				</Container>
 			)}

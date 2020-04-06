@@ -100,6 +100,7 @@ const Board = ({ match }) => {
 
 			return;
 		} else if (type === "TASKS") {
+			// task were moved to a different group
 			handleOuterTaskReorder(
 				boardData._id,
 				originalGroups,
