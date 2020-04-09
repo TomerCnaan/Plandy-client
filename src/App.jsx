@@ -69,7 +69,10 @@ function App() {
 						<Route path="/logout" component={Logout} />
 						<ProtectedRoute path="/company" component={TeamPage} />
 						<ProtectedRoute path="/profile" component={ProfilePage} />
-						<ProtectedRoute path="/home-page" component={HomePage} />
+						<ProtectedRoute
+							path="/home-page"
+							render={() => <HomePage user={user} />}
+						/>
 						<ProtectedRoute
 							path="/board/:id"
 							render={(props) => <Board {...props} />}

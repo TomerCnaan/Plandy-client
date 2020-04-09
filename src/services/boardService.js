@@ -6,7 +6,7 @@ const apiEndpoint = "/boards";
 function createBoard(data) {
 	return http.post(apiEndpoint, {
 		name: data.name,
-		type: data.type
+		type: data.type,
 	});
 }
 
@@ -20,4 +20,9 @@ function getBoardData(id) {
 	return http.get(`${apiEndpoint}/${id}`);
 }
 
-export default { createBoard, getBoards, getBoardData };
+// delete a board
+function deleteBoard(id) {
+	return http.delete(`${apiEndpoint}/${id}`);
+}
+
+export default { createBoard, getBoards, getBoardData, deleteBoard };

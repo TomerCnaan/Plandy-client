@@ -6,6 +6,7 @@ import {
 	SET_BOARD_DATA,
 	SET_NEW_GROUPS_ORDER,
 	SET_NEW_COLUMNS_ORDER,
+	DELETE_BOARD,
 } from "../actions/actionTypes";
 
 const intialState = {
@@ -68,6 +69,16 @@ const boards = (state = intialState, action) => {
 						column_order: action.payload.newColumnsArr,
 					},
 				},
+			};
+		case DELETE_BOARD:
+			const newData = { ...state.boardsData };
+			if (state.boardsData[action.payload.id])
+				delete newData[action.payload.id];
+			else newData[action.payload.id] = action.payload.oldData;
+			return {
+				...state,
+				boardsList: action.payload.bList, //new boards list
+				boardsData: newData,
 			};
 		default:
 			return state;
