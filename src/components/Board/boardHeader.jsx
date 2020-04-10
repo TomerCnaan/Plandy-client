@@ -1,20 +1,14 @@
 import React from "react";
 
 // libraries
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import _ from "lodash";
 
-import { deleteBoard } from "../../actions/boardActions";
-
-// services
-import boardService from "../../services/boardService";
+// components
+import Settings from "./settings";
 
 // style
 import styled from "styled-components";
-import Button from "@material-ui/core/Button";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { toast } from "react-toastify";
 
 const Container = styled.div`
 	display: flex;
@@ -57,34 +51,7 @@ const Actions = styled.div`
 
 const BoardHeader = ({ data }) => {
 	const { name, description, _id } = data;
-
-	const dispatch = useDispatch();
 	const boardsList = useSelector((state) => state.boards.boardsList);
-
-	const handleDeleteBoard = async () => {
-		const result = window.confirm(
-			"Are you sure that you want to delete this board?"
-		);
-		if (result) {
-			const originalBoardsList = _.cloneDeep(boardsList);
-			const originalBoard = _.find(boardsList, { _id: _id });
-			const originalIndex = _.findIndex(boardsList, { _id: _id });
-			const newBoardsList = _.cloneDeep(boardsList);
-			newBoardsList.splice(originalIndex, 1);
-			dispatch(deleteBoard(_id, newBoardsList, originalBoard));
-
-			try {
-				await boardService.deleteBoard(_id);
-				toast.success("The board has been deleted 🗑️");
-				window.location = "/home-page";
-			} catch (ex) {
-				if (ex.response && ex.response.status < 500) {
-					toast.error(ex.response.data);
-				}
-				dispatch(deleteBoard(_id, originalBoardsList, originalBoard));
-			}
-		}
-	};
 
 	return (
 		<Container>
@@ -93,15 +60,7 @@ const BoardHeader = ({ data }) => {
 				<Description>{description}</Description>
 			</Text>
 			<Actions>
-				<Button
-					style={{ height: "35px" }}
-					variant="contained"
-					color="secondary"
-					startIcon={<DeleteIcon />}
-					onClick={() => handleDeleteBoard()}
-				>
-					Delete
-				</Button>
+				<Settings boardId={_id} boardsList={boardsList} />
 			</Actions>
 		</Container>
 	);

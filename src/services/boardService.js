@@ -25,4 +25,18 @@ function deleteBoard(id) {
 	return http.delete(`${apiEndpoint}/${id}`);
 }
 
-export default { createBoard, getBoards, getBoardData, deleteBoard };
+// change board type
+function changeBoardType(type, boardId) {
+	return http.put(`${apiEndpoint}/type`, {
+		type,
+		boardId,
+	});
+}
+
+export default {
+	createBoard,
+	getBoards,
+	getBoardData,
+	deleteBoard,
+	changeBoardType,
+};

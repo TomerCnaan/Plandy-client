@@ -7,6 +7,7 @@ import {
 	SET_NEW_GROUPS_ORDER,
 	SET_NEW_COLUMNS_ORDER,
 	DELETE_BOARD,
+	CHANGE_TYPE,
 } from "../actions/actionTypes";
 
 const intialState = {
@@ -79,6 +80,17 @@ const boards = (state = intialState, action) => {
 				...state,
 				boardsList: action.payload.bList, //new boards list
 				boardsData: newData,
+			};
+		case CHANGE_TYPE:
+			return {
+				...state,
+				boardsData: {
+					...state.boardsData,
+					[action.payload.id]: {
+						...state.boardsData[action.payload.id],
+						type: action.payload.type,
+					},
+				},
 			};
 		default:
 			return state;

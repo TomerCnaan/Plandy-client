@@ -9,6 +9,8 @@ const Container = styled.div`
 	justify-content: center;
 	width: 140px;
 	height: 40px;
+	border-right: 0.5px solid #dad3d3;
+	border-left: 0.5px solid #dad3d3;
 `;
 
 const Text = styled.div`

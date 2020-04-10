@@ -7,6 +7,7 @@ export const SET_BOARD_DATA = "SET_BOARD_DATA";
 export const SET_NEW_GROUPS_ORDER = "SET_NEW_GROUPS_ORDER";
 export const SET_NEW_COLUMNS_ORDER = "SET_NEW_COLUMNS_ORDER";
 export const DELETE_BOARD = "DELETE_BOARD";
+export const CHANGE_TYPE = "CHANGE_TYPE";
 
 //userActions
 export const SET_USER = "SET_USER";

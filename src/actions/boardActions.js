@@ -7,6 +7,7 @@ import {
 	SET_NEW_GROUPS_ORDER,
 	SET_NEW_COLUMNS_ORDER,
 	DELETE_BOARD,
+	CHANGE_TYPE,
 } from "./actionTypes";
 
 import boardService from "../services/boardService";
@@ -88,4 +89,10 @@ export const setNewColumnsOrder = (boardId, newColumnsArr) => ({
 export const deleteBoard = (boardId, newBoardsList, oldData) => ({
 	type: DELETE_BOARD,
 	payload: { id: boardId, bList: newBoardsList, oldData },
+});
+
+// change board type
+export const changeType = (boardId, type) => ({
+	type: CHANGE_TYPE,
+	payload: { id: boardId, type },
 });
