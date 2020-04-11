@@ -8,6 +8,8 @@ import {
 	SET_NEW_COLUMNS_ORDER,
 	DELETE_BOARD,
 	CHANGE_TYPE,
+	ADD_GROUP,
+	ADD_TASK,
 } from "../actions/actionTypes";
 
 const intialState = {
@@ -89,6 +91,39 @@ const boards = (state = intialState, action) => {
 					[action.payload.id]: {
 						...state.boardsData[action.payload.id],
 						type: action.payload.type,
+					},
+				},
+			};
+		case ADD_GROUP:
+			const boardGroups = state.boardsData[action.payload.id].groups;
+			boardGroups.push(action.payload.group);
+			return {
+				...state,
+				boardsData: {
+					...state.boardsData,
+					[action.payload.id]: {
+						...state.boardsData[action.payload.id],
+						groups: boardGroups,
+					},
+				},
+			};
+		case ADD_TASK:
+			console.log("in add task");
+			let updatedGroups = state.boardsData[action.payload.boardId].groups;
+			console.log(updatedGroups);
+			const groupTasks = updatedGroups[action.payload.groupIndex];
+			console.log(groupTasks);
+			groupTasks.tasks.push(action.payload.task);
+			updatedGroups[action.payload.groupIndex] = groupTasks;
+			console.log(updatedGroups);
+
+			return {
+				...state,
+				boardsData: {
+					...state.boardsData,
+					[action.payload.boardId]: {
+						...state.boardsData[action.payload.boardId],
+						groups: updatedGroups,
 					},
 				},
 			};

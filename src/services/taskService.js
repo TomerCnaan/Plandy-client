@@ -23,4 +23,11 @@ function reorderOuterTasks(data) {
 	});
 }
 
-export default { reorderInnerTasks, reorderOuterTasks };
+function addTask(boardId, groupId) {
+	return http.post(apiEndpoint, {
+		boardId,
+		groupId,
+	});
+}
+
+export default { reorderInnerTasks, reorderOuterTasks, addTask };

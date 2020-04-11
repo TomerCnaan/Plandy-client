@@ -8,6 +8,8 @@ import {
 	SET_NEW_COLUMNS_ORDER,
 	DELETE_BOARD,
 	CHANGE_TYPE,
+	ADD_GROUP,
+	ADD_TASK,
 } from "./actionTypes";
 
 import boardService from "../services/boardService";
@@ -95,4 +97,16 @@ export const deleteBoard = (boardId, newBoardsList, oldData) => ({
 export const changeType = (boardId, type) => ({
 	type: CHANGE_TYPE,
 	payload: { id: boardId, type },
+});
+
+// add group
+export const addGroup = (boardId, newGroup) => ({
+	type: ADD_GROUP,
+	payload: { id: boardId, group: newGroup },
+});
+
+// add task
+export const addTask = (boardId, groupIndex, newTask) => ({
+	type: ADD_TASK,
+	payload: { boardId, groupIndex, task: newTask },
 });

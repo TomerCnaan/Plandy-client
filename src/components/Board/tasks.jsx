@@ -5,6 +5,7 @@ import { Droppable } from "react-beautiful-dnd";
 
 // components
 import Task from "./task";
+import AddTask from "./addTask";
 
 // style
 import styled from "styled-components";
@@ -18,25 +19,31 @@ const Container = styled.div`
 	/* border: 1px solid skyblue; */
 `;
 
-const Tasks = ({ tasks, groupIndex, color, boardId }) => {
+const Tasks = ({ tasks, groupId, groupIndex, color, boardId }) => {
 	return (
 		<Droppable droppableId={groupIndex} type="TASKS">
 			{(provided, snapshot) => (
 				<Container {...provided.droppableProps} ref={provided.innerRef}>
-					{tasks.map((task, index) => {
-						const taskId = task._id;
+					{tasks &&
+						tasks.map((task, index) => {
+							const taskId = task._id;
 
-						return (
-							<Task
-								key={taskId}
-								task={task}
-								index={index}
-								color={color}
-								boardId={boardId}
-							/>
-						);
-					})}
+							return (
+								<Task
+									key={taskId}
+									task={task}
+									index={index}
+									color={color}
+									boardId={boardId}
+								/>
+							);
+						})}
 					{provided.placeholder}
+					<AddTask
+						boardId={boardId}
+						groupId={groupId}
+						groupIndex={groupIndex}
+					/>
 				</Container>
 			)}
 		</Droppable>

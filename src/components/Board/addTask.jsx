@@ -1,0 +1,46 @@
+import React from "react";
+
+// libraries
+import { useDispatch } from "react-redux";
+
+// services
+import taskService from "../../services/taskService";
+
+// actions
+import { addTask } from "../../actions/boardActions";
+
+// style
+import styled from "styled-components";
+import IconButton from "@material-ui/core/IconButton";
+import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
+import { toast } from "react-toastify";
+
+const Add = styled.div`
+	display: flex;
+	margin-left: 20px;
+`;
+
+const AddTask = ({ boardId, groupId, groupIndex }) => {
+	const dispatch = useDispatch();
+
+	const handleAddTask = async () => {
+		try {
+			const { data: newTask } = await taskService.addTask(boardId, groupId);
+			dispatch(addTask(boardId, groupIndex, newTask));
+		} catch (ex) {
+			if (ex.response && ex.response.status < 500) {
+				toast.error(ex.response.data);
+			}
+		}
+	};
+
+	return (
+		<Add>
+			<IconButton onClick={handleAddTask}>
+				<AddCircleRoundedIcon fontSize="small" />
+			</IconButton>
+		</Add>
+	);
+};
+
+export default AddTask;

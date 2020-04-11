@@ -20,7 +20,9 @@ const Text = styled.div`
 `;
 
 const Cell = ({ data }) => {
-	const { value, columnType } = data;
+	const value = data ? data.value : null;
+	const type = data ? data.columnType : null;
+
 	return (
 		<Container>
 			<Text>{value}</Text>
