@@ -16,10 +16,14 @@ const Container = styled.div`
 	align-self: flex-start;
 	flex-flow: column nowrap;
 	min-height: 50px;
-	width: 1100px;
-	margin: 8px;
+	/* width: 1100px; */
+	width: 100%;
+	/* margin: 8px; */
+	padding: 8px;
 	margin-bottom: 20px;
+	padding-right: 50px;
 	background-color: white;
+	flex-shrink: 0;
 	/* border: 1px solid lightgray;
 	border-radius: 5px; */
 `;

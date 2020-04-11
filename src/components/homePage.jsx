@@ -41,7 +41,7 @@ const HomePage = () => {
 		<MainWrapper>
 			<Slider />
 			<MainContent>
-				<h1>Home Page</h1>
+				<h1 style={{ paddingLeft: "40px" }}>Home Page</h1>
 				<Page>
 					{/* <h2>Hello {propsuser.name}</h2> */}
 					<Advice>{randomAdvice}</Advice>

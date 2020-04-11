@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // components
 import Cell from "./cell";
@@ -16,10 +16,12 @@ const Container = styled.div`
 	align-items: center;
 	flex-grow: 1;
 	flex-shrink: 0;
-	background-color: #f5f5f5;
+	background-color: #f5f6f8;
 	border-right: 0.5px solid #dad3d3;
-	margin-left: 35px;
+	/* margin-left: 35px; */
 	margin-bottom: 1.5px;
+	/* transform: translate3d(20deg, 10deg, 10deg);
+	will-change: transform; */
 `;
 
 const Name = styled.h5`
@@ -44,11 +46,20 @@ const CellList = styled.div`
 	height: 40px;
 `;
 
+const Delete = styled.div`
+	width: 34.5px;
+	height: 40px;
+	background-color: ${(props) => (props.hovered ? "#f5f6f8" : "white")};
+	transform: background 200ms ease;
+`;
+
 const Task = ({ task, index, color, boardId }) => {
 	const { _id, name, column_values } = task;
 	const column_order = useSelector(
 		(state) => state.boards.boardsData[boardId].column_order
 	);
+
+	const [isHovered, setIsHovered] = useState(false);
 
 	return (
 		<Draggable draggableId={_id} index={index}>
@@ -58,7 +69,10 @@ const Task = ({ task, index, color, boardId }) => {
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}
 					isDragging={snapshot.isDragging}
+					onMouseEnter={() => setIsHovered(true)}
+					onMouseLeave={() => setIsHovered(false)}
 				>
+					<Delete hovered={isHovered}></Delete>
 					<LeftEdge fill={color}></LeftEdge>
 					<Name>{name}</Name>
 

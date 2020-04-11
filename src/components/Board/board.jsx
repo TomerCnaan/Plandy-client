@@ -33,8 +33,11 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	/* border: 1px solid black; */
-	width: 100%;
-	height: 100%;
+	/* width: 100%;
+	height: 100%; */
+	padding-left: 30px;
+	flex-shrink: 0;
+	flex-grow: 1;
 `;
 
 const Board = ({ match }) => {

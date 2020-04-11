@@ -12,7 +12,7 @@ import { addTask } from "../../actions/boardActions";
 // style
 import styled from "styled-components";
 import IconButton from "@material-ui/core/IconButton";
-import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
+import AddIcon from "@material-ui/icons/Add";
 import { toast } from "react-toastify";
 
 const Add = styled.div`
@@ -37,7 +37,8 @@ const AddTask = ({ boardId, groupId, groupIndex }) => {
 	return (
 		<Add>
 			<IconButton onClick={handleAddTask}>
-				<AddCircleRoundedIcon fontSize="small" />
+				<AddIcon fontSize="small" />
+				<span style={{ fontSize: "14px", paddingRight: "3px" }}> Add</span>
 			</IconButton>
 		</Add>
 	);

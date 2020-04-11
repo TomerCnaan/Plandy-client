@@ -21,10 +21,10 @@ export const MainContent = styled.div`
 	flex-direction: column;
 	position: relative;
 	flex-grow: 1;
-	min-width: 0;
 	width: 100%;
-	margin-left: 70px;
-	margin-top: 20px;
+	/* margin-left: 70px; */
+	margin-left: 30px;
+	/* margin-top: 20px; */
 	transition: margin-left 200ms ease, visibility 200ms ease, opacity 200ms ease;
 	overflow: auto;
 `;

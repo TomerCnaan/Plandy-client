@@ -17,6 +17,8 @@ body {
 	width: 100%;
 	height: 100%;
 	background-color: #fff;
+	margin: 0px;
+	padding: 0px;
 	overflow: hidden;
 }
 

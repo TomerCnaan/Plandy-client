@@ -15,6 +15,11 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 30px;
+	border-bottom: 1px solid #e1e1e1;
+	padding-left: 40px;
+	padding-top: 35px;
+	overflow-y: hidden;
+	flex-shrink: 0;
 `;
 
 const Head = styled.div`
@@ -62,6 +67,7 @@ const Util = styled.div`
 	justify-content: flex-end;
 	padding-right: 50px;
 	padding-top: 20px;
+	padding-bottom: 15px;
 `;
 
 const BoardHeader = ({ data }) => {
