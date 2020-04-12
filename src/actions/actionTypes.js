@@ -12,6 +12,7 @@ export const ADD_GROUP = "ADD_GROUP";
 export const ADD_TASK = "ADD_TASK";
 export const DELETE_GROUP = "DELETE_GROUP";
 export const REVERSE_DELETE_GROUP = "REVERSE_DELETE_GROUP";
+export const DELETE_TASK = "DELETE_TASK";
 
 //userActions
 export const SET_USER = "SET_USER";

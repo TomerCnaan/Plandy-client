@@ -23,6 +23,7 @@ function reorderOuterTasks(data) {
 	});
 }
 
+// add task
 function addTask(boardId, groupId) {
 	return http.post(apiEndpoint, {
 		boardId,
@@ -30,4 +31,15 @@ function addTask(boardId, groupId) {
 	});
 }
 
-export default { reorderInnerTasks, reorderOuterTasks, addTask };
+// delete task
+function deleteTask(boardId, groupId, taskId) {
+	return http.delete(apiEndpoint, {
+		data: {
+			boardId,
+			groupId,
+			taskId,
+		},
+	});
+}
+
+export default { reorderInnerTasks, reorderOuterTasks, addTask, deleteTask };

@@ -12,6 +12,7 @@ import {
 	ADD_TASK,
 	DELETE_GROUP,
 	REVERSE_DELETE_GROUP,
+	DELETE_TASK,
 } from "../actions/actionTypes";
 
 const intialState = {
@@ -148,6 +149,20 @@ const boards = (state = intialState, action) => {
 					[action.payload.boardId]: {
 						...state.boardsData[action.payload.boardId],
 						groups: returnGroup,
+					},
+				},
+			};
+		case DELETE_TASK:
+			let newGroupsList = state.boardsData[action.payload.boardId].groups;
+			newGroupsList[action.payload.index].tasks = action.payload.newTasks;
+
+			return {
+				...state,
+				boardsData: {
+					...state.boardsData,
+					[action.payload.boardId]: {
+						...state.boardsData[action.payload.boardId],
+						groups: newGroupsList,
 					},
 				},
 			};

@@ -5,10 +5,19 @@ import Cell from "./cell";
 
 // libraries
 import { Draggable } from "react-beautiful-dnd";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+// actions
+import { deleteTask } from "../../actions/boardActions";
+
+// services
+import taskService from "../../services/taskService";
 
 // style
 import styled from "styled-components";
+import DeleteIcon from "@material-ui/icons/Delete";
+import IconButton from "@material-ui/core/IconButton";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
 	/* border: 1px solid green; */
@@ -47,19 +56,39 @@ const CellList = styled.div`
 `;
 
 const Delete = styled.div`
+	display: flex;
+	justify-content: center;
 	width: 34.5px;
 	height: 40px;
 	background-color: ${(props) => (props.hovered ? "#f5f6f8" : "white")};
-	transform: background 200ms ease;
+	/* opacity: ${(props) => (props.hovered ? "1" : "0")}; */
+	transition: background-color 250ms linear;
 `;
 
-const Task = ({ task, index, color, boardId }) => {
+const Task = ({ task, index, color, boardId, groupId }) => {
 	const { _id, name, column_values } = task;
 	const column_order = useSelector(
 		(state) => state.boards.boardsData[boardId].column_order
 	);
 
+	const dispatch = useDispatch();
+
 	const [isHovered, setIsHovered] = useState(false);
+
+	const handleTaskDelete = async () => {
+		dispatch(deleteTask(boardId)); //TODO: add props
+
+		try {
+			await taskService.deleteTask(boardId, groupId, _id);
+			toast.success("The task has been deleted 🚀");
+		} catch (ex) {
+			if (ex.response && ex.response.status < 500) {
+				toast.error(ex.response.data);
+			}
+
+			dispatch(deleteTask()); //TODO: add props
+		}
+	};
 
 	return (
 		<Draggable draggableId={_id} index={index}>
@@ -72,7 +101,15 @@ const Task = ({ task, index, color, boardId }) => {
 					onMouseEnter={() => setIsHovered(true)}
 					onMouseLeave={() => setIsHovered(false)}
 				>
-					<Delete hovered={isHovered}></Delete>
+					<Delete hovered={isHovered}>
+						{/* <IconButton
+							size="small"
+							style={{ display: "flex", opacity: `${isHovered}` }}
+							onClick={handleTaskDelete}
+						>
+							<DeleteIcon fontSize="small" />
+						</IconButton> */}
+					</Delete>
 					<LeftEdge fill={color}></LeftEdge>
 					<Name>{name}</Name>
 

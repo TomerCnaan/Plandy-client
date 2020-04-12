@@ -35,6 +35,7 @@ const Tasks = ({ tasks, groupId, groupIndex, color, boardId }) => {
 									index={index}
 									color={color}
 									boardId={boardId}
+									groupId={groupId}
 								/>
 							);
 						})}
