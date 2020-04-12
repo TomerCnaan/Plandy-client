@@ -18,4 +18,14 @@ function addGroup(boardId) {
 	});
 }
 
-export default { reorderGroups, addGroup };
+// delete group
+function deleteGroup(boardId, groupId) {
+	return http.delete(apiEndpoint, {
+		data: {
+			boardId,
+			groupId,
+		},
+	});
+}
+
+export default { reorderGroups, addGroup, deleteGroup };

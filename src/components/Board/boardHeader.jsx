@@ -2,7 +2,6 @@ import React from "react";
 
 // libraries
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 // components
 import Settings from "./settings";

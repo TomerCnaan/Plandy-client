@@ -2,10 +2,12 @@ import React from "react";
 
 // libraries
 import { Draggable } from "react-beautiful-dnd";
+import { useSelector } from "react-redux";
 
 // components
 import Tasks from "./tasks";
 import ColumnList from "./columnList";
+import GroupMenu from "./groupMenu";
 
 // style
 import styled from "styled-components";
@@ -52,7 +54,6 @@ const Img = styled.img`
 
 const Group = ({ group, index, boardId }) => {
 	const { _id, title, tasks } = group;
-
 	return (
 		<Draggable draggableId={_id} index={index}>
 			{(provided, snapshot) => (
@@ -62,6 +63,12 @@ const Group = ({ group, index, boardId }) => {
 							<Img src={GripDrag} alt="grip" />
 						</Span>{" "}
 						<Title groupColor={group.color}>{title}</Title>
+						<GroupMenu
+							groupId={_id}
+							boardId={boardId}
+							groupIndex={index.toString()}
+							group={group}
+						/>
 						<ColumnList
 							boardId={boardId}
 							groupIndex={index.toString()}

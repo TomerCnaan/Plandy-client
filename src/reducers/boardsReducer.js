@@ -10,6 +10,8 @@ import {
 	CHANGE_TYPE,
 	ADD_GROUP,
 	ADD_TASK,
+	DELETE_GROUP,
+	REVERSE_DELETE_GROUP,
 } from "../actions/actionTypes";
 
 const intialState = {
@@ -108,14 +110,10 @@ const boards = (state = intialState, action) => {
 				},
 			};
 		case ADD_TASK:
-			console.log("in add task");
 			let updatedGroups = state.boardsData[action.payload.boardId].groups;
-			console.log(updatedGroups);
 			const groupTasks = updatedGroups[action.payload.groupIndex];
-			console.log(groupTasks);
 			groupTasks.tasks.push(action.payload.task);
 			updatedGroups[action.payload.groupIndex] = groupTasks;
-			console.log(updatedGroups);
 
 			return {
 				...state,
@@ -124,6 +122,32 @@ const boards = (state = intialState, action) => {
 					[action.payload.boardId]: {
 						...state.boardsData[action.payload.boardId],
 						groups: updatedGroups,
+					},
+				},
+			};
+		case DELETE_GROUP:
+			const newGroups = state.boardsData[action.payload.boardId].groups;
+			newGroups.splice(action.payload.index, 1);
+			return {
+				...state,
+				boardsData: {
+					...state.boardsData,
+					[action.payload.boardId]: {
+						...state.boardsData[action.payload.boardId],
+						groups: newGroups,
+					},
+				},
+			};
+		case REVERSE_DELETE_GROUP:
+			const returnGroup = state.boardsData[action.payload.boardId].groups;
+			returnGroup.splice(action.payload.index, 0, action.payload.group);
+			return {
+				...state,
+				boardsData: {
+					...state.boardsData,
+					[action.payload.boardId]: {
+						...state.boardsData[action.payload.boardId],
+						groups: returnGroup,
 					},
 				},
 			};
