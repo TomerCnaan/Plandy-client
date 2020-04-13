@@ -15,6 +15,10 @@ const Container = styled.div`
 	flex-direction: column;
 	flex-grow: 1;
 	min-height: 40px;
+	/* border: ${(props) =>
+		props.isDraggingOver ? "0.5px dashed black" : "none"}; */
+	padding: ${(props) => (props.isDraggingOver ? "8px" : "0")};
+	transition: 200ms ease;
 
 	/* border: 1px solid skyblue; */
 `;
@@ -23,7 +27,11 @@ const Tasks = ({ tasks, groupId, groupIndex, color, boardId }) => {
 	return (
 		<Droppable droppableId={groupIndex} type="TASKS">
 			{(provided, snapshot) => (
-				<Container {...provided.droppableProps} ref={provided.innerRef}>
+				<Container
+					{...provided.droppableProps}
+					ref={provided.innerRef}
+					isDraggingOver={snapshot.isDraggingOver}
+				>
 					{tasks &&
 						tasks.map((task, index) => {
 							const taskId = task._id;

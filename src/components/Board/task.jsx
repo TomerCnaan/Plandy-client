@@ -102,13 +102,17 @@ const Task = ({ task, index, color, boardId, groupId }) => {
 					onMouseLeave={() => setIsHovered(false)}
 				>
 					<Delete hovered={isHovered}>
-						{/* <IconButton
+						<IconButton
 							size="small"
-							style={{ display: "flex", opacity: `${isHovered}` }}
+							style={{
+								display: "flex",
+								opacity: `${Number(isHovered)}`,
+								transition: "500ms ease",
+							}}
 							onClick={handleTaskDelete}
 						>
 							<DeleteIcon fontSize="small" />
-						</IconButton> */}
+						</IconButton>
 					</Delete>
 					<LeftEdge fill={color}></LeftEdge>
 					<Name>{name}</Name>
