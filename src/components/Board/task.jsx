@@ -65,7 +65,7 @@ const Delete = styled.div`
 	transition: background-color 250ms linear;
 `;
 
-const Task = ({ task, index, color, boardId, groupId }) => {
+const Task = ({ task, index, color, boardId, groupId, group, groupIndex }) => {
 	const { _id, name, column_values } = task;
 	const column_order = useSelector(
 		(state) => state.boards.boardsData[boardId].column_order
@@ -76,7 +76,9 @@ const Task = ({ task, index, color, boardId, groupId }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	const handleTaskDelete = async () => {
-		dispatch(deleteTask(boardId)); //TODO: add props
+		const originalTasksList = group.tasks;
+		const tasksList = group.tasks.filter((t) => t._id !== _id);
+		dispatch(deleteTask(boardId, groupIndex, tasksList));
 
 		try {
 			await taskService.deleteTask(boardId, groupId, _id);
@@ -86,7 +88,7 @@ const Task = ({ task, index, color, boardId, groupId }) => {
 				toast.error(ex.response.data);
 			}
 
-			dispatch(deleteTask()); //TODO: add props
+			dispatch(deleteTask(boardId, groupIndex, originalTasksList));
 		}
 	};
 

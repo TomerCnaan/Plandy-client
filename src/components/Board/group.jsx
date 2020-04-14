@@ -82,6 +82,7 @@ const Group = ({ group, index, boardId }) => {
 						color={group.color}
 						boardId={boardId}
 						groupId={_id}
+						group={group}
 					/>
 				</Container>
 			)}
