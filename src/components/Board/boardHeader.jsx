@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+
+// services
+import boardService from "../../services/boardService";
 
 // libraries
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+// actions
+import { updateDescription } from "../../actions/boardActions";
 
 // components
 import Settings from "./settings";
@@ -9,6 +15,8 @@ import AddGroup from "./addGroup";
 
 // style
 import styled from "styled-components";
+import { TextArea } from "../style/main-app";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
 	display: flex;
@@ -47,9 +55,6 @@ const Description = styled.h3`
 	font-size: 14px;
 	text-transform: capitalize;
 	color: #b5b5b5;
-	:hover {
-		border: 0.5px dashed lightgrey;
-	}
 `;
 
 const Actions = styled.div`
@@ -73,12 +78,54 @@ const BoardHeader = ({ data }) => {
 	const { name, description, _id } = data;
 	const boardsList = useSelector((state) => state.boards.boardsList);
 
+	const dispatch = useDispatch();
+	const [descriptionValue, setDescriptionValue] = useState(description);
+
+	const handleChange = (e) => {
+		console.log(e.target);
+		setDescriptionValue(e.target.value);
+	};
+
+	const handleKeyPress = (e) => {
+		if (e.key === "Enter") {
+			e.preventDefault();
+			handleSubmit();
+			return;
+		}
+	};
+
+	const handleSubmit = async () => {
+		const originalDescr = description;
+		dispatch(updateDescription(_id, descriptionValue));
+
+		try {
+			await boardService.changeDescription(_id, descriptionValue);
+		} catch (ex) {
+			if (ex.error && ex.error.status < 500) {
+				toast.error("Falied to update board description");
+			}
+			setDescriptionValue(originalDescr);
+			dispatch(updateDescription(_id, originalDescr));
+		}
+	};
+
 	return (
 		<Container>
 			<Head>
 				<Text>
 					<Title>{name}</Title>
-					<Description>{description}</Description>
+					<Description>
+						<TextArea
+							value={descriptionValue}
+							onChange={handleChange}
+							onKeyDown={handleKeyPress}
+							onBlur={handleSubmit}
+							rows="1"
+							wrap="off"
+						>
+							{descriptionValue}
+						</TextArea>
+					</Description>
 				</Text>
 				<Actions>
 					<Settings boardId={_id} boardsList={boardsList} />

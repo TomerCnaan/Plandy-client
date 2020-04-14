@@ -29,4 +29,23 @@ export const MainContent = styled.div`
 	overflow: auto;
 `;
 
+export const TextArea = styled.textarea`
+	font-family: "Montserrat", sans-serif;
+	white-space: nowrap;
+	border: none;
+	padding: 0px 5px;
+	border-radius: 0;
+	height: 100%;
+	width: 100%;
+	outline: 0;
+	overflow: hidden;
+	font-size: 13px;
+	line-height: 20px;
+	:hover,
+	:focus {
+		border: 0.5px dashed lightgrey;
+	}
+	resize: none;
+`;
+
 export default MainWrapper;

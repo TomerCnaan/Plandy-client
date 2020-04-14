@@ -13,6 +13,7 @@ import {
 	DELETE_GROUP,
 	REVERSE_DELETE_GROUP,
 	DELETE_TASK,
+	UPDATE_DESCRIPTION,
 } from "./actionTypes";
 
 import boardService from "../services/boardService";
@@ -129,4 +130,9 @@ export const reverseDeleteGroup = (boardId, groupIndex, group) => ({
 export const deleteTask = (boardId, groupIndex, tasksList) => ({
 	type: DELETE_TASK,
 	payload: { boardId, index: groupIndex, newTasks: tasksList },
+});
+
+export const updateDescription = (boardId, description) => ({
+	type: UPDATE_DESCRIPTION,
+	payload: { boardId, description },
 });

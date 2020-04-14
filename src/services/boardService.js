@@ -33,10 +33,18 @@ function changeBoardType(type, boardId) {
 	});
 }
 
+function changeDescription(boardId, description) {
+	http.put(`${apiEndpoint}/description`, {
+		boardId,
+		description,
+	});
+}
+
 export default {
 	createBoard,
 	getBoards,
 	getBoardData,
 	deleteBoard,
 	changeBoardType,
+	changeDescription,
 };

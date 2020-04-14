@@ -13,6 +13,7 @@ import {
 	DELETE_GROUP,
 	REVERSE_DELETE_GROUP,
 	DELETE_TASK,
+	UPDATE_DESCRIPTION,
 } from "../actions/actionTypes";
 
 const intialState = {
@@ -163,6 +164,18 @@ const boards = (state = intialState, action) => {
 					[action.payload.boardId]: {
 						...state.boardsData[action.payload.boardId],
 						groups: newGroupsList,
+					},
+				},
+			};
+		case UPDATE_DESCRIPTION:
+			const { boardId, description } = action.payload;
+			return {
+				...state,
+				boardsData: {
+					...state.boardsData,
+					[boardId]: {
+						...state.boardsData[boardId],
+						description: description,
 					},
 				},
 			};
