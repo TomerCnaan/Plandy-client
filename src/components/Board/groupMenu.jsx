@@ -60,6 +60,9 @@ const GroupMenu = ({ groupId, boardId, groupIndex, group }) => {
 			</IconButton>
 			<Menu
 				anchorEl={anchorEl}
+				getContentAnchorEl={null}
+				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+				transformOrigin={{ vertical: "top", horizontal: "center" }}
 				keepMounted
 				open={Boolean(anchorEl)}
 				onClose={handleClose}

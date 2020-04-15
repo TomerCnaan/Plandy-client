@@ -35,9 +35,19 @@ const Header = styled.div`
 	align-items: stretch;
 `;
 
-const Title = styled.h3`
+const Title = styled.textarea`
+	font-family: "Montserrat", sans-serif;
 	padding: 9px;
+	font-weight: 700;
+	font-size: 18.72px;
+	line-height: 28.08px;
 	color: ${(props) => props.groupColor};
+	white-space: nowrap;
+	border: 1px dashed transparent;
+	outline: 0;
+	overflow: hidden;
+	border-radius: 0;
+	resize: none;
 `;
 
 const Span = styled.span`
@@ -62,7 +72,9 @@ const Group = ({ group, index, boardId }) => {
 						<Span groupColor={group.color} {...provided.dragHandleProps}>
 							<Img src={GripDrag} alt="grip" />
 						</Span>{" "}
-						<Title groupColor={group.color}>{title}</Title>
+						<Title rows="1" wrap="off" groupColor={group.color}>
+							{title}
+						</Title>
 						<GroupMenu
 							groupId={_id}
 							boardId={boardId}

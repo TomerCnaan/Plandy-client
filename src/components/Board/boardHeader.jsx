@@ -15,7 +15,7 @@ import AddGroup from "./addGroup";
 
 // style
 import styled from "styled-components";
-import { TextArea } from "../style/main-app";
+// import { TextArea } from "../style/main-app";
 import { toast } from "react-toastify";
 
 const Container = styled.div`
@@ -72,6 +72,25 @@ const Util = styled.div`
 	padding-right: 50px;
 	padding-top: 20px;
 	padding-bottom: 15px;
+`;
+
+const TextArea = styled.textarea`
+	font-family: "Montserrat", sans-serif;
+	white-space: nowrap;
+	border: 0.5px dashed transparent;
+	padding: 0px 5px;
+	border-radius: 0;
+	height: 100%;
+	width: 100%;
+	outline: 0;
+	overflow: hidden;
+	font-size: 15px;
+	line-height: 20px;
+	:hover,
+	:focus {
+		border: 0.5px dashed lightgrey;
+	}
+	resize: none;
 `;
 
 const BoardHeader = ({ data }) => {
