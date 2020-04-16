@@ -14,6 +14,8 @@ import {
 	REVERSE_DELETE_GROUP,
 	DELETE_TASK,
 	UPDATE_DESCRIPTION,
+	UPDATE_GROUP_TITLE,
+	UPDATE_TASK_NAME,
 } from "../actions/actionTypes";
 
 const intialState = {
@@ -176,6 +178,34 @@ const boards = (state = intialState, action) => {
 					[boardId]: {
 						...state.boardsData[boardId],
 						description: description,
+					},
+				},
+			};
+		case UPDATE_GROUP_TITLE:
+			const newGroupsTitle = state.boardsData[action.payload.boardId].groups;
+			newGroupsTitle[action.payload.groupIndex].title = action.payload.newTitle;
+			return {
+				...state,
+				boardsData: {
+					...state.boardsData,
+					[action.payload.boardId]: {
+						...state.boardsData[action.payload.boardId],
+						groups: newGroupsTitle,
+					},
+				},
+			};
+		case UPDATE_TASK_NAME:
+			const groupsUpdatedTask = state.boardsData[action.payload.boardId].groups;
+			groupsUpdatedTask[action.payload.groupIndex].tasks[
+				action.payload.taskIndex
+			].name = action.payload.newName;
+			return {
+				...state,
+				boardsData: {
+					...state.boardsData,
+					[action.payload.boardId]: {
+						...state.boardsData[action.payload.boardId],
+						groups: groupsUpdatedTask,
 					},
 				},
 			};

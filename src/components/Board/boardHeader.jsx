@@ -141,6 +141,7 @@ const BoardHeader = ({ data }) => {
 							onBlur={handleSubmit}
 							rows="1"
 							wrap="off"
+							spellCheck="false"
 						>
 							{descriptionValue}
 						</TextArea>

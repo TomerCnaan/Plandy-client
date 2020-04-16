@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
 
+// actions
+import { updateGroupTitle } from "../../actions/boardActions";
+
 // services
 import groupService from "../../services/groupService";
 
@@ -15,6 +18,7 @@ import GroupMenu from "./groupMenu";
 // style
 import styled from "styled-components";
 import GripDrag from "../../images/grip-group.svg";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
 	display: flex;
@@ -38,12 +42,28 @@ const Header = styled.div`
 	align-items: stretch;
 `;
 
+// const WrapTitle = styled.label`
+// 	height: 30px;
+// 	display: flex;
+// 	align-items: center;
+// 	align-self: center;
+// 	padding: 0 2px;
+// 	white-space: nowrap;
+// 	text-overflow: ellipsis;
+// 	overflow: hidden;
+// 	min-width: 1px;
+// 	:focus {
+// 		flex-grow: 1;
+// 	}
+// `;
+
 const Title = styled.textarea`
 	font-family: "Montserrat", sans-serif;
 	height: 30px;
 	min-width: 1px;
 	display: flex;
 	align-self: center;
+	padding: 0 3px;
 	font-weight: 700;
 	font-size: 18.72px;
 	line-height: 25.08px;
@@ -57,6 +77,8 @@ const Title = styled.textarea`
 	:hover,
 	:focus {
 		border: 1px dashed ${(props) => props.groupColor};
+	}
+	:focus {
 		flex-grow: 1;
 	}
 `;
@@ -93,16 +115,16 @@ const Group = ({ group, index, boardId }) => {
 
 	const handleSubmit = async () => {
 		const originalTitle = title;
-		// dispatch() //TODO: add redux support
+		dispatch(updateGroupTitle(boardId, index, titleValue));
 
 		try {
 			await groupService.updateGroupTitle(boardId, _id, titleValue);
 		} catch (ex) {
-			if (ex.error && ex.error.status < 500) {
-				toast.error(ex.error.data);
+			if (ex.response && ex.response.status < 500) {
+				toast.error(ex.response.data);
 			}
 			setTitlenValue(originalTitle);
-			// dispatch() //TODO: add redux support
+			dispatch(updateGroupTitle(boardId, index, originalTitle));
 		}
 	};
 
@@ -125,6 +147,7 @@ const Group = ({ group, index, boardId }) => {
 							rows="1"
 							wrap="off"
 							groupColor={group.color}
+							spellCheck="false"
 							value={titleValue}
 							onChange={handleChange}
 							onKeyDown={handleKeyPress}

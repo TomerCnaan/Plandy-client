@@ -42,4 +42,20 @@ function deleteTask(boardId, groupId, taskId) {
 	});
 }
 
-export default { reorderInnerTasks, reorderOuterTasks, addTask, deleteTask };
+// change task name
+function changeName(boardId, groupId, taskId, name) {
+	return http.put(apiEndpoint, {
+		boardId,
+		groupId,
+		taskId,
+		name,
+	});
+}
+
+export default {
+	reorderInnerTasks,
+	reorderOuterTasks,
+	addTask,
+	deleteTask,
+	changeName,
+};

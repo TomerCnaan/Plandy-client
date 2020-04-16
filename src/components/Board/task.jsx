@@ -33,11 +33,32 @@ const Container = styled.div`
 	will-change: transform; */
 `;
 
-const Name = styled.h5`
+const Name = styled.textarea`
+	font-family: "Montserrat", sans-serif;
 	font-weight: 500;
-	/* padding: 8px; */
 	font-size: 14px;
+	height: 28px;
+	line-height: 25px;
+	display: flex;
+	align-self: center;
+	padding: 1px 3px;
 	color: #171717;
+	background-color: #f5f6f8;
+	border: 1px solid transparent;
+	outline: 0;
+	overflow: hidden;
+	border-radius: 0;
+	resize: none;
+	white-space: nowrap;
+	transition: background-color 300ms ease;
+	:hover,
+	:focus {
+		border: 1px dashed lightblue;
+		background-color: white;
+	}
+	:focus {
+		flex-grow: 1;
+	}
 `;
 
 const LeftEdge = styled.div`
@@ -72,7 +93,7 @@ const Task = ({ task, index, color, boardId, groupId, group, groupIndex }) => {
 	);
 
 	const dispatch = useDispatch();
-
+	const [nameValue, setNameValue] = useState(name);
 	const [isHovered, setIsHovered] = useState(false);
 
 	const handleTaskDelete = async () => {
@@ -89,6 +110,33 @@ const Task = ({ task, index, color, boardId, groupId, group, groupIndex }) => {
 			}
 
 			dispatch(deleteTask(boardId, groupIndex, originalTasksList));
+		}
+	};
+
+	const handleChange = (e) => {
+		setNameValue(e.target.value);
+	};
+
+	const handleKeyPress = (e) => {
+		if (e.key === "Enter") {
+			e.preventDefault();
+			handleSubmit();
+			return;
+		}
+	};
+
+	const handleSubmit = async () => {
+		const originalName = name;
+		// dispatch(updateGroupTitle(boardId, index, nameValue));
+
+		try {
+			await taskService.changeName(boardId, groupId, _id, nameValue);
+		} catch (ex) {
+			if (ex.response && ex.response.status < 500) {
+				toast.error(ex.response.data);
+			}
+			setNameValue(originalName);
+			// dispatch(updateGroupTitle(boardId, index, originalName));
 		}
 	};
 
@@ -117,7 +165,17 @@ const Task = ({ task, index, color, boardId, groupId, group, groupIndex }) => {
 						</IconButton>
 					</Delete>
 					<LeftEdge fill={color}></LeftEdge>
-					<Name>{name}</Name>
+					<Name
+						rows="1"
+						wrap="off"
+						spellCheck="false"
+						value={nameValue}
+						onChange={handleChange}
+						onKeyDown={handleKeyPress}
+						onBlur={handleSubmit}
+					>
+						{name}
+					</Name>
 
 					<CellList>
 						{column_order.map((column, index) => {
