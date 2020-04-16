@@ -21,7 +21,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { toast } from "react-toastify";
 
-const GroupMenu = ({ groupId, boardId, groupIndex, group }) => {
+const GroupMenu = ({ groupId, boardId, groupIndex, group, color }) => {
 	const dispatch = useDispatch();
 
 	const [anchorEl, setAnchorEl] = useState(null);
@@ -52,11 +52,15 @@ const GroupMenu = ({ groupId, boardId, groupIndex, group }) => {
 		<div style={{ display: "flex" }}>
 			<IconButton
 				aria-label="dropdown"
-				color="default"
+				// color="default"
 				size="small"
 				onClick={handleClick}
 			>
-				<ArrowDropDownCircleIcon fontSize="small" color="action" />
+				<ArrowDropDownCircleIcon
+					fontSize="small"
+					color="action"
+					style={{ fill: color }}
+				/>
 			</IconButton>
 			<Menu
 				anchorEl={anchorEl}

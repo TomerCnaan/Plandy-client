@@ -28,4 +28,13 @@ function deleteGroup(boardId, groupId) {
 	});
 }
 
-export default { reorderGroups, addGroup, deleteGroup };
+// update title
+function updateGroupTitle(boardId, groupId, newTitle) {
+	return http.put(`${apiEndpoint}/title`, {
+		boardId,
+		groupId,
+		title: newTitle,
+	});
+}
+
+export default { reorderGroups, addGroup, deleteGroup, updateGroupTitle };
