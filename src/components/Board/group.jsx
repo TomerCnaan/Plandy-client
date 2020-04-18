@@ -42,21 +42,6 @@ const Header = styled.div`
 	align-items: stretch;
 `;
 
-// const WrapTitle = styled.label`
-// 	height: 30px;
-// 	display: flex;
-// 	align-items: center;
-// 	align-self: center;
-// 	padding: 0 2px;
-// 	white-space: nowrap;
-// 	text-overflow: ellipsis;
-// 	overflow: hidden;
-// 	min-width: 1px;
-// 	:focus {
-// 		flex-grow: 1;
-// 	}
-// `;
-
 const Title = styled.textarea`
 	font-family: "Montserrat", sans-serif;
 	height: 30px;

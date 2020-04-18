@@ -2,6 +2,7 @@ import React from "react";
 
 // components
 import Column from "./column";
+import ColumnMenu from "./columnMenu";
 
 // libraries
 import { useSelector } from "react-redux";
@@ -47,6 +48,7 @@ const ColumnList = ({ boardId, groupIndex, groupName }) => {
 							/>
 						);
 					})}
+					<ColumnMenu columns={[{ type: "a" }, { type: "b" }]} />
 					{provided.placeholder}
 				</Container>
 			)}
