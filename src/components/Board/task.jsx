@@ -26,7 +26,7 @@ const Container = styled.div`
 	flex-grow: 1;
 	flex-shrink: 0;
 	background-color: #f5f6f8;
-	border-right: 0.5px solid #dad3d3;
+	/* border-right: 0.5px solid #dad3d3; */
 	/* margin-left: 35px; */
 	margin-bottom: 1.5px;
 	/* transform: translate3d(20deg, 10deg, 10deg);
@@ -187,6 +187,15 @@ const Task = ({ task, index, color, boardId, groupId, group, groupIndex }) => {
 							return <Cell key={index} data={value} />;
 						})}
 					</CellList>
+					<div style={{ display: "flex", width: "26px", height: "40px" }}></div>
+					<div
+						style={{
+							display: "flex",
+							width: "3px",
+							backgroundColor: "#dad3d3",
+							height: "40px",
+						}}
+					></div>
 				</Container>
 			)}
 		</Draggable>

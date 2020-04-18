@@ -6,6 +6,7 @@ import { Draggable } from "react-beautiful-dnd";
 // style
 import styled from "styled-components";
 import DragGrip from "../../images/column-grip.svg";
+import DeleteColumn from "../../images/column-delete.svg";
 
 const Container = styled.div`
 	display: flex;
@@ -28,16 +29,22 @@ const Container = styled.div`
 `;
 
 const Name = styled.h4`
+	position: ${(props) => (props.isHovered ? "inline" : "absolute")};
+	display: flex;
+	justify-self: center;
 	font-weight: 300;
-	padding-right: ${(props) => (props.isHovered ? "0" : "20px")};
+	/* padding-right: ${(props) => (props.isHovered ? "0" : "20px")}; */
 	font-size: 16px;
 	color: #171717;
+	white-space: nowrap;
 `;
 
 const Grip = styled.div`
+	/* display: ${(props) => (props.isHovered ? "inline" : "none")}; */
 	opacity: ${(props) => (props.isHovered ? "100" : "0")};
-	padding-right: ${(props) => (props.isHovered ? "10px" : "0px")};
+	padding-right: ${(props) => (props.isHovered ? "5px" : "0px")};
 	transition: 300ms ease;
+	display: flex;
 `;
 
 const Img = styled.img`
@@ -61,6 +68,9 @@ const Column = ({ column, index, groupName }) => {
 				>
 					<Grip {...provided.dragHandleProps} isHovered={isHovered}>
 						<Img src={DragGrip} alt="grip" />
+					</Grip>
+					<Grip isHovered={isHovered}>
+						<Img src={DeleteColumn} alt="delete" />
 					</Grip>
 					<Name isHovered={isHovered}>{name}</Name>
 				</Container>

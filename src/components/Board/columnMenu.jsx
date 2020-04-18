@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
+
+// components
+import AddColumn from "./addColumn";
 
 // style
 import IconButton from "@material-ui/core/IconButton";
 import ArrowDropDownCircleOutlinedIcon from "@material-ui/icons/ArrowDropDownCircleOutlined";
 import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import ListItemText from "@material-ui/core/ListItemText";
 
-const ColumnMenu = ({ columns }) => {
+const ColumnMenu = ({ columns, boardId }) => {
 	const [anchorEl, setAnchorEl] = useState(null);
 
 	const handleClick = (e) => {
@@ -18,12 +19,10 @@ const ColumnMenu = ({ columns }) => {
 		setAnchorEl(null);
 	};
 
-	const handleAddColumn = (e) => {
-		console.log(e.target.value);
-	};
-
 	return (
-		<div style={{ display: "flex" }}>
+		<div
+			style={{ display: "flex", alignSelf: "flex-end", justifySelf: "center" }}
+		>
 			<IconButton
 				aria-label="dropdown"
 				// color="default"
@@ -45,11 +44,10 @@ const ColumnMenu = ({ columns }) => {
 				keepMounted
 				open={Boolean(anchorEl)}
 				onClose={handleClose}
+				style={{ fontFamily: "Montserrat, sans-serif" }}
 			>
 				{columns.map((column, index) => (
-					<MenuItem key={index}>
-						<ListItemText primary={column.type} />
-					</MenuItem>
+					<AddColumn key={index} column={column} boardId={boardId} />
 				))}
 			</Menu>
 		</div>

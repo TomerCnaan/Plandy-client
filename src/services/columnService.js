@@ -2,6 +2,19 @@ import http from "./httpService";
 
 const apiEndpoint = "/columns";
 
+// get column types
+function getColumnTypes() {
+	return http.get("/column-types");
+}
+
+// create new board column
+function createBoardColumn(boardId, columnId) {
+	return http.post(apiEndpoint, {
+		boardId,
+		columnId,
+	});
+}
+
 // reorder groups of a board
 function reorderColumns(data) {
 	const newColumns = data.newColumns.map((column) => column._id);
@@ -11,4 +24,4 @@ function reorderColumns(data) {
 	});
 }
 
-export default { reorderColumns };
+export default { reorderColumns, getColumnTypes, createBoardColumn };
