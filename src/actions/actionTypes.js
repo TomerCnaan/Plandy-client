@@ -16,7 +16,13 @@ export const DELETE_TASK = "DELETE_TASK";
 export const UPDATE_DESCRIPTION = "UPDATE_DESCRIPTION";
 export const UPDATE_GROUP_TITLE = "UPDATE_GROUP_TITLE";
 export const UPDATE_TASK_NAME = "UPDATE_TASK_NAME";
+export const ADD_COLUMN = "ADD_COLUMN";
+export const DELETE_COLUMN = "DELETE_COLUMN";
 
 //userActions
 export const SET_USER = "SET_USER";
 export const REMOVE_USER = "REMOVE_USER";
+
+// visibility actions
+export const SET_COLUMNS_WIDTH = "SET_COLUMNS_WIDTH";
+export const SET_COLUMN_AMOUNT = "SET_COLUMN_AMOUNT";

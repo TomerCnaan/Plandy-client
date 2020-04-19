@@ -16,6 +16,8 @@ import {
 	UPDATE_DESCRIPTION,
 	UPDATE_GROUP_TITLE,
 	UPDATE_TASK_NAME,
+	ADD_COLUMN,
+	DELETE_COLUMN,
 } from "./actionTypes";
 
 import boardService from "../services/boardService";
@@ -147,4 +149,16 @@ export const updateGroupTitle = (boardId, groupIndex, newTitle) => ({
 export const updateTaskName = (boardId, groupIndex, taskIndex, newName) => ({
 	type: UPDATE_TASK_NAME,
 	payload: { boardId, groupIndex, taskIndex, newName },
+});
+
+// add column
+export const addColumn = (boardId, newColumn) => ({
+	type: ADD_COLUMN,
+	payload: { boardId, newColumn },
+});
+
+// delete column
+export const deleteColumn = (boardId, columnIndex, column) => ({
+	type: DELETE_COLUMN,
+	payload: { boardId, columnIndex, column },
 });

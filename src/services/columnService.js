@@ -15,6 +15,15 @@ function createBoardColumn(boardId, columnId) {
 	});
 }
 
+function deleteBoardColumn(boardId, boardColumnId) {
+	return http.delete(apiEndpoint, {
+		data: {
+			boardId,
+			boardColumnId,
+		},
+	});
+}
+
 // reorder groups of a board
 function reorderColumns(data) {
 	const newColumns = data.newColumns.map((column) => column._id);
@@ -24,4 +33,9 @@ function reorderColumns(data) {
 	});
 }
 
-export default { reorderColumns, getColumnTypes, createBoardColumn };
+export default {
+	reorderColumns,
+	getColumnTypes,
+	createBoardColumn,
+	deleteBoardColumn,
+};

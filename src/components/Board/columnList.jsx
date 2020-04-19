@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 // components
 import Column from "./column";
@@ -8,8 +8,14 @@ import ColumnMenu from "./columnMenu";
 import columnService from "../../services/columnService";
 
 // libraries
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Droppable } from "react-beautiful-dnd";
+
+// actions
+import {
+	setColumnContainerWidth,
+	setColumnAmount,
+} from "../../actions/visibilityActions";
 
 // style
 import styled from "styled-components";
@@ -31,6 +37,18 @@ const ColumnList = ({ boardId, groupIndex, groupName }) => {
 	const columnOrder = useSelector(
 		(state) => state.boards.boardsData[boardId].column_order
 	);
+	const [columnCount, setColumnCount] = useState(columnOrder.length);
+
+	const dispatch = useDispatch();
+	const refWidth = useRef(null);
+
+	useEffect(() => {
+		dispatch(setColumnContainerWidth(refWidth.current.offsetWidth));
+	}, [refWidth.current]);
+
+	useEffect(() => {
+		dispatch(setColumnAmount(columnCount));
+	}, [columnCount]);
 
 	const [columnTypes, setColumnTypes] = useState(null);
 	useEffect(() => {
@@ -43,7 +61,7 @@ const ColumnList = ({ boardId, groupIndex, groupName }) => {
 	};
 
 	return (
-		<Container>
+		<Container ref={refWidth}>
 			<Droppable
 				droppableId={groupName}
 				type={`COLUMNS-${groupIndex}`}
@@ -63,6 +81,7 @@ const ColumnList = ({ boardId, groupIndex, groupName }) => {
 									column={column}
 									index={index}
 									groupName={groupName}
+									boardId={boardId}
 								/>
 							);
 						})}

@@ -7,6 +7,8 @@ const Container = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	min-width: 120px;
+	max-width: 180px;
 	width: 140px;
 	height: 40px;
 	border-right: 0.5px solid #dad3d3;

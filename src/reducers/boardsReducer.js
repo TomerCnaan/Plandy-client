@@ -16,6 +16,8 @@ import {
 	UPDATE_DESCRIPTION,
 	UPDATE_GROUP_TITLE,
 	UPDATE_TASK_NAME,
+	ADD_COLUMN,
+	DELETE_COLUMN,
 } from "../actions/actionTypes";
 
 const intialState = {
@@ -206,6 +208,40 @@ const boards = (state = intialState, action) => {
 					[action.payload.boardId]: {
 						...state.boardsData[action.payload.boardId],
 						groups: groupsUpdatedTask,
+					},
+				},
+			};
+		case ADD_COLUMN:
+			const newColumns = state.boardsData[action.payload.boardId].column_order;
+			newColumns.push(action.payload.newColumn);
+			return {
+				...state,
+				boardsData: {
+					...state.boardsData,
+					[action.payload.boardId]: {
+						...state.boardsData[action.payload.boardId],
+						column_order: newColumns,
+					},
+				},
+			};
+		case DELETE_COLUMN:
+			const deletedColumns =
+				state.boardsData[action.payload.boardId].column_order;
+			if (!action.payload.column)
+				deletedColumns.splice(action.payload.columnIndex, 1);
+			else
+				deletedColumns.splice(
+					action.payload.columnIndex,
+					0,
+					action.payload.column
+				);
+			return {
+				...state,
+				boardsData: {
+					...state.boardsData,
+					[action.payload.boardId]: {
+						...state.boardsData[action.payload.boardId],
+						column_order: deletedColumns,
 					},
 				},
 			};
