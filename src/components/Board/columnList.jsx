@@ -15,10 +15,12 @@ import { Droppable } from "react-beautiful-dnd";
 import {
 	setColumnContainerWidth,
 	setColumnAmount,
+	setColumnWidth,
 } from "../../actions/visibilityActions";
 
 // style
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
 	display: flex;
@@ -37,18 +39,14 @@ const ColumnList = ({ boardId, groupIndex, groupName }) => {
 	const columnOrder = useSelector(
 		(state) => state.boards.boardsData[boardId].column_order
 	);
-	const [columnCount, setColumnCount] = useState(columnOrder.length);
 
 	const dispatch = useDispatch();
 	const refWidth = useRef(null);
 
 	useEffect(() => {
 		dispatch(setColumnContainerWidth(refWidth.current.offsetWidth));
-	}, [refWidth.current]);
-
-	useEffect(() => {
-		dispatch(setColumnAmount(columnCount));
-	}, [columnCount]);
+		dispatch(setColumnAmount(columnOrder.length));
+	}, [refWidth.current, columnOrder]);
 
 	const [columnTypes, setColumnTypes] = useState(null);
 	useEffect(() => {
@@ -56,8 +54,14 @@ const ColumnList = ({ boardId, groupIndex, groupName }) => {
 	}, []);
 
 	const fetchTypes = async () => {
-		const { data } = await columnService.getColumnTypes();
-		setColumnTypes(data);
+		try {
+			const { data } = await columnService.getColumnTypes();
+			setColumnTypes(data);
+		} catch (ex) {
+			if (ex.response && ex.response.status < 500) {
+				toast.error(ex.response.data);
+			}
+		}
 	};
 
 	return (

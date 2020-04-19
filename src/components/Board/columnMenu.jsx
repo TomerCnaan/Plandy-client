@@ -47,7 +47,12 @@ const ColumnMenu = ({ columns, boardId }) => {
 				style={{ fontFamily: "Montserrat, sans-serif" }}
 			>
 				{columns.map((column, index) => (
-					<AddColumn key={index} column={column} boardId={boardId} />
+					<AddColumn
+						key={index}
+						column={column}
+						colAmount={columns.length}
+						boardId={boardId}
+					/>
 				))}
 			</Menu>
 		</div>

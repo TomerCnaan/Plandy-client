@@ -26,3 +26,5 @@ export const REMOVE_USER = "REMOVE_USER";
 // visibility actions
 export const SET_COLUMNS_WIDTH = "SET_COLUMNS_WIDTH";
 export const SET_COLUMN_AMOUNT = "SET_COLUMN_AMOUNT";
+export const SET_COL_WIDTH = "SET_COL_WIDTH";
+export const SET_CELLS_WIDTH = "SET_CELLS_WIDTH";

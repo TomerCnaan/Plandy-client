@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 // components
 import Cell from "./cell";
@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 // actions
 import { deleteTask } from "../../actions/boardActions";
+import { setColumnWidth } from "../../actions/visibilityActions";
 
 // services
 import taskService from "../../services/taskService";
@@ -72,7 +73,7 @@ const CellList = styled.div`
 	display: flex;
 	justify-content: flex-end;
 	flex-grow: 1;
-	width: 140px;
+	flex-shrink: 0;
 	height: 40px;
 `;
 
@@ -95,6 +96,12 @@ const Task = ({ task, index, color, boardId, groupId, group, groupIndex }) => {
 	const dispatch = useDispatch();
 	const [nameValue, setNameValue] = useState(name);
 	const [isHovered, setIsHovered] = useState(false);
+	const widthRef = useRef(null);
+
+	const amount = useSelector((state) => state.visibility.columnAmount);
+	useEffect(() => {
+		dispatch(setColumnWidth(widthRef.current.offsetWidth, amount));
+	}, [widthRef.current]);
 
 	const handleTaskDelete = async () => {
 		const originalTasksList = group.tasks;
@@ -177,7 +184,7 @@ const Task = ({ task, index, color, boardId, groupId, group, groupIndex }) => {
 						{name}
 					</Name>
 
-					<CellList>
+					<CellList ref={widthRef}>
 						{column_order.map((column, index) => {
 							const type = column.columnType.type;
 							const value = column_values.find(

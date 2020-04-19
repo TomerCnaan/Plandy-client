@@ -22,7 +22,7 @@ const Container = styled.div`
 	justify-content: center;
 	min-width: 120px;
 	max-width: 180px;
-	width: 140px;
+	width: ${(props) => props.width};
 	height: 40px;
 	background-color: ${(props) => (props.isDragging ? "#f5f5f5" : "none")};
 	border: ${(props) =>
@@ -73,10 +73,8 @@ const Column = ({ column, index, groupName, boardId }) => {
 	const dispatch = useDispatch();
 
 	const { _id, name } = column;
-	const containerWidth = useSelector(
-		(state) => state.visibility.columnsContainerWidth
-	);
-	const columnAmount = useSelector((state) => state.visibility.columnAmount);
+
+	const colWidth = useSelector((state) => state.visibility.columnWidth);
 
 	const handleDeleteColumn = async () => {
 		const result = window.confirm(
@@ -106,8 +104,7 @@ const Column = ({ column, index, groupName, boardId }) => {
 					isDragging={snapshot.isDragging}
 					onMouseEnter={() => setIsHovered(true)}
 					onMouseLeave={() => setIsHovered(false)}
-					contWidth={containerWidth}
-					CulAmount={columnAmount}
+					width={colWidth}
 				>
 					<Grip {...provided.dragHandleProps} isHovered={isHovered}>
 						<Img src={DragGrip} alt="grip" />

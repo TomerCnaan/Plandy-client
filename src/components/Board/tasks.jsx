@@ -14,6 +14,7 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
+	flex-shrink: 0;
 	min-height: 40px;
 	/* border: ${(props) =>
 		props.isDraggingOver ? "0.5px dashed black" : "none"}; */

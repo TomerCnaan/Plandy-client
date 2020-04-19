@@ -1,15 +1,19 @@
 import React from "react";
 
+// libraries
+import { useSelector } from "react-redux";
+
 // style
 import styled from "styled-components";
 
 const Container = styled.div`
 	display: flex;
+	flex-shrink: 0;
 	align-items: center;
 	justify-content: center;
 	min-width: 120px;
 	max-width: 180px;
-	width: 140px;
+	width: ${(props) => props.width};
 	height: 40px;
 	border-right: 0.5px solid #dad3d3;
 	border-left: 0.5px solid #dad3d3;
@@ -25,8 +29,10 @@ const Cell = ({ data }) => {
 	const value = data ? data.value : null;
 	const type = data ? data.columnType : null;
 
+	const cellWidth = useSelector((state) => state.visibility.columnWidth);
+
 	return (
-		<Container>
+		<Container width={cellWidth}>
 			<Text>{value}</Text>
 		</Container>
 	);
