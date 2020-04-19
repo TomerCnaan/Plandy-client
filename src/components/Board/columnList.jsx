@@ -93,8 +93,14 @@ const ColumnList = ({ boardId, groupIndex, groupName }) => {
 					</ColList>
 				)}
 			</Droppable>
-			{columnTypes && <ColumnMenu columns={columnTypes} boardId={boardId} />}
-			<div style={{ width: "3px" }}></div>
+			{columnTypes && (
+				<ColumnMenu
+					columns={columnTypes}
+					boardId={boardId}
+					boardColumns={columnOrder}
+				/>
+			)}
+			<div style={{ width: "3px", display: "flex", flexShrink: "0" }}></div>
 		</Container>
 	);
 };

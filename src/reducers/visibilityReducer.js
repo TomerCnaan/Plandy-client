@@ -5,7 +5,7 @@ import {
 	SET_CELLS_WIDTH,
 } from "../actions/actionTypes";
 
-const visibility = (state = {}, action) => {
+const visibility = (state = { maxAmountColumns: 6 }, action) => {
 	switch (action.type) {
 		case SET_COLUMNS_WIDTH:
 			const width = action.payload.width;
@@ -24,7 +24,6 @@ const visibility = (state = {}, action) => {
 			return {
 				...state,
 				columnWidth: `${calcWidth}px`,
-				maxAmountColumns: 6,
 			};
 		case SET_CELLS_WIDTH:
 			return {
