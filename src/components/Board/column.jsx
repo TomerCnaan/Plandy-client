@@ -36,17 +36,48 @@ const Container = styled.div`
 		border-bottom: 0;
 		border-radius: 10px 10px 0px 0px;
 	}
+	${(props) =>
+		props.isFocused &&
+		`background-color: #f5f5f5;
+		border: 0.5px solid #dad3d3;
+		border-bottom: 0;
+		border-radius: 10px 10px 0px 0px;`};
 `;
 
-const Name = styled.h4`
+const Name = styled.div`
 	position: ${(props) => (props.isHovered ? "inline" : "absolute")};
-	display: flex;
+	display: ${(props) =>
+		props.isHovered ? "none" : props.isFocused ? "none" : "flex"};
 	justify-self: center;
 	font-weight: 300;
 	/* padding-right: ${(props) => (props.isHovered ? "0" : "20px")}; */
 	font-size: 16px;
 	color: #171717;
 	white-space: nowrap;
+`;
+
+const EditableName = styled.textarea`
+	display: ${(props) =>
+		props.isHovered ? "flex" : props.isFocused ? "flex" : "none"};
+	text-align: justify;
+	border: 0.5px dashed transparent;
+	/* width: ${(props) => props.width}; */
+	white-space: nowrap;
+	font-family: "Montserrat", sans-serif;
+	font-weight: 300;
+	font-size: 16px;
+	color: #171717;
+	height: 22px;
+	background-color: ${(props) => (props.isHovered ? "#f5f5f5" : "none")};
+	resize: none;
+	text-align-last: center;
+	outline: none;
+	padding: 1px 0px;
+	overflow: hidden;
+	transition: 300ms ease;
+	:hover, :focus {
+		border: 0.5px dashed #171717;
+	}
 `;
 
 const Grip = styled.div`
@@ -70,9 +101,11 @@ const DelBtn = styled.button`
 
 const Column = ({ column, index, groupName, boardId }) => {
 	const [isHovered, setIsHovered] = useState(false);
+	const [isFocused, setIsFocused] = useState(false);
 	const dispatch = useDispatch();
 
 	const { _id, name } = column;
+	const [nameValue, setNameValue] = useState(name);
 
 	const colWidth = useSelector((state) => state.visibility.columnWidth);
 
@@ -95,6 +128,31 @@ const Column = ({ column, index, groupName, boardId }) => {
 		}
 	};
 
+	const handleChange = (e) => {
+		setNameValue(e.target.value);
+	};
+
+	const handleKeyPress = (e) => {
+		if (e.key === "Enter") {
+			e.preventDefault();
+			handleSubmit();
+			return;
+		}
+	};
+
+	const handleSubmit = async () => {
+		setIsFocused(false);
+		const originalName = name;
+		try {
+			await columnService.updateColumnName(boardId, _id, nameValue);
+		} catch (ex) {
+			if (ex.response && ex.response.status < 500) {
+				toast.error(ex.response.data);
+			}
+			setNameValue(originalName);
+		}
+	};
+
 	return (
 		<Draggable draggableId={`${groupName}-${name}`} index={index}>
 			{(provided, snapshot) => (
@@ -105,6 +163,7 @@ const Column = ({ column, index, groupName, boardId }) => {
 					onMouseEnter={() => setIsHovered(true)}
 					onMouseLeave={() => setIsHovered(false)}
 					width={colWidth}
+					isFocused={isFocused}
 				>
 					<Grip {...provided.dragHandleProps} isHovered={isHovered}>
 						<Img src={DragGrip} alt="grip" />
@@ -114,9 +173,23 @@ const Column = ({ column, index, groupName, boardId }) => {
 							<Img src={DeleteColumn} alt="delete" />
 						</DelBtn>
 					</Grip>
-					<Name rows="1" wrap="off" spellCheck="false" isHovered={isHovered}>
-						{name}
+					<Name isHovered={isHovered} isFocused={isFocused}>
+						{nameValue}
 					</Name>
+					<EditableName
+						onClick={() => setIsFocused(true)}
+						spellCheck="false"
+						isHovered={isHovered}
+						isFocused={isFocused}
+						rows="1"
+						wrap="off"
+						value={nameValue}
+						onChange={handleChange}
+						onKeyDown={handleKeyPress}
+						onBlur={handleSubmit}
+					>
+						{name}
+					</EditableName>
 				</Container>
 			)}
 		</Draggable>

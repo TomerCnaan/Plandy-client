@@ -15,12 +15,22 @@ function createBoardColumn(boardId, columnId) {
 	});
 }
 
+// delete column from board
 function deleteBoardColumn(boardId, boardColumnId) {
 	return http.delete(apiEndpoint, {
 		data: {
 			boardId,
 			boardColumnId,
 		},
+	});
+}
+
+// update column name
+function updateColumnName(boardId, boardColumnId, newName) {
+	return http.put(apiEndpoint, {
+		boardId,
+		boardColumnId,
+		newName,
 	});
 }
 
@@ -38,4 +48,5 @@ export default {
 	getColumnTypes,
 	createBoardColumn,
 	deleteBoardColumn,
+	updateColumnName,
 };

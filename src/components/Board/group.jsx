@@ -46,6 +46,7 @@ const Title = styled.textarea`
 	font-family: "Montserrat", sans-serif;
 	height: 30px;
 	min-width: 1px;
+	/* width: auto; */
 	display: flex;
 	align-self: center;
 	padding: 0 3px;
