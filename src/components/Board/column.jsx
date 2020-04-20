@@ -77,6 +77,7 @@ const EditableName = styled.textarea`
 	transition: 300ms ease;
 	:hover, :focus {
 		border: 0.5px dashed #171717;
+		margin-right: 4px;
 	}
 `;
 
