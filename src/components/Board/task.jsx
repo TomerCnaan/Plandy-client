@@ -34,6 +34,14 @@ const Container = styled.div`
 	will-change: transform; */
 `;
 
+const WrapName = styled.div`
+	display: flex;
+	flex-grow: 1;
+	flex-shrink: 0;
+	height: 40px;
+	min-width: 223px;
+`;
+
 const Name = styled.textarea`
 	font-family: "Montserrat", sans-serif;
 	font-weight: 500;
@@ -63,6 +71,8 @@ const Name = styled.textarea`
 `;
 
 const LeftEdge = styled.div`
+	display: flex;
+	flex-shrink: 0;
 	width: 6px;
 	background-color: ${(props) => props.fill};
 	height: 38px;
@@ -79,6 +89,7 @@ const CellList = styled.div`
 
 const Delete = styled.div`
 	display: flex;
+	flex-shrink: 0;
 	justify-content: center;
 	width: 34.5px;
 	height: 40px;
@@ -172,17 +183,19 @@ const Task = ({ task, index, color, boardId, groupId, group, groupIndex }) => {
 						</IconButton>
 					</Delete>
 					<LeftEdge fill={color}></LeftEdge>
-					<Name
-						rows="1"
-						wrap="off"
-						spellCheck="false"
-						value={nameValue}
-						onChange={handleChange}
-						onKeyDown={handleKeyPress}
-						onBlur={handleSubmit}
-					>
-						{name}
-					</Name>
+					<WrapName>
+						<Name
+							rows="1"
+							wrap="off"
+							spellCheck="false"
+							value={nameValue}
+							onChange={handleChange}
+							onKeyDown={handleKeyPress}
+							onBlur={handleSubmit}
+						>
+							{name}
+						</Name>
+					</WrapName>
 
 					<CellList ref={widthRef}>
 						{column_order.map((column, index) => {

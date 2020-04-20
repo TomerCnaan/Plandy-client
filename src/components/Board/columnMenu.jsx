@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ArrowDropDownCircleOutlinedIcon from "@material-ui/icons/ArrowDropDownCircleOutlined";
 import Menu from "@material-ui/core/Menu";
 
-const ColumnMenu = ({ columns, boardId }) => {
+const ColumnMenu = ({ columns, boardId, boardColumns }) => {
 	const [anchorEl, setAnchorEl] = useState(null);
 
 	const handleClick = (e) => {
@@ -21,7 +21,12 @@ const ColumnMenu = ({ columns, boardId }) => {
 
 	return (
 		<div
-			style={{ display: "flex", alignSelf: "flex-end", justifySelf: "center" }}
+			style={{
+				display: "flex",
+				alignSelf: "flex-end",
+				justifySelf: "center",
+				flexShrink: "0",
+			}}
 		>
 			<IconButton
 				aria-label="dropdown"
@@ -50,7 +55,7 @@ const ColumnMenu = ({ columns, boardId }) => {
 					<AddColumn
 						key={index}
 						column={column}
-						colAmount={columns.length}
+						colAmount={boardColumns.length}
 						boardId={boardId}
 					/>
 				))}

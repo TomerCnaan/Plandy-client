@@ -42,6 +42,12 @@ const Header = styled.div`
 	align-items: stretch;
 `;
 
+const WrapTitle = styled.div`
+	display: flex;
+	flex-grow: 1;
+	flex-shrink: 0;
+`;
+
 const Title = styled.textarea`
 	font-family: "Montserrat", sans-serif;
 	height: 30px;
@@ -119,28 +125,30 @@ const Group = ({ group, index, boardId }) => {
 			{(provided, snapshot) => (
 				<Container ref={provided.innerRef} {...provided.draggableProps}>
 					<Header>
-						<Span groupColor={group.color} {...provided.dragHandleProps}>
-							<Img src={GripDrag} alt="grip" />
-						</Span>{" "}
-						<GroupMenu
-							groupId={_id}
-							boardId={boardId}
-							groupIndex={index.toString()}
-							group={group}
-							color={group.color}
-						/>
-						<Title
-							rows="1"
-							wrap="off"
-							groupColor={group.color}
-							spellCheck="false"
-							value={titleValue}
-							onChange={handleChange}
-							onKeyDown={handleKeyPress}
-							onBlur={handleSubmit}
-						>
-							{title}
-						</Title>
+						<WrapTitle>
+							<Span groupColor={group.color} {...provided.dragHandleProps}>
+								<Img src={GripDrag} alt="grip" />
+							</Span>{" "}
+							<GroupMenu
+								groupId={_id}
+								boardId={boardId}
+								groupIndex={index.toString()}
+								group={group}
+								color={group.color}
+							/>
+							<Title
+								rows="1"
+								wrap="off"
+								groupColor={group.color}
+								spellCheck="false"
+								value={titleValue}
+								onChange={handleChange}
+								onKeyDown={handleKeyPress}
+								onBlur={handleSubmit}
+							>
+								{title}
+							</Title>
+						</WrapTitle>
 						<ColumnList
 							boardId={boardId}
 							groupIndex={index.toString()}
