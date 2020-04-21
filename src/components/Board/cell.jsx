@@ -1,5 +1,8 @@
 import React from "react";
 
+// components
+import TextCell from "../CellTypes/textCell";
+
 // libraries
 import { useSelector } from "react-redux";
 
@@ -25,15 +28,45 @@ const Text = styled.div`
 	color: #5a5a5a;
 `;
 
-const Cell = ({ data }) => {
-	const value = data ? data.value : null;
-	const type = data ? data.columnType : null;
+const TEXT_CELL = "text";
+const STATUS_CELL = "status";
+const PRIORITY_CELL = "priority";
+const NUMBER_CELL = "number";
+const LINK_CELL = "link";
+const DUE_DATE_CELL = "due date";
+const ASSIGN_CELL = "assign";
 
+const Cell = ({ data, boardColumn, boardId, groupId, taskId }) => {
+	const value = data ? data.value : null;
+	const { options, type } = boardColumn.columnType;
+	const { _id: columnId, customOptions } = boardColumn;
+	const allOptions = [...options, ...customOptions];
+
+	console.log(type);
 	const cellWidth = useSelector((state) => state.visibility.columnWidth);
+
+	const renderCellByTye = () => {
+		switch (type) {
+			case TEXT_CELL:
+				return (
+					<TextCell
+						boardId={boardId}
+						groupId={groupId}
+						taskId={taskId}
+						boardColumnId={columnId}
+						value={value}
+					/>
+				);
+
+			default:
+				break;
+		}
+	};
 
 	return (
 		<Container width={cellWidth}>
-			<Text>{value}</Text>
+			{/* <Text>{value}</Text> */}
+			{renderCellByTye()}
 		</Container>
 	);
 };

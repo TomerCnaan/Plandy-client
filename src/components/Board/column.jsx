@@ -60,6 +60,7 @@ const EditableName = styled.textarea`
 	display: ${(props) =>
 		props.isHovered ? "flex" : props.isFocused ? "flex" : "none"};
 	text-align: justify;
+	justify-self: ${(props) => (props.isHovered ? "center" : "auto")};
 	border: 0.5px dashed transparent;
 	/* width: ${(props) => props.width}; */
 	white-space: nowrap;
@@ -76,7 +77,7 @@ const EditableName = styled.textarea`
 	overflow: hidden;
 	transition: 300ms ease;
 	:hover, :focus {
-		border: 0.5px dashed #171717;
+		border: 0.5px dashed lightgray;
 		margin-right: 4px;
 	}
 `;

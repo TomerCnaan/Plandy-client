@@ -22,6 +22,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import nameLabel from "../images/name-label.svg";
+import typeLabel from "../images/board-type.svg";
 
 // images
 import Plus from "../images/plus-sign.svg";
@@ -30,8 +31,8 @@ import Plus from "../images/plus-sign.svg";
 
 const theme = createMuiTheme({
 	typography: {
-		fontFamily: "Montserrat, sans-serif"
-	}
+		fontFamily: "Montserrat, sans-serif",
+	},
 });
 
 const Btn = styled.button`
@@ -46,7 +47,7 @@ const Btn = styled.button`
 
 const INTITIAL_STATE = {
 	name: "",
-	type: ""
+	type: "",
 };
 
 // ----------------------------------------
@@ -55,7 +56,7 @@ const AddBoardModal = () => {
 	const [open, setOpen] = useState(false);
 	const [types, setTypes] = useState([
 		{ _id: 1, name: "public" },
-		{ _id: 2, name: "private" }
+		{ _id: 2, name: "private" },
 	]);
 
 	const handleClickOpen = () => {
@@ -67,12 +68,8 @@ const AddBoardModal = () => {
 	};
 
 	const schema = {
-		name: Joi.string()
-			.required()
-			.label("Name"),
-		type: Joi.string()
-			.required()
-			.label("Label")
+		name: Joi.string().required().label("Name"),
+		type: Joi.string().required().label("Label"),
 	};
 
 	const dispatch = useDispatch();
@@ -82,7 +79,7 @@ const AddBoardModal = () => {
 			const board = await boardService.createBoard(data);
 			dispatch(addBoardName(board.data));
 			toast.success("🚀 The board was added successfully!", {
-				position: toast.POSITION.TOP_RIGHT
+				position: toast.POSITION.TOP_RIGHT,
 			});
 			handleClose();
 		} catch (ex) {
@@ -113,7 +110,7 @@ const AddBoardModal = () => {
 					</DialogContentText>
 					<form onSubmit={handleSubmit} noValidate>
 						{renderInput("name", nameLabel, "Name")}
-						{renderSelect("type", "Type", "Board Type", types)}
+						{renderSelect("type", typeLabel, "Board Type", types)}
 						{renderButton("ADD", "modal-submit-btn")}
 					</form>
 				</DialogContent>

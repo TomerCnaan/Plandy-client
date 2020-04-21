@@ -2,16 +2,16 @@ import React from "react";
 import { Alert } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
 	alert: {
 		display: "inline-flex",
 		minWidth: "58.5%",
 		marginTop: "0px",
-		backgroundColor: "rgb(239, 174, 168)"
+		backgroundColor: "rgb(239, 174, 168)",
 	},
 	label: {
-		verticalAlign: "middle"
-	}
+		verticalAlign: "middle",
+	},
 }));
 
 const Select = ({ name, label, placeholder, options, error, ...rest }) => {
@@ -23,11 +23,11 @@ const Select = ({ name, label, placeholder, options, error, ...rest }) => {
 				className={classes.label}
 				style={{ fontWeight: "bold", fontSize: "14px" }}
 			>
-				{label}
+				<img src={label} alt="label" />
 			</label>
 			<select name={name} id={name} {...rest} className="input-area">
 				<option value=""></option>
-				{options.map(option => (
+				{options.map((option) => (
 					<option key={option._id} value={option.name}>
 						{option.name}
 					</option>

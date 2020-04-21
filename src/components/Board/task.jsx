@@ -204,7 +204,16 @@ const Task = ({ task, index, color, boardId, groupId, group, groupIndex }) => {
 								(x) => x.columnType.type === type
 							);
 
-							return <Cell key={index} data={value} />;
+							return (
+								<Cell
+									key={index}
+									data={value}
+									boardColumn={column}
+									boardId={boardId}
+									groupId={groupId}
+									taskId={_id}
+								/>
+							);
 						})}
 					</CellList>
 					<div style={{ display: "flex", width: "26px", height: "40px" }}></div>
