@@ -2,6 +2,7 @@ import React from "react";
 
 // components
 import TextCell from "../CellTypes/textCell";
+import LinkCell from "../CellTypes/linkCell";
 
 // libraries
 import { useSelector } from "react-redux";
@@ -42,7 +43,6 @@ const Cell = ({ data, boardColumn, boardId, groupId, taskId }) => {
 	const { _id: columnId, customOptions } = boardColumn;
 	const allOptions = [...options, ...customOptions];
 
-	console.log(type);
 	const cellWidth = useSelector((state) => state.visibility.columnWidth);
 
 	const renderCellByTye = () => {
@@ -57,7 +57,16 @@ const Cell = ({ data, boardColumn, boardId, groupId, taskId }) => {
 						value={value}
 					/>
 				);
-
+			case LINK_CELL:
+				return (
+					<LinkCell
+						boardId={boardId}
+						groupId={groupId}
+						taskId={taskId}
+						boardColumnId={columnId}
+						value={value}
+					/>
+				);
 			default:
 				break;
 		}

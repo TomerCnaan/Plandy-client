@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 // style
 import styled from "styled-components";
+import { withStyles } from "@material-ui/core/styles";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const Container = styled.div`
 	display: flex;
@@ -56,6 +58,13 @@ const Text = styled.div`
 	padding: 0 2px;
 `;
 
+const TextToolTip = withStyles((theme) => ({
+	tooltip: {
+		boxShadow: theme.shadows[1],
+		fontSize: 18,
+	},
+}))(Tooltip);
+
 const TextCell = ({ boardId, groupId, taskId, boardColumnId, value }) => {
 	const [textValue, setTextValue] = useState(value);
 	const [hovered, setHovered] = useState(false);
@@ -76,15 +85,7 @@ const TextCell = ({ boardId, groupId, taskId, boardColumnId, value }) => {
 	const handleSubmit = async () => {
 		setFocused(false);
 		console.log("submitting");
-		// const originalName = name;
-		// try {
-		// 	await columnService.updateColumnName(boardId, _id, nameValue);
-		// } catch (ex) {
-		// 	if (ex.response && ex.response.status < 500) {
-		// 		toast.error(ex.response.data);
-		// 	}
-		// 	setNameValue(originalName);
-		// }
+		// TODO: add server support
 	};
 
 	return (
@@ -95,20 +96,27 @@ const TextCell = ({ boardId, groupId, taskId, boardColumnId, value }) => {
 			<Text hovered={hovered} focused={focused}>
 				<span style={{ whiteSpace: "nowrap" }}>{textValue}</span>
 			</Text>
-			<EditText
-				row="1"
-				spellCheck="false"
-				wrap="off"
-				onClick={() => setFocused(true)}
-				hovered={hovered}
-				focused={focused}
-				value={textValue}
-				onChange={handleChange}
-				onKeyDown={handleKeyPress}
-				onBlur={handleSubmit}
+			<TextToolTip
+				title={textValue ? textValue : ""}
+				arrow
+				placement="top"
+				interactive
 			>
-				{textValue}
-			</EditText>
+				<EditText
+					row="1"
+					spellCheck="false"
+					wrap="off"
+					onClick={() => setFocused(true)}
+					hovered={hovered}
+					focused={focused}
+					value={textValue ? textValue : ""}
+					onChange={handleChange}
+					onKeyDown={handleKeyPress}
+					onBlur={handleSubmit}
+				>
+					{textValue}
+				</EditText>
+			</TextToolTip>
 		</Container>
 	);
 };
