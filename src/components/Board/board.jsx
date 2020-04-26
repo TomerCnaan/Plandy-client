@@ -253,6 +253,7 @@ const Board = ({ match }) => {
 													group={group}
 													index={index}
 													boardId={boardData._id}
+													ownerId={boardData.owner}
 												/>
 											);
 										})}

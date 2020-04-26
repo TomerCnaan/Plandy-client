@@ -8,6 +8,7 @@ import { addColumn } from "../../actions/boardActions";
 
 // services
 import columnService from "../../services/columnService";
+import authService from "../../services/authService";
 
 // style
 import MenuItem from "@material-ui/core/MenuItem";

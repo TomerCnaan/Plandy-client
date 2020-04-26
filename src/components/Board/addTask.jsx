@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // libraries
 import { useDispatch } from "react-redux";
 
 // services
 import taskService from "../../services/taskService";
+import authService from "../../services/authService";
 
 // actions
 import { addTask } from "../../actions/boardActions";
@@ -20,8 +21,14 @@ const Add = styled.div`
 	margin-left: 20px;
 `;
 
-const AddTask = ({ boardId, groupId, groupIndex }) => {
+const AddTask = ({ boardId, groupId, groupIndex, ownerId }) => {
 	const dispatch = useDispatch();
+	const [isOwner, setIsOwner] = useState(false);
+
+	useEffect(() => {
+		const { _id } = authService.getCurrentUser();
+		setIsOwner(_id === ownerId ? true : false);
+	}, []);
 
 	const handleAddTask = async () => {
 		try {
@@ -36,7 +43,7 @@ const AddTask = ({ boardId, groupId, groupIndex }) => {
 
 	return (
 		<Add>
-			<IconButton onClick={handleAddTask}>
+			<IconButton onClick={handleAddTask} disabled={!isOwner}>
 				<AddIcon fontSize="small" />
 				<span style={{ fontSize: "14px", paddingRight: "3px" }}> Add</span>
 			</IconButton>

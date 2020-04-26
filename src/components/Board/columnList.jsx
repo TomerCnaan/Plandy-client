@@ -35,7 +35,7 @@ const ColList = styled.div`
 		props.isDraggingOver ? "#ff4f4f17" : "white"};
 `;
 
-const ColumnList = ({ boardId, groupIndex, groupName }) => {
+const ColumnList = ({ boardId, groupIndex, groupName, ownerId }) => {
 	const columnOrder = useSelector(
 		(state) => state.boards.boardsData[boardId].column_order
 	);
@@ -98,6 +98,7 @@ const ColumnList = ({ boardId, groupIndex, groupName }) => {
 					columns={columnTypes}
 					boardId={boardId}
 					boardColumns={columnOrder}
+					ownerId={ownerId}
 				/>
 			)}
 			<div style={{ width: "3px", display: "flex", flexShrink: "0" }}></div>

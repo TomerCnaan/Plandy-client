@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // libraries
 import { useDispatch } from "react-redux";
@@ -8,14 +8,21 @@ import { addGroup } from "../../actions/boardActions";
 
 // services
 import groupService from "../../services/groupService";
+import authService from "../../services/authService";
 
 // style
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import { toast } from "react-toastify";
 
-const AddGroup = ({ boardId }) => {
+const AddGroup = ({ boardId, ownerId }) => {
 	const dispatch = useDispatch();
+	const [isOwner, setIsOwner] = useState(false);
+
+	useEffect(() => {
+		const { _id } = authService.getCurrentUser();
+		setIsOwner(_id === ownerId ? true : false);
+	}, []);
 
 	const handleAddGroup = async () => {
 		try {
@@ -36,6 +43,7 @@ const AddGroup = ({ boardId }) => {
 			color="primary"
 			startIcon={<AddIcon />}
 			onClick={handleAddGroup}
+			disabled={!isOwner}
 		>
 			New Group
 		</Button>

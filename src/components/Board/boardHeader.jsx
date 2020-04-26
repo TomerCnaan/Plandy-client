@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // services
 import boardService from "../../services/boardService";
+import boardInfo from "../../text/boardInfo";
 
 // libraries
 import { useSelector, useDispatch } from "react-redux";
@@ -14,8 +15,11 @@ import Settings from "./settings";
 import AddGroup from "./addGroup";
 
 // style
+import IconButton from "@material-ui/core/IconButton";
+import InfoIcon from "@material-ui/icons/Info";
+import { withStyles } from "@material-ui/core/styles";
+import Tooltip from "@material-ui/core/Tooltip";
 import styled from "styled-components";
-// import { TextArea } from "../style/main-app";
 import { toast } from "react-toastify";
 
 const Container = styled.div`
@@ -93,12 +97,28 @@ const TextArea = styled.textarea`
 	resize: none;
 `;
 
+const InfoToolTip = withStyles((theme) => ({
+	tooltip: {
+		boxShadow: theme.shadows[1],
+		fontSize: 14,
+		maxWidth: 300,
+		backgroundColor: theme.palette.info.main,
+		wordSpacing: 1.5,
+		padding: 5,
+	},
+}))(Tooltip);
+
 const BoardHeader = ({ data }) => {
-	const { name, description, _id } = data;
+	const { name, description, _id, owner, isPermitted } = data;
 	const boardsList = useSelector((state) => state.boards.boardsList);
 
 	const dispatch = useDispatch();
 	const [descriptionValue, setDescriptionValue] = useState(description);
+	const [infoValue, setInfoValue] = useState("");
+
+	useEffect(() => {
+		setInfoValue(boardInfo.getInfo(owner, isPermitted));
+	}, []);
 
 	const handleChange = (e) => {
 		console.log(e.target);
@@ -132,7 +152,22 @@ const BoardHeader = ({ data }) => {
 		<Container>
 			<Head>
 				<Text>
-					<Title>{name}</Title>
+					<div style={{ display: "flex" }}>
+						<Title>{name}</Title>
+						<div style={{ alignSelf: "center", paddingLeft: "10px" }}>
+							<InfoToolTip
+								title={infoValue ? infoValue : ""}
+								arrow
+								placement="right-start"
+								interactive
+							>
+								<IconButton size="small">
+									<InfoIcon />
+								</IconButton>
+							</InfoToolTip>
+						</div>
+					</div>
+
 					<Description>
 						<TextArea
 							value={descriptionValue}
@@ -148,11 +183,11 @@ const BoardHeader = ({ data }) => {
 					</Description>
 				</Text>
 				<Actions>
-					<Settings boardId={_id} boardsList={boardsList} />
+					<Settings boardId={_id} boardsList={boardsList} ownerId={owner} />
 				</Actions>
 			</Head>
 			<Util>
-				<AddGroup boardId={_id} />
+				<AddGroup boardId={_id} ownerId={owner} />
 			</Util>
 		</Container>
 	);
