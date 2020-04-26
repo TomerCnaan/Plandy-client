@@ -98,7 +98,16 @@ const Delete = styled.div`
 	transition: background-color 250ms linear;
 `;
 
-const Task = ({ task, index, color, boardId, groupId, group, groupIndex }) => {
+const Task = ({
+	task,
+	index,
+	color,
+	boardId,
+	groupId,
+	group,
+	groupIndex,
+	permitted,
+}) => {
 	const { _id, name, column_values } = task;
 	const column_order = useSelector(
 		(state) => state.boards.boardsData[boardId].column_order
@@ -178,6 +187,7 @@ const Task = ({ task, index, color, boardId, groupId, group, groupIndex }) => {
 								transition: "500ms ease",
 							}}
 							onClick={handleTaskDelete}
+							disabled={!permitted}
 						>
 							<DeleteIcon fontSize="small" />
 						</IconButton>
@@ -212,6 +222,7 @@ const Task = ({ task, index, color, boardId, groupId, group, groupIndex }) => {
 									boardId={boardId}
 									groupId={groupId}
 									taskId={_id}
+									permitted={permitted}
 								/>
 							);
 						})}

@@ -37,7 +37,7 @@ const LINK_CELL = "link";
 const DUE_DATE_CELL = "due date";
 const ASSIGN_CELL = "assign";
 
-const Cell = ({ data, boardColumn, boardId, groupId, taskId }) => {
+const Cell = ({ data, boardColumn, boardId, groupId, taskId, permitted }) => {
 	const value = data ? data.value : null;
 	const { options, type } = boardColumn.columnType;
 	const { _id: columnId, customOptions } = boardColumn;
@@ -55,6 +55,7 @@ const Cell = ({ data, boardColumn, boardId, groupId, taskId }) => {
 						taskId={taskId}
 						boardColumnId={columnId}
 						value={value}
+						permitted={permitted}
 					/>
 				);
 			case LINK_CELL:

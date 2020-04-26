@@ -8,7 +8,6 @@ import { deleteBoard, changeType } from "../../actions/boardActions";
 
 // services
 import boardService from "../../services/boardService";
-import authService from "../../services/authService";
 
 // style
 import Dialog from "@material-ui/core/Dialog";
@@ -26,19 +25,13 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { toast } from "react-toastify";
 
-const Settings = ({ boardId, boardsList, ownerId }) => {
+const Settings = ({ boardId, boardsList, owner }) => {
 	const dispatch = useDispatch();
 	const boardType = useSelector(
 		(state) => state.boards.boardsData[boardId].type
 	);
 	const [open, setOpen] = useState(false);
 	const [selectedType, setSelectedType] = useState(boardType);
-	const [isOwner, setIsOwner] = useState(false);
-
-	useEffect(() => {
-		const { _id } = authService.getCurrentUser();
-		setIsOwner(_id === ownerId ? true : false);
-	}, []);
 
 	const handleClose = () => {
 		setOpen(false);
@@ -100,7 +93,7 @@ const Settings = ({ boardId, boardsList, ownerId }) => {
 			<IconButton
 				aria-label="settings"
 				onClick={() => setOpen(!open)}
-				disabled={!isOwner}
+				disabled={!owner}
 			>
 				<SettingsIcon />
 			</IconButton>

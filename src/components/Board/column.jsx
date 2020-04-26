@@ -99,9 +99,12 @@ const DelBtn = styled.button`
 	:hover {
 		cursor: pointer;
 	}
+	:disabled {
+		cursor: default;
+	}
 `;
 
-const Column = ({ column, index, groupName, boardId }) => {
+const Column = ({ column, index, groupName, boardId, owner }) => {
 	const [isHovered, setIsHovered] = useState(false);
 	const [isFocused, setIsFocused] = useState(false);
 	const dispatch = useDispatch();
@@ -171,7 +174,7 @@ const Column = ({ column, index, groupName, boardId }) => {
 						<Img src={DragGrip} alt="grip" />
 					</Grip>
 					<Grip isHovered={isHovered}>
-						<DelBtn onClick={handleDeleteColumn}>
+						<DelBtn onClick={handleDeleteColumn} disabled={!owner}>
 							<Img src={DeleteColumn} alt="delete" />
 						</DelBtn>
 					</Grip>

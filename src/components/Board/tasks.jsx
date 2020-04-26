@@ -31,7 +31,7 @@ const Tasks = ({
 	color,
 	boardId,
 	group,
-	ownerId,
+	permitted,
 }) => {
 	return (
 		<Droppable droppableId={groupIndex} type="TASKS">
@@ -55,6 +55,7 @@ const Tasks = ({
 									groupId={groupId}
 									group={group}
 									groupIndex={groupIndex}
+									permitted={permitted}
 								/>
 							);
 						})}
@@ -63,7 +64,7 @@ const Tasks = ({
 						boardId={boardId}
 						groupId={groupId}
 						groupIndex={groupIndex}
-						ownerId={ownerId}
+						permitted={permitted}
 					/>
 				</Container>
 			)}

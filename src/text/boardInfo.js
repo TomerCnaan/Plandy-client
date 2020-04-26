@@ -1,8 +1,6 @@
-import authService from "../services/authService";
-
 const boardOwnerInfo = `
     You are the board Owner!
-    You are permitted to do all the board action, 
+    You are permitted to do all the board actions, 
        all the actions will be applied to the other 
        board users.
 `;
@@ -19,8 +17,7 @@ const boardReadOnlyInfo = `
 `;
 
 function getInfo(owner, isPermitted) {
-	const { _id } = authService.getCurrentUser();
-	if (owner === _id) {
+	if (owner) {
 		return boardOwnerInfo;
 	} else if (isPermitted) {
 		return boardPermittedInfo;

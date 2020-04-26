@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Joi from "joi-browser";
 
 // style
+import IconButton from "@material-ui/core/IconButton";
+import EditIcon from "@material-ui/icons/Edit";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 
@@ -32,13 +34,18 @@ const LinkWrap = styled.div`
 	color: #5a5a5a;
 	border: 1px solid transparent;
 	padding: 0 2px;
-	:hover {
+	transition: 300ms ease;
+	/* :hover {
 		border: 1px dashed gray;
-	}
+	} */
 `;
 const Link = styled.a`
+	display: flex;
+	justify-self: flex-start;
+	max-width: 80%;
 	text-decoration: underline;
 	color: blue;
+	overflow: hidden;
 `;
 
 const EditLink = styled.textarea`
@@ -98,13 +105,30 @@ const LinkCell = ({ boardId, groupId, taskId, boardColumnId, value }) => {
 	return (
 		<Container>
 			<LinkWrap
+				onMouseEnter={() => setHovered(true)}
+				onMouseLeave={() => setHovered(false)}
 				hovered={hovered}
 				focused={focused}
-				onClick={() => setFocused(true)}
+				// onClick={() => setFocused(true)}
 			>
-				<Link href={linkValue} target="_blank" rel="noopener noreferrer">
+				<Link
+					href={linkValue}
+					target="_blank"
+					rel="noopener noreferrer"
+					title={linkValue}
+				>
 					{linkValue}
 				</Link>
+				<IconButton
+					size="small"
+					onClick={() => setFocused(true)}
+					style={{
+						display: hovered ? "flex" : "none",
+						justifySelf: "flexEnd",
+					}}
+				>
+					<EditIcon fontSize="small" />
+				</IconButton>
 			</LinkWrap>
 			<EditLink
 				row="1"

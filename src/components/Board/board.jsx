@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 // libraries
 import _ from "lodash";
@@ -50,6 +50,17 @@ const Board = ({ match }) => {
 	useEffect(() => {
 		dispatch(fetchBoardData(match.params.id));
 	}, [match.params.id]);
+
+	const [isOwner, setIsOwner] = useState(false);
+	const [isPermitted, setIsPermitted] = useState(false);
+
+	useEffect(() => {
+		if (boardData) {
+			console.log(boardData.owner);
+			setIsOwner(userId === boardData.owner ? true : false);
+			setIsPermitted(boardData.isPermitted);
+		}
+	}, [boardData]);
 
 	const onDragEnd = (result) => {
 		console.log("result:", result);
@@ -235,7 +246,11 @@ const Board = ({ match }) => {
 			) : (
 				boardData && (
 					<MainContent>
-						<BoardHeader data={boardData} />
+						<BoardHeader
+							data={boardData}
+							owner={isOwner}
+							permitted={isPermitted}
+						/>
 
 						<DragDropContext onDragEnd={onDragEnd}>
 							<Droppable droppableId="all-groups" type="GROUPS">
@@ -253,7 +268,8 @@ const Board = ({ match }) => {
 													group={group}
 													index={index}
 													boardId={boardData._id}
-													ownerId={boardData.owner}
+													owner={isOwner}
+													permitted={isPermitted}
 												/>
 											);
 										})}

@@ -87,7 +87,7 @@ const Img = styled.img`
 	display: flex;
 `;
 
-const Group = ({ group, index, boardId, ownerId }) => {
+const Group = ({ group, index, boardId, owner, permitted }) => {
 	const { _id, title, tasks } = group;
 
 	const dispatch = useDispatch();
@@ -135,6 +135,7 @@ const Group = ({ group, index, boardId, ownerId }) => {
 								groupIndex={index.toString()}
 								group={group}
 								color={group.color}
+								owner={owner}
 							/>
 							<Title
 								rows="1"
@@ -153,7 +154,7 @@ const Group = ({ group, index, boardId, ownerId }) => {
 							boardId={boardId}
 							groupIndex={index.toString()}
 							groupName={group.title}
-							ownerId={ownerId}
+							owner={owner}
 						/>
 					</Header>
 
@@ -164,7 +165,7 @@ const Group = ({ group, index, boardId, ownerId }) => {
 						boardId={boardId}
 						groupId={_id}
 						group={group}
-						ownerId={ownerId}
+						permitted={permitted}
 					/>
 				</Container>
 			)}

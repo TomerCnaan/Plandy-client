@@ -108,8 +108,8 @@ const InfoToolTip = withStyles((theme) => ({
 	},
 }))(Tooltip);
 
-const BoardHeader = ({ data }) => {
-	const { name, description, _id, owner, isPermitted } = data;
+const BoardHeader = ({ data, owner, permitted }) => {
+	const { name, description, _id } = data;
 	const boardsList = useSelector((state) => state.boards.boardsList);
 
 	const dispatch = useDispatch();
@@ -117,7 +117,7 @@ const BoardHeader = ({ data }) => {
 	const [infoValue, setInfoValue] = useState("");
 
 	useEffect(() => {
-		setInfoValue(boardInfo.getInfo(owner, isPermitted));
+		setInfoValue(boardInfo.getInfo(owner, permitted));
 	}, []);
 
 	const handleChange = (e) => {
@@ -183,11 +183,11 @@ const BoardHeader = ({ data }) => {
 					</Description>
 				</Text>
 				<Actions>
-					<Settings boardId={_id} boardsList={boardsList} ownerId={owner} />
+					<Settings boardId={_id} boardsList={boardsList} owner={owner} />
 				</Actions>
 			</Head>
 			<Util>
-				<AddGroup boardId={_id} ownerId={owner} />
+				<AddGroup boardId={_id} owner={owner} />
 			</Util>
 		</Container>
 	);
