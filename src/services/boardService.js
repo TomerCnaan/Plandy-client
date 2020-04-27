@@ -40,6 +40,10 @@ function changeDescription(boardId, description) {
 	});
 }
 
+function getBoardUsers(boardId) {
+	http.get(`${apiEndpoint}/users/${boardId}`);
+}
+
 export default {
 	createBoard,
 	getBoards,
@@ -47,4 +51,5 @@ export default {
 	deleteBoard,
 	changeBoardType,
 	changeDescription,
+	getBoardUsers,
 };
