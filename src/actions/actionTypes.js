@@ -18,6 +18,7 @@ export const UPDATE_GROUP_TITLE = "UPDATE_GROUP_TITLE";
 export const UPDATE_TASK_NAME = "UPDATE_TASK_NAME";
 export const ADD_COLUMN = "ADD_COLUMN";
 export const DELETE_COLUMN = "DELETE_COLUMN";
+export const SET_GROUP_COLOR = "SET_GROUP_COLOR";
 
 //userActions
 export const SET_USER = "SET_USER";

@@ -92,6 +92,7 @@ const Group = ({ group, index, boardId, owner, permitted }) => {
 
 	const dispatch = useDispatch();
 	const [titleValue, setTitlenValue] = useState(title);
+	const [groupColor, setGroupColor] = useState(group.color);
 
 	const handleChange = (e) => {
 		setTitlenValue(e.target.value);
@@ -120,13 +121,17 @@ const Group = ({ group, index, boardId, owner, permitted }) => {
 		}
 	};
 
+	const handleColorChange = (color) => {
+		setGroupColor(color);
+	};
+
 	return (
 		<Draggable draggableId={_id} index={index}>
 			{(provided, snapshot) => (
 				<Container ref={provided.innerRef} {...provided.draggableProps}>
 					<Header>
 						<WrapTitle>
-							<Span groupColor={group.color} {...provided.dragHandleProps}>
+							<Span groupColor={groupColor} {...provided.dragHandleProps}>
 								<Img src={GripDrag} alt="grip" />
 							</Span>{" "}
 							<GroupMenu
@@ -134,13 +139,15 @@ const Group = ({ group, index, boardId, owner, permitted }) => {
 								boardId={boardId}
 								groupIndex={index.toString()}
 								group={group}
-								color={group.color}
+								color={groupColor}
+								originalColor={group.color}
+								handleColorChange={handleColorChange}
 								owner={owner}
 							/>
 							<Title
 								rows="1"
 								wrap="off"
-								groupColor={group.color}
+								groupColor={groupColor}
 								spellCheck="false"
 								value={titleValue}
 								onChange={handleChange}

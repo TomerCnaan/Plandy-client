@@ -1,3 +1,5 @@
+import { produce } from "immer";
+
 import {
 	SET_BOARD_NAMES,
 	LOADING,
@@ -18,6 +20,7 @@ import {
 	UPDATE_TASK_NAME,
 	ADD_COLUMN,
 	DELETE_COLUMN,
+	SET_GROUP_COLOR,
 } from "../actions/actionTypes";
 
 const intialState = {
@@ -245,6 +248,12 @@ const boards = (state = intialState, action) => {
 					},
 				},
 			};
+		case SET_GROUP_COLOR:
+			return produce(state, (draftState) => {
+				draftState.boardsData[action.payload.boardId].groups[
+					action.payload.groupIndex
+				].color = action.payload.color;
+			});
 		default:
 			return state;
 	}

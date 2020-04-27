@@ -37,4 +37,18 @@ function updateGroupTitle(boardId, groupId, newTitle) {
 	});
 }
 
-export default { reorderGroups, addGroup, deleteGroup, updateGroupTitle };
+function updateGroupColor(boardId, groupId, color) {
+	return http.put(`${apiEndpoint}/color`, {
+		boardId,
+		groupId,
+		color,
+	});
+}
+
+export default {
+	reorderGroups,
+	addGroup,
+	deleteGroup,
+	updateGroupTitle,
+	updateGroupColor,
+};

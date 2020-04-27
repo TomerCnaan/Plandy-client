@@ -18,6 +18,7 @@ import {
 	UPDATE_TASK_NAME,
 	ADD_COLUMN,
 	DELETE_COLUMN,
+	SET_GROUP_COLOR,
 } from "./actionTypes";
 
 import boardService from "../services/boardService";
@@ -161,4 +162,10 @@ export const addColumn = (boardId, newColumn) => ({
 export const deleteColumn = (boardId, columnIndex, column) => ({
 	type: DELETE_COLUMN,
 	payload: { boardId, columnIndex, column },
+});
+
+// set group color
+export const changeGroupColor = (boardId, groupIndex, newColor) => ({
+	type: SET_GROUP_COLOR,
+	payload: { boardId, groupIndex, color: newColor },
 });

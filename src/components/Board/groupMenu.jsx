@@ -7,7 +7,11 @@ import { useDispatch } from "react-redux";
 import { ChromePicker } from "react-color";
 
 // actions
-import { deleteGroup, reverseDeleteGroup } from "../../actions/boardActions";
+import {
+	deleteGroup,
+	reverseDeleteGroup,
+	changeGroupColor,
+} from "../../actions/boardActions";
 
 // services
 import groupService from "../../services/groupService";
@@ -27,26 +31,45 @@ import { toast } from "react-toastify";
 const Popover = styled.div`
 	position: absolute;
 	z-index: 100;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	left: 40%;
 `;
 
 const Cover = styled.div`
 	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
 `;
 
-const GroupMenu = ({ groupId, boardId, groupIndex, group, color, owner }) => {
+const GroupMenu = ({
+	groupId,
+	boardId,
+	groupIndex,
+	group,
+	color,
+	originalColor,
+	handleColorChange,
+	owner,
+}) => {
 	const dispatch = useDispatch();
 	const [anchorEl, setAnchorEl] = useState(null);
 	const [displayPicker, setDisplayPicker] = useState(false);
 
-	const closePicker = () => {
+	const closePicker = async () => {
 		setDisplayPicker(false);
+
+		dispatch(changeGroupColor(boardId, groupIndex, color));
+
+		try {
+			await groupService.updateGroupColor(boardId, groupId, color);
+		} catch (ex) {
+			if (ex.response && ex.response.status < 500) {
+				toast.error(ex.response.data);
+			}
+
+			dispatch(changeGroupColor(boardId, groupIndex, originalColor));
+		}
 	};
 
 	const openPicker = () => {
@@ -116,8 +139,12 @@ const GroupMenu = ({ groupId, boardId, groupIndex, group, color, owner }) => {
 			{displayPicker ? (
 				<Popover>
 					{" "}
-					<Cover onClick={closePicker} /> <ChromePicker />{" "}
-				</Popover> //TODO: create color picker component
+					<Cover onClick={closePicker} />{" "}
+					<ChromePicker
+						color={color}
+						onChange={(color) => handleColorChange(color.hex)}
+					/>{" "}
+				</Popover>
 			) : null}
 		</div>
 	);

@@ -56,7 +56,6 @@ const Board = ({ match }) => {
 
 	useEffect(() => {
 		if (boardData) {
-			console.log(boardData.owner);
 			setIsOwner(userId === boardData.owner ? true : false);
 			setIsPermitted(boardData.isPermitted);
 		}
