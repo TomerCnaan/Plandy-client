@@ -44,13 +44,23 @@ const ColumnList = ({ boardId, groupIndex, groupName, owner }) => {
 	const refWidth = useRef(null);
 
 	useEffect(() => {
-		dispatch(setColumnContainerWidth(refWidth.current.offsetWidth));
-		dispatch(setColumnAmount(columnOrder.length));
+		let mounted = true;
+		if (mounted) {
+			dispatch(setColumnContainerWidth(refWidth.current.offsetWidth));
+			dispatch(setColumnAmount(columnOrder.length));
+		}
+
+		return () => (mounted = false);
 	}, [refWidth.current, columnOrder]);
 
 	const [columnTypes, setColumnTypes] = useState(null);
 	useEffect(() => {
-		fetchTypes();
+		let mounted = true;
+		if (mounted) {
+			fetchTypes();
+		}
+
+		return () => (mounted = false);
 	}, []);
 
 	const fetchTypes = async () => {

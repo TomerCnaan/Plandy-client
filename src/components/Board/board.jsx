@@ -62,8 +62,6 @@ const Board = ({ match }) => {
 	}, [boardData]);
 
 	const onDragEnd = (result) => {
-		console.log("result:", result);
-
 		const { destination, source, type } = result;
 
 		if (!destination) return;

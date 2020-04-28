@@ -34,14 +34,14 @@ function changeBoardType(type, boardId) {
 }
 
 function changeDescription(boardId, description) {
-	http.put(`${apiEndpoint}/description`, {
+	return http.put(`${apiEndpoint}/description`, {
 		boardId,
 		description,
 	});
 }
 
 function getBoardUsers(boardId) {
-	http.get(`${apiEndpoint}/users/${boardId}`);
+	return http.get(`${apiEndpoint}/users/${boardId}`);
 }
 
 export default {

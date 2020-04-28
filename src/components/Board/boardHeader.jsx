@@ -13,6 +13,7 @@ import { updateDescription } from "../../actions/boardActions";
 // components
 import Settings from "./settings";
 import AddGroup from "./addGroup";
+import UsersList from "./usersList";
 
 // style
 import IconButton from "@material-ui/core/IconButton";
@@ -183,6 +184,7 @@ const BoardHeader = ({ data, owner, permitted }) => {
 					</Description>
 				</Text>
 				<Actions>
+					<UsersList boardId={_id} />
 					<Settings boardId={_id} boardsList={boardsList} owner={owner} />
 				</Actions>
 			</Head>
