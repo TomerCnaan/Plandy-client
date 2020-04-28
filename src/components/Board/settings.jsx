@@ -94,6 +94,7 @@ const Settings = ({ boardId, boardsList, owner }) => {
 				aria-label="settings"
 				onClick={() => setOpen(!open)}
 				disabled={!owner}
+				title="settings"
 			>
 				<SettingsIcon />
 			</IconButton>

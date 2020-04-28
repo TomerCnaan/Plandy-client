@@ -6,13 +6,13 @@ const boardOwnerInfo = `
 `;
 
 const boardPermittedInfo = `
-    You are a permitted user.
+    You are in an Editor role.
     You can modify tasks and columns.
     You can change the order of the items but it won't be saved for the other users.
 `;
 
 const boardReadOnlyInfo = `
-    Your role is read only. You can change the order of the items and the naming but it
+    Your role is Viewer. You can change the order of the items and the naming but it
     won't be saved for the other users.
 `;
 

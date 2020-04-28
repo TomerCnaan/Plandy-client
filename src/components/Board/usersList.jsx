@@ -6,51 +6,9 @@ import boardService from "../../services/boardService";
 // style
 import IconButton from "@material-ui/core/IconButton";
 import GroupIcon from "@material-ui/icons/Group";
-import styled from "styled-components";
+// import styled from "styled-components";
 import { toast } from "react-toastify";
-
-const Dropdown = styled.div`
-	position: absolute;
-	top: 90px;
-	width: 250px;
-	transform: translateX(-75%);
-	background-color: #242526;
-	border: 1px solid #474a4d;
-	border-radius: 8px;
-	padding: 1rem;
-	overflow: hidden;
-	transition: height 500ms ease;
-	z-index: 10;
-`;
-
-const Menu = styled.div`
-	width: 100%;
-`;
-
-const MenuTitle = styled.span`
-	color: #a7a7a7;
-	font-size: 12px;
-	height: 25px;
-	display: flex;
-	align-items: center;
-	transition: background 500ms;
-	padding: 0.5rem;
-	padding-bottom: 4px;
-	border-bottom: 1px solid #474a4d;
-`;
-
-const MenuItem = styled.span`
-	color: #dadce1;
-	height: 40px;
-	display: flex;
-	align-items: center;
-	border-radius: 8px;
-	transition: background 500ms;
-	padding: 0.5rem;
-	:hover {
-		background-color: #525357;
-	}
-`;
+import { Dropdown, Menu, MenuTitle, MenuItem } from "../style/menu-style";
 
 const UserList = ({ boardId }) => {
 	const [open, setOpen] = useState(false);
@@ -72,8 +30,12 @@ const UserList = ({ boardId }) => {
 	};
 
 	return (
-		<div tabIndex="0" onBlur={() => setOpen(false)}>
-			<IconButton onClick={() => setOpen(!open)}>
+		<div
+			tabIndex="0"
+			onBlur={() => setOpen(false)}
+			style={{ paddingRight: "25px" }}
+		>
+			<IconButton onClick={() => setOpen(!open)} title="users list">
 				<GroupIcon />
 			</IconButton>
 			{open && (
@@ -81,12 +43,12 @@ const UserList = ({ boardId }) => {
 					<Menu>
 						<MenuTitle>owner</MenuTitle>
 						<MenuItem>{users.owner}</MenuItem>
-						<MenuTitle>permitted users</MenuTitle>
+						<MenuTitle>Editors</MenuTitle>
 						{users.permitted &&
 							users.permitted.map((user) => (
 								<MenuItem key={user._id}> {user.name} </MenuItem>
 							))}
-						<MenuTitle>read only users</MenuTitle>
+						<MenuTitle>Viewers</MenuTitle>
 						{users.readOnly &&
 							users.readOnly.map((user) => (
 								<MenuItem key={user._id}>{user.name}</MenuItem>
@@ -97,6 +59,5 @@ const UserList = ({ boardId }) => {
 		</div>
 	);
 };
-// TODO: finish writing
 
 export default UserList;

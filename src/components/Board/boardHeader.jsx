@@ -14,6 +14,7 @@ import { updateDescription } from "../../actions/boardActions";
 import Settings from "./settings";
 import AddGroup from "./addGroup";
 import UsersList from "./usersList";
+import AddUsers from "./addUsers";
 
 // style
 import IconButton from "@material-ui/core/IconButton";
@@ -110,7 +111,7 @@ const InfoToolTip = withStyles((theme) => ({
 }))(Tooltip);
 
 const BoardHeader = ({ data, owner, permitted }) => {
-	const { name, description, _id } = data;
+	const { name, description, _id, type } = data;
 	const boardsList = useSelector((state) => state.boards.boardsList);
 
 	const dispatch = useDispatch();
@@ -184,6 +185,7 @@ const BoardHeader = ({ data, owner, permitted }) => {
 					</Description>
 				</Text>
 				<Actions>
+					<AddUsers boardId={_id} owner={owner} type={type} />
 					<UsersList boardId={_id} />
 					<Settings boardId={_id} boardsList={boardsList} owner={owner} />
 				</Actions>

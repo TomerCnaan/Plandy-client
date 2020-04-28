@@ -33,6 +33,7 @@ function changeBoardType(type, boardId) {
 	});
 }
 
+// change board description
 function changeDescription(boardId, description) {
 	return http.put(`${apiEndpoint}/description`, {
 		boardId,
@@ -40,8 +41,23 @@ function changeDescription(boardId, description) {
 	});
 }
 
+// get the users of the board by role
 function getBoardUsers(boardId) {
 	return http.get(`${apiEndpoint}/users/${boardId}`);
+}
+
+// get users from the company that are not in the board
+function getUsersNotInBoard(boardId) {
+	return http.get(`${apiEndpoint}/other-users/${boardId}`);
+}
+
+// add users to a board
+function addUsersToBoard(boardId, users, permitted) {
+	return http.post(`${apiEndpoint}/add-users`, {
+		boardId,
+		users,
+		permitted,
+	});
 }
 
 export default {
@@ -52,4 +68,6 @@ export default {
 	changeBoardType,
 	changeDescription,
 	getBoardUsers,
+	getUsersNotInBoard,
+	addUsersToBoard,
 };
