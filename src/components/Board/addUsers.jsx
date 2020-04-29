@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 // libraries
 import _ from "lodash";
+import { useDispatch, useSelector } from "react-redux";
 
 // services
 import boardService from "../../services/boardService";
@@ -22,6 +23,7 @@ import { toast } from "react-toastify";
 import { Dropdown, Menu, MenuItem, MenuTitle } from "../style/menu-style";
 
 const AddUsers = ({ boardId, owner, type }) => {
+	const dispatch = useDispatch();
 	const [open, setOpen] = useState(false);
 	const [users, setUsers] = useState([]);
 	const [newUsers, setNewUsers] = useState([]);
@@ -30,7 +32,7 @@ const AddUsers = ({ boardId, owner, type }) => {
 
 	useEffect(() => {
 		fetchUsers();
-	}, []);
+	}, [users]);
 
 	const fetchUsers = async () => {
 		try {
@@ -60,8 +62,9 @@ const AddUsers = ({ boardId, owner, type }) => {
 
 		// TODO: add redux support
 		try {
-			throw new Error();
+			// throw new Error();
 			await boardService.addUsersToBoard(boardId, newUsers, permitted);
+			toast.success("Users were added successfully 💯");
 		} catch (ex) {
 			if (ex.response && ex.response.status < 500) {
 				toast.error(ex.response.data);
@@ -89,7 +92,7 @@ const AddUsers = ({ boardId, owner, type }) => {
 						</IconButton>
 						<FormControl component="fieldset" style={{ color: "#a7a7a7" }}>
 							<FormLabel component="legend" style={{ color: "#a7a7a7" }}>
-								Type
+								Role
 							</FormLabel>
 							<RadioGroup
 								aria-label="roles"
@@ -114,6 +117,7 @@ const AddUsers = ({ boardId, owner, type }) => {
 								height: "auto",
 								fontSize: "16px",
 								borderColor: "#fda80d",
+								margin: "10px 0px",
 							}}
 						>
 							Users To Add: {toAddString}
