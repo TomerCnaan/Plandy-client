@@ -85,7 +85,7 @@ const Settings = ({ boardId, boardsList, owner }) => {
 
 				dispatch(changeType(boardId, originalType));
 			}
-		}
+		} else setSelectedType(boardType);
 	};
 
 	return (
@@ -98,11 +98,26 @@ const Settings = ({ boardId, boardsList, owner }) => {
 			>
 				<SettingsIcon />
 			</IconButton>
-			<Dialog open={open} onClose={handleClose}>
+			<Dialog
+				open={open}
+				onClose={handleClose}
+				PaperProps={{
+					style: {
+						backgroundColor: "#242526",
+						border: "1px solid #474a4d",
+						color: "#dadce1",
+					},
+				}}
+			>
 				<DialogTitle>Settings</DialogTitle>
 				<DialogContent>
-					<FormControl component="fieldset" style={{ marginBottom: "40px" }}>
-						<FormLabel component="legend">Type</FormLabel>
+					<FormControl
+						component="fieldset"
+						style={{ marginBottom: "40px", color: "#dadce1" }}
+					>
+						<FormLabel component="legend" style={{ color: "#dadce1" }}>
+							Type
+						</FormLabel>
 						<RadioGroup
 							aria-label="type"
 							name="types"
