@@ -2,6 +2,7 @@ import React from "react";
 
 // libraries
 import { Droppable } from "react-beautiful-dnd";
+import { useSelector } from "react-redux";
 
 // components
 import Task from "./task";
@@ -33,6 +34,13 @@ const Tasks = ({
 	group,
 	permitted,
 }) => {
+	const searchQuery = useSelector((state) => state.search.searchQuery);
+	let filteredTasks = tasks;
+	if (searchQuery)
+		filteredTasks = tasks.filter((t) =>
+			t.name.toLowerCase().includes(searchQuery.toLowerCase())
+		);
+
 	return (
 		<Droppable droppableId={groupIndex} type="TASKS">
 			{(provided, snapshot) => (
@@ -41,8 +49,8 @@ const Tasks = ({
 					ref={provided.innerRef}
 					isDraggingOver={snapshot.isDraggingOver}
 				>
-					{tasks &&
-						tasks.map((task, index) => {
+					{filteredTasks &&
+						filteredTasks.map((task, index) => {
 							const taskId = task._id;
 
 							return (

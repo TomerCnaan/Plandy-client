@@ -1,17 +1,14 @@
 import React from "react";
 
-// style
-import "../style/form-elements.css";
-
-const SearchBox = ({ value, onChange }) => {
+const SearchBox = ({ value, onChange, className }) => {
 	return (
 		<input
 			type="text"
 			name="query"
-			className="search-input-area"
+			className={className}
 			placeholder="Search..."
 			value={value}
-			onChange={e => onChange(e.currentTarget.value)}
+			onChange={(e) => onChange(e.currentTarget.value)}
 		/>
 	);
 };

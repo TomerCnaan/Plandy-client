@@ -18,6 +18,7 @@ import {
 	Search,
 	Seperator,
 } from "./board-nav-style";
+import "../style/form-elements.css";
 
 const BoardNav = () => {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -50,7 +51,11 @@ const BoardNav = () => {
 				{role !== "member" && <AddBoardModal />}
 			</Header>
 			<Search>
-				<SearchBox value={searchQuery} onChange={handleSearch} />
+				<SearchBox
+					value={searchQuery}
+					onChange={handleSearch}
+					className="search-input-area"
+				/>
 			</Search>
 			<Seperator />
 			{loading ? <Spinner /> : _boards && <Boards query={searchQuery} />}

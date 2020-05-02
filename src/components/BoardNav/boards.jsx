@@ -10,17 +10,17 @@ import Board from "./board";
 import { Items } from "./board-nav-style";
 
 const Boards = ({ query }) => {
-	const boardsList = useSelector(state => state.boards.boardsList);
+	const boardsList = useSelector((state) => state.boards.boardsList);
 
 	let filteredBoards = boardsList;
 	if (query)
-		filteredBoards = boardsList.filter(b =>
-			b.name.toLowerCase().startsWith(query.toLowerCase())
+		filteredBoards = boardsList.filter((b) =>
+			b.name.toLowerCase().includes(query.toLowerCase())
 		);
 
 	return (
 		<Items>
-			{filteredBoards.map(board => (
+			{filteredBoards.map((board) => (
 				<Board
 					key={board._id}
 					name={board.name}

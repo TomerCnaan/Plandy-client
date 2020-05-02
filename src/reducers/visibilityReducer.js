@@ -7,7 +7,7 @@ import {
 	SET_CELLS_WIDTH,
 } from "../actions/actionTypes";
 
-const visibility = (draft = { maxAmountColumns: 6 }, action) => {
+const visibility = produce((draft = { maxAmountColumns: 6 }, action) => {
 	const { type, payload } = action;
 	switch (type) {
 		case SET_COLUMNS_WIDTH:
@@ -28,6 +28,6 @@ const visibility = (draft = { maxAmountColumns: 6 }, action) => {
 		default:
 			return draft;
 	}
-};
+});
 
 export default visibility;

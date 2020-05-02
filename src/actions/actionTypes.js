@@ -24,6 +24,9 @@ export const SET_GROUP_COLOR = "SET_GROUP_COLOR";
 export const SET_USER = "SET_USER";
 export const REMOVE_USER = "REMOVE_USER";
 
+// search actions
+export const SET_SEARCH_QUERY = "SET_SEARCH_QUERY";
+
 // visibility actions
 export const SET_COLUMNS_WIDTH = "SET_COLUMNS_WIDTH";
 export const SET_COLUMN_AMOUNT = "SET_COLUMN_AMOUNT";

@@ -9,12 +9,14 @@ import { useSelector, useDispatch } from "react-redux";
 
 // actions
 import { updateDescription } from "../../actions/boardActions";
+import { setSearchQuery } from "../../actions/searchActions";
 
 // components
 import Settings from "./settings";
 import AddGroup from "./addGroup";
 import UsersList from "./usersList";
 import AddUsers from "./addUsers";
+import SearchBox from "../common/searchBox";
 
 // style
 import IconButton from "@material-ui/core/IconButton";
@@ -51,6 +53,17 @@ const Title = styled.h2`
 	font-weight: medium;
 	text-transform: capitalize;
 	color: #2d2d2d;
+`;
+
+const Type = styled.div`
+	font-weight: lighter;
+	color: #ff6f6f;
+	align-self: center;
+	padding-left: 25px;
+	transition: color 300ms ease;
+	:hover {
+		color: red;
+	}
 `;
 
 const Description = styled.h3`
@@ -117,6 +130,7 @@ const BoardHeader = ({ data, owner, permitted }) => {
 	const dispatch = useDispatch();
 	const [descriptionValue, setDescriptionValue] = useState(description);
 	const [infoValue, setInfoValue] = useState("");
+	const searchQuery = useSelector((state) => state.search.searchQuery);
 
 	useEffect(() => {
 		setInfoValue(boardInfo.getInfo(owner, permitted));
@@ -150,6 +164,10 @@ const BoardHeader = ({ data, owner, permitted }) => {
 		}
 	};
 
+	const handleSearch = (query) => {
+		dispatch(setSearchQuery(query));
+	};
+
 	return (
 		<Container>
 			<Head>
@@ -168,8 +186,8 @@ const BoardHeader = ({ data, owner, permitted }) => {
 								</IconButton>
 							</InfoToolTip>
 						</div>
+						<Type>{type} board</Type>
 					</div>
-
 					<Description>
 						<TextArea
 							value={descriptionValue}
@@ -191,6 +209,11 @@ const BoardHeader = ({ data, owner, permitted }) => {
 				</Actions>
 			</Head>
 			<Util>
+				<SearchBox
+					value={searchQuery}
+					onChange={handleSearch}
+					className="in-board-search"
+				/>
 				<AddGroup boardId={_id} owner={owner} />
 			</Util>
 		</Container>
