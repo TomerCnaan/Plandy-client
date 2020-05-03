@@ -124,18 +124,19 @@ const Task = ({
 	}, [widthRef.current]);
 
 	const handleTaskDelete = async () => {
-		const originalTasksList = group.tasks;
-		const tasksList = group.tasks.filter((t) => t._id !== _id);
-		dispatch(deleteTask(boardId, groupIndex, tasksList));
+		const originalTasksList = group.tasks; //save original data
+		const tasksList = group.tasks.filter((t) => t._id !== _id); //remove current task
+		dispatch(deleteTask(boardId, groupIndex, tasksList)); //set store with new tasks list
 
 		try {
-			await taskService.deleteTask(boardId, groupId, _id);
+			await taskService.deleteTask(boardId, groupId, _id); //call server
 			toast.success("The task has been deleted 🚀");
 		} catch (ex) {
 			if (ex.response && ex.response.status < 500) {
 				toast.error(ex.response.data);
 			}
 
+			// something went wrong - return to data before delete
 			dispatch(deleteTask(boardId, groupIndex, originalTasksList));
 		}
 	};

@@ -4,11 +4,11 @@ import http from "./httpService";
 const apiEndpoint = "/auth";
 const tokenKey = "token";
 
-http.setJwt(getJwt());
+http.setJwt(getJwt()); //set http header of the auth token.
 
 export async function login(email, password) {
-	const { data: jwt } = await http.post(apiEndpoint, { email, password });
-	localStorage.setItem(tokenKey, jwt);
+	const { data: jwt } = await http.post(apiEndpoint, { email, password }); //call server
+	localStorage.setItem(tokenKey, jwt); //store auth token in the browser local storage
 }
 
 export function loginWithJwt(jwt) {
@@ -37,5 +37,5 @@ export default {
 	loginWithJwt,
 	logout,
 	getCurrentUser,
-	getJwt
+	getJwt,
 };

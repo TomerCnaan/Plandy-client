@@ -20,27 +20,20 @@ import passwordLabel from "../images/password-label.svg";
 
 const INTITIAL_STATE = {
 	email: "",
-	password: ""
+	password: "",
 };
 
 // ---------------------------------------------
 
-const LoginForm = props => {
+const LoginForm = (props) => {
 	const schema = {
-		email: Joi.string()
-			.required()
-			.email()
-			.label("Email"),
-		password: Joi.string()
-			.required()
-			.label("Password")
+		email: Joi.string().required().email().label("Email"),
+		password: Joi.string().required().label("Password"),
 	};
 
 	const doSubmit = async (data, errors) => {
 		try {
-			await auth.login(data.email, data.password);
-			// const { state } = props.location;
-			// window.location = state ? state.from.pathname : "/";
+			await auth.login(data.email, data.password); //login with user details
 			window.location = "/";
 		} catch (ex) {
 			if (ex.response && ex.response.status === 400) {

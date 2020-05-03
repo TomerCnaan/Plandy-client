@@ -55,19 +55,19 @@ export const fetchBoardNames = () => {
 // fetch board data from server async
 export const fetchBoardData = (id) => {
 	return (dispatch) => {
-		dispatch(isLoadingBoard(true));
+		dispatch(isLoadingBoard(true)); //set app to loading board state
 
 		boardService
-			.getBoardData(id)
+			.getBoardData(id) //get board data from the server
 			.then((res) => {
-				dispatch(setBoardData(res.data));
+				dispatch(setBoardData(res.data)); //set board data in the store
 			})
 			.catch((err) => {
 				if (err.response && err.response.status === 400)
 					toast.error(err.response.data);
 			})
 			.then(() => {
-				dispatch(isLoadingBoard(false));
+				dispatch(isLoadingBoard(false)); //set loading board state to false
 			});
 	};
 };
