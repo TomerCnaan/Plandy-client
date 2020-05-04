@@ -32,7 +32,7 @@ const AddUsers = ({ boardId, owner, type }) => {
 
 	useEffect(() => {
 		fetchUsers();
-	}, [users]);
+	}, []);
 
 	const fetchUsers = async () => {
 		try {

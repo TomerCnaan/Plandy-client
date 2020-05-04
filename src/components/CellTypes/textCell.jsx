@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 
+// services
+import cellService from "../../services/cellService";
+
 // style
 import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
 	display: flex;
@@ -84,8 +88,17 @@ const TextCell = ({ boardId, groupId, taskId, boardColumnId, value }) => {
 
 	const handleSubmit = async () => {
 		setFocused(false);
-		console.log("submitting");
-		// TODO: add server support
+		const originalText = value;
+
+		try {
+			await cellService.setTextCell(boardId, taskId, textValue, boardColumnId);
+		} catch (ex) {
+			if (ex.response && ex.response.status < 500) {
+				toast.error(ex.response.data);
+			}
+
+			setTextValue(originalText);
+		}
 	};
 
 	return (

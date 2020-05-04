@@ -210,10 +210,11 @@ const Task = ({
 
 					<CellList ref={widthRef}>
 						{column_order.map((column, index) => {
-							const type = column.columnType.type;
+							const boardColumnId = column._id;
 							const value = column_values.find(
-								(x) => x.columnType.type === type
+								(x) => x.boardColumn === boardColumnId
 							);
+							console.log(value);
 
 							return (
 								<Cell
