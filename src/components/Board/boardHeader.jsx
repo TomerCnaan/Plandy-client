@@ -203,7 +203,7 @@ const BoardHeader = ({ data, owner, permitted }) => {
 					</Description>
 				</Text>
 				<Actions>
-					<AddUsers boardId={_id} owner={owner} type={type} />
+					{owner && <AddUsers boardId={_id} owner={owner} type={type} />}
 					<UsersList boardId={_id} />
 					<Settings boardId={_id} boardsList={boardsList} owner={owner} />
 				</Actions>

@@ -214,7 +214,6 @@ const Task = ({
 							const value = column_values.find(
 								(x) => x.boardColumn === boardColumnId
 							);
-							console.log(value);
 
 							return (
 								<Cell

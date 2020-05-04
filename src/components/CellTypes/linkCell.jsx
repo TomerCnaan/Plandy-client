@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Joi from "joi-browser";
 
+// services
+import cellService from "../../services/cellService";
+
 // style
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
@@ -93,13 +96,24 @@ const LinkCell = ({ boardId, groupId, taskId, boardColumnId, value }) => {
 
 	const handleSubmit = async () => {
 		setFocused(false);
-		console.log("submitting");
 		const { error } = Joi.validate({ link: linkValue }, schema);
 		if (error) {
 			toast.error(error.details[0].message);
 			setLinkValue("");
+			return;
 		}
-		// TODO: add server support
+
+		const originalText = value;
+
+		try {
+			await cellService.setLinkCell(boardId, taskId, linkValue, boardColumnId);
+		} catch (ex) {
+			if (ex.response && ex.response.status < 500) {
+				toast.error(ex.response.data);
+			}
+
+			setLinkValue(originalText);
+		}
 	};
 
 	return (

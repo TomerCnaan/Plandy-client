@@ -11,4 +11,13 @@ function setTextCell(boardId, taskId, value, boardColumnId) {
 	});
 }
 
-export default { setTextCell };
+function setLinkCell(boardId, taskId, value, boardColumnId) {
+	return http.post(`${apiEndpoint}/link`, {
+		boardId,
+		taskId,
+		value,
+		boardColumnId,
+	});
+}
+
+export default { setTextCell, setLinkCell };
