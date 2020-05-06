@@ -3,6 +3,7 @@ import React from "react";
 // components
 import TextCell from "../CellTypes/textCell";
 import LinkCell from "../CellTypes/linkCell";
+import PriorityCell from "../CellTypes/priorityCell";
 
 // libraries
 import { useSelector } from "react-redux";
@@ -62,10 +63,20 @@ const Cell = ({ data, boardColumn, boardId, groupId, taskId, permitted }) => {
 				return (
 					<LinkCell
 						boardId={boardId}
-						groupId={groupId}
 						taskId={taskId}
 						boardColumnId={columnId}
 						value={value}
+					/>
+				);
+			case PRIORITY_CELL:
+				return (
+					<PriorityCell
+						boardId={boardId}
+						taskId={taskId}
+						boardColumnId={columnId}
+						value={value}
+						options={allOptions}
+						permitted={permitted}
 					/>
 				);
 			default:
@@ -73,12 +84,7 @@ const Cell = ({ data, boardColumn, boardId, groupId, taskId, permitted }) => {
 		}
 	};
 
-	return (
-		<Container width={cellWidth}>
-			{/* <Text>{value}</Text> */}
-			{renderCellByTye()}
-		</Container>
-	);
+	return <Container width={cellWidth}>{renderCellByTye()}</Container>;
 };
 
 export default Cell;

@@ -58,7 +58,11 @@ const BoardNav = () => {
 				/>
 			</Search>
 			<Seperator />
-			{loading ? <Spinner /> : _boards && <Boards query={searchQuery} />}
+			{loading ? (
+				<Spinner />
+			) : (
+				_boards && <Boards query={searchQuery} user={user} />
+			)}
 		</SliderContent>
 	);
 };

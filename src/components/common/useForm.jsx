@@ -49,7 +49,7 @@ const useForm = (initialState, validationSchema, doSubmit) => {
 
 		setData({
 			...data,
-			[name]: value
+			[name]: value,
 		});
 	}
 
@@ -93,7 +93,7 @@ const useForm = (initialState, validationSchema, doSubmit) => {
 		handleSubmit,
 		renderInput,
 		renderButton,
-		renderSelect
+		renderSelect,
 	};
 };
 

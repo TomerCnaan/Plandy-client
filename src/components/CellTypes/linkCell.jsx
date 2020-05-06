@@ -73,7 +73,7 @@ const EditLink = styled.textarea`
 	}
 `;
 
-const LinkCell = ({ boardId, groupId, taskId, boardColumnId, value }) => {
+const LinkCell = ({ boardId, taskId, boardColumnId, value }) => {
 	const [linkValue, setLinkValue] = useState(value);
 	const [hovered, setHovered] = useState(false);
 	const [focused, setFocused] = useState(false);

@@ -20,4 +20,13 @@ function setLinkCell(boardId, taskId, value, boardColumnId) {
 	});
 }
 
-export default { setTextCell, setLinkCell };
+function setPriorityCell(boardId, taskId, value, boardColumnId) {
+	return http.post(`${apiEndpoint}/priority`, {
+		boardId,
+		taskId,
+		value,
+		boardColumnId,
+	});
+}
+
+export default { setTextCell, setLinkCell, setPriorityCell };

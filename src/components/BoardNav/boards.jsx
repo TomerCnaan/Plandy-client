@@ -9,7 +9,7 @@ import Board from "./board";
 // style
 import { Items } from "./board-nav-style";
 
-const Boards = ({ query }) => {
+const Boards = ({ query, user }) => {
 	const boardsList = useSelector((state) => state.boards.boardsList);
 
 	let filteredBoards = boardsList;
@@ -26,6 +26,7 @@ const Boards = ({ query }) => {
 					name={board.name}
 					id={board._id}
 					description={board.description}
+					user={user}
 				/>
 			))}
 			<hr style={{ marginTop: "30px", border: "0.5px solid #E1E1E1" }} />

@@ -17,7 +17,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { toast } from "react-toastify";
 
 const Board = (props) => {
-	const { name, id, description } = props;
+	const { name, id, description, user } = props;
 	const dispatch = useDispatch();
 	const boardsList = useSelector((state) => state.boards.boardsList);
 
@@ -51,7 +51,11 @@ const Board = (props) => {
 			<Link to={`/board/${id}`} title={description}>
 				<Name>{name}</Name>
 			</Link>
-			<IconButton aria-label="delete" onClick={() => handleDeleteBoard()}>
+			<IconButton
+				aria-label="delete"
+				onClick={() => handleDeleteBoard()}
+				disabled={user.role === "member"}
+			>
 				<DeleteIcon fontSize="small" />
 			</IconButton>
 		</Item>
