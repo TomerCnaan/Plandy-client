@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 
+// components
+import DropdownMenu from "../common/dropdownMenu";
+
 // services
 import cellService from "../../services/cellService";
 
 // style
-import { Dropdown, Menu, MenuTitle, MenuItem } from "../style/menu-style";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -12,8 +14,8 @@ const Container = styled.div`
 	align-items: center;
 	justify-content: center;
 	border-radius: 2px;
-	width: calc(90% - 2px);
-	height: calc(90% - 2px);
+	width: calc(98% - 2px);
+	height: calc(98% - 2px);
 	background-color: ${(props) => (props.value ? props.bg : "transparent")};
 	color: white;
 	:hover {
@@ -25,34 +27,42 @@ const Container = styled.div`
 
 const PriorityCell = ({ boardId, taskId, boardColumnId, options, value }) => {
 	const [priorityValue, setPriorityValue] = useState(value ? value : null);
-	const [open, setOpen] = useState(false);
+	const [anchor, setAnchor] = useState(null);
 	const [bgColor, setBgColor] = useState("transparent");
 
 	useEffect(() => {
 		if (priorityValue) {
-			console.log(options);
 			const { color } = options.find((i) => i.value === value);
 			setBgColor(color);
 		}
 	}, []);
 
+	const handleUpdateCell = () => {
+		console.log("updating cell.");
+	};
+
+	const handleCloseMenu = () => {
+		console.log("In handle close menu");
+		setAnchor(null);
+		console.log(anchor);
+	};
+
 	return (
 		<Container
 			bg={bgColor}
 			value={priorityValue}
-			onClick={() => setOpen(!open)}
+			onClick={(e) => {
+				setAnchor(e.currentTarget);
+				console.log("clicking");
+			}}
 		>
 			<span>{priorityValue}</span>
-			{open && (
-				<Dropdown>
-					<Menu>
-						<MenuTitle>Options</MenuTitle>
-						{options.map((option, index) => (
-							<MenuItem key={index}> {option.value} </MenuItem>
-						))}
-					</Menu>
-				</Dropdown>
-			)}
+			<DropdownMenu
+				anchor={anchor}
+				options={options}
+				handleUpdateCell={handleUpdateCell}
+				handleCloseMenu={handleCloseMenu}
+			/>
 		</Container>
 	);
 };
