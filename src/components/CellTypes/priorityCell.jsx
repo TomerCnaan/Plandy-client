@@ -7,17 +7,29 @@ import DropdownMenu from "../common/dropdownMenu";
 import cellService from "../../services/cellService";
 
 // style
+import { toast } from "react-toastify";
 import styled from "styled-components";
 
 const Container = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: 2px;
 	width: calc(98% - 2px);
 	height: calc(98% - 2px);
-	background-color: ${(props) => (props.value ? props.bg : "transparent")};
+`;
+
+const Btn = styled.button`
+	width: 100%;
+	height: 100%;
+	border: 0;
+	font-family: "Montserrat", sans-serif;
+	font-size: 15px;
 	color: white;
+	background-color: ${(props) => (props.value ? props.bg : "transparent")};
+	border-radius: 2px;
+	:focus {
+		outline: none;
+	}
 	:hover {
 		border-top-right-radius: 10px;
 		border-bottom-left-radius: 10px;
@@ -25,7 +37,14 @@ const Container = styled.div`
 	}
 `;
 
-const PriorityCell = ({ boardId, taskId, boardColumnId, options, value }) => {
+const PriorityCell = ({
+	boardId,
+	taskId,
+	boardColumnId,
+	options,
+	value,
+	permitted,
+}) => {
 	const [priorityValue, setPriorityValue] = useState(value ? value : null);
 	const [anchor, setAnchor] = useState(null);
 	const [bgColor, setBgColor] = useState("transparent");
@@ -37,26 +56,45 @@ const PriorityCell = ({ boardId, taskId, boardColumnId, options, value }) => {
 		}
 	}, []);
 
-	const handleUpdateCell = () => {
-		console.log("updating cell.");
+	const handleUpdateCell = async (option) => {
+		setAnchor(null);
+		const originalValue = priorityValue;
+		const originalColor = bgColor;
+		setPriorityValue(option.value);
+		setBgColor(option.color);
+
+		try {
+			await cellService.setPriorityCell(
+				boardId,
+				taskId,
+				option.value,
+				boardColumnId
+			);
+		} catch (ex) {
+			if (ex.response && ex.response.status < 500) {
+				toast.error(ex.response.data);
+			}
+			setPriorityValue(originalValue);
+			setBgColor(originalColor);
+		}
 	};
 
 	const handleCloseMenu = () => {
-		console.log("In handle close menu");
 		setAnchor(null);
-		console.log(anchor);
 	};
 
 	return (
-		<Container
-			bg={bgColor}
-			value={priorityValue}
-			onClick={(e) => {
-				setAnchor(e.currentTarget);
-				console.log("clicking");
-			}}
-		>
-			<span>{priorityValue}</span>
+		<Container>
+			<Btn
+				type="button"
+				bg={bgColor}
+				value={priorityValue}
+				onClick={(e) => setAnchor(e.currentTarget)}
+				title="Click to change the priority"
+				disabled={!permitted}
+			>
+				<span>{priorityValue}</span>
+			</Btn>
 			<DropdownMenu
 				anchor={anchor}
 				options={options}

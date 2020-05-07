@@ -3,6 +3,15 @@ import React, { useState, useEffect } from "react";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import FlagIcon from "@material-ui/icons/Flag";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+	item: {
+		fontFamily: "Montserrat, sans-serif",
+	},
+}));
 
 const DropdownMenu = ({
 	options,
@@ -10,6 +19,7 @@ const DropdownMenu = ({
 	anchor,
 	handleCloseMenu,
 }) => {
+	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = useState(anchor);
 
 	useEffect(() => {
@@ -18,7 +28,6 @@ const DropdownMenu = ({
 
 	const handleClose = () => {
 		setAnchorEl(null);
-		console.log("handling close menu");
 		handleCloseMenu();
 	};
 
@@ -35,6 +44,9 @@ const DropdownMenu = ({
 		>
 			{options.map((option, index) => (
 				<MenuItem key={index} onClick={() => handleUpdateCell(option)}>
+					<ListItemIcon style={{ minWidth: "35px" }}>
+						<FlagIcon style={{ fill: option.color }} />
+					</ListItemIcon>
 					<ListItemText primary={option.value} />
 				</MenuItem>
 			))}
