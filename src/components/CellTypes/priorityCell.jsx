@@ -83,6 +83,11 @@ const PriorityCell = ({
 		setAnchor(null);
 	};
 
+	const handleAddOption = () => {
+		setAnchor(null);
+		// TODO: add option
+	};
+
 	return (
 		<Container>
 			<Btn

@@ -5,7 +5,32 @@ import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import FlagIcon from "@material-ui/icons/Flag";
-import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import AddIcon from "@material-ui/icons/Add";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { IconButton } from "@material-ui/core";
+
+const CssTextField = withStyles({
+	root: {
+		"& label.Mui-focused": {
+			color: "#3F51B5",
+		},
+		"& .MuiInput-underline:after": {
+			borderBottomColor: "#3F51B5",
+		},
+		"& .MuiOutlinedInput-root": {
+			"& fieldset": {
+				borderColor: "red",
+			},
+			"&:hover fieldset": {
+				borderColor: "yellow",
+			},
+			"&.Mui-focused fieldset": {
+				borderColor: "#3F51B5",
+			},
+		},
+	},
+})(TextField);
 
 const useStyles = makeStyles((theme) => ({
 	item: {
@@ -18,9 +43,11 @@ const DropdownMenu = ({
 	handleUpdateCell,
 	anchor,
 	handleCloseMenu,
+	handleAddOption,
 }) => {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = useState(anchor);
+	const [textInput, setTextInput] = useState("");
 
 	useEffect(() => {
 		setAnchorEl(anchor);
@@ -29,6 +56,10 @@ const DropdownMenu = ({
 	const handleClose = () => {
 		setAnchorEl(null);
 		handleCloseMenu();
+	};
+
+	const handleInput = (e) => {
+		setTextInput(e.target.value);
 	};
 
 	return (
@@ -50,6 +81,20 @@ const DropdownMenu = ({
 					<ListItemText primary={option.value} />
 				</MenuItem>
 			))}
+			<MenuItem>
+				<CssTextField
+					// variant="outlined"
+					// color="primary"
+					// size="small"
+					label="Add Option"
+					value={textInput}
+					onChange={handleInput}
+					style={{ width: "140px" }}
+				/>
+				<IconButton size="small">
+					<AddIcon fontSize="small" onClick={handleAddOption} />
+				</IconButton>
+			</MenuItem>
 		</Menu>
 	);
 };
