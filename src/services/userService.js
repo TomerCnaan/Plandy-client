@@ -7,13 +7,13 @@ function register(user) {
 		name: user.name,
 		email: user.email,
 		password: user.password,
-		company: { name: user.companyName }
+		company: { name: user.companyName },
 	});
 }
 
 function sendInvitation(user) {
 	return http.post(`${apiEndpoint}/add`, {
-		email: user.email
+		email: user.email,
 	});
 }
 
@@ -21,8 +21,14 @@ function addUser(user, token) {
 	return http.post(`${apiEndpoint}/add/${token}`, {
 		name: user.name,
 		email: user.email,
-		password: user.password
+		password: user.password,
 	});
 }
 
-export default { register, sendInvitation, addUser };
+function changeRole(userId, newRole) {
+	return http.put(`${apiEndpoint}/role/${userId}`, {
+		role: newRole,
+	});
+}
+
+export default { register, sendInvitation, addUser, changeRole };

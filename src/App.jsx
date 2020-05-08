@@ -67,7 +67,10 @@ function App() {
 						<Route path="/join/:token" component={JoinForm} />
 						<Route path="/login" component={LoginForm} />
 						<Route path="/logout" component={Logout} />
-						<ProtectedRoute path="/company" component={TeamPage} />
+						<ProtectedRoute
+							path="/company"
+							render={() => <TeamPage user={user} />}
+						/>
 						<ProtectedRoute path="/profile" component={ProfilePage} />
 						<ProtectedRoute
 							path="/home-page"
