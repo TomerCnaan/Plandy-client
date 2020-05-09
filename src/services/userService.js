@@ -31,4 +31,16 @@ function changeRole(userId, newRole) {
 	});
 }
 
-export default { register, sendInvitation, addUser, changeRole };
+function updateUsername(name, id) {
+	return http.put(`${apiEndpoint}/${id}`, {
+		name,
+	});
+}
+
+export default {
+	register,
+	sendInvitation,
+	addUser,
+	changeRole,
+	updateUsername,
+};

@@ -2,16 +2,16 @@ import React from "react";
 import { Alert } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
 	alert: {
 		display: "inline-flex",
 		minWidth: "58.5%",
 		marginTop: "0px",
-		backgroundColor: "rgb(239, 174, 168)"
+		backgroundColor: "rgb(239, 174, 168)",
 	},
 	label: {
-		verticalAlign: "middle"
-	}
+		verticalAlign: "middle",
+	},
 }));
 
 const Input = ({ name, label, placeholder, error, style, ...rest }) => {
@@ -22,7 +22,7 @@ const Input = ({ name, label, placeholder, error, style, ...rest }) => {
 				<img src={label} alt="label" />
 			</label>
 			<input
-				className="input-area"
+				className={style ? style : "input-area"}
 				{...rest}
 				name={name}
 				id={name}

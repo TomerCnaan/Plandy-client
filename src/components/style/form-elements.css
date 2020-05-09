@@ -137,3 +137,53 @@
 	color: black;
 	box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.109);
 }
+
+/* profile page */
+.submit-update {
+	background: #f35f0c;
+	width: 150px;
+	height: 58px;
+	border-radius: 45px;
+	font-size: 20px;
+	line-height: 34px;
+	color: #ffffff;
+	border: none;
+	align-items: center;
+	margin-top: 37px;
+	margin-bottom: 60px;
+}
+
+.submit-update:disabled {
+	cursor: not-allowed;
+	pointer-events: all !important;
+	background-color: #ff8c4a;
+}
+
+.submit-update:enabled {
+	cursor: pointer;
+}
+
+.input-area-profile {
+	width: 300px;
+	min-width: 150px;
+	height: 60px;
+	background: rgba(212, 181, 152, 0.24);
+	border: none;
+	/* margin-top: 37px; */
+	margin-top: 4.3%;
+	margin-left: 24px;
+	padding-left: 21px;
+	padding-top: 19px;
+	padding-bottom: 18px;
+	font-family: "Montserrat", sans-serif;
+	font-weight: 300;
+	font-size: 20px;
+	line-height: 29px;
+
+	color: black;
+}
+
+.input-area-profile:focus {
+	outline: none !important;
+	border: 0.5px solid #e4793b;
+}

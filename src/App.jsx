@@ -71,7 +71,10 @@ function App() {
 							path="/company"
 							render={() => <TeamPage user={user} />}
 						/>
-						<ProtectedRoute path="/profile" component={ProfilePage} />
+						<ProtectedRoute
+							path="/profile"
+							render={() => <ProfilePage user={user} />}
+						/>
 						<ProtectedRoute
 							path="/home-page"
 							render={() => <HomePage user={user} />}
