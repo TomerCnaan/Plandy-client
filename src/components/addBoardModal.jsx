@@ -78,9 +78,6 @@ const AddBoardModal = () => {
 		try {
 			const board = await boardService.createBoard(data);
 			dispatch(addBoardName(board.data));
-			toast.success("🚀 The board was added successfully!", {
-				position: toast.POSITION.TOP_RIGHT,
-			});
 			handleClose();
 			window.location = `/board/${board.data._id}`;
 		} catch (ex) {
@@ -106,7 +103,7 @@ const AddBoardModal = () => {
 				<DialogTitle style={{ color: "#f35f0c" }}>Add a board</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
-						To add a board, peak a name and choose whether you want the board to
+						To add a board, pick a name and choose whether you want the board to
 						be public to all company members or invite only.
 					</DialogContentText>
 					<form onSubmit={handleSubmit} noValidate>

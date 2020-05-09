@@ -67,9 +67,14 @@ const Body = styled.div`
 	padding-top: 50px;
 `;
 
-const Img = styled.div`
-	height: 100%;
-	width: 100%;
+const Link = styled.span`
+	color: #f35f0c;
+	transition: background-color 500ms ease-in-out;
+	border: 0.5px solid #f35f0c;
+	:hover {
+		background-color: #f35f0c;
+		color: white;
+	}
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -144,20 +149,18 @@ const ProfilePage = ({ user }) => {
 			<MainContent>
 				<PageName>
 					<span>Profile page</span>
-					<span>
+					<Link>
 						<NavLink
 							to="/logout"
 							style={{
 								fontWeight: "lighter",
-								color: "#f35f0c",
-								// border: "0.5px solid #f35f0c",
 								padding: "2px 5px",
-								fontSize: "26px",
+								fontSize: "22px",
 							}}
 						>
 							{`Logout`}
 						</NavLink>
-					</span>
+					</Link>
 				</PageName>
 				{user && (
 					<Container>

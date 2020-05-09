@@ -70,7 +70,7 @@ const TextToolTip = withStyles((theme) => ({
 }))(Tooltip);
 
 const TextCell = ({ boardId, groupId, taskId, boardColumnId, value }) => {
-	const [textValue, setTextValue] = useState(value);
+	const [textValue, setTextValue] = useState(value ? value : "");
 	const [hovered, setHovered] = useState(false);
 	const [focused, setFocused] = useState(false);
 
