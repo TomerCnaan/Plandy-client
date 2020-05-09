@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 // libraries
 import { Draggable } from "react-beautiful-dnd";
@@ -98,9 +98,11 @@ const Group = ({ group, index, boardId, owner, permitted }) => {
 		setTitlenValue(e.target.value);
 	};
 
+	const textAreaRef = useRef(null);
 	const handleKeyPress = (e) => {
 		if (e.key === "Enter") {
 			e.preventDefault();
+			textAreaRef.current.blur();
 			handleSubmit();
 			return;
 		}
@@ -153,6 +155,7 @@ const Group = ({ group, index, boardId, owner, permitted }) => {
 								onChange={handleChange}
 								onKeyDown={handleKeyPress}
 								onBlur={handleSubmit}
+								ref={textAreaRef}
 							>
 								{title}
 							</Title>

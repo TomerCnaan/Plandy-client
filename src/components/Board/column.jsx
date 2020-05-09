@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 // services
 import columnService from "../../services/columnService";
@@ -137,9 +137,11 @@ const Column = ({ column, index, groupName, boardId, owner }) => {
 		setNameValue(e.target.value);
 	};
 
+	const textAreaRef = useRef(null);
 	const handleKeyPress = (e) => {
 		if (e.key === "Enter") {
 			e.preventDefault();
+			textAreaRef.current.blur();
 			handleSubmit();
 			return;
 		}
@@ -192,6 +194,7 @@ const Column = ({ column, index, groupName, boardId, owner }) => {
 						onChange={handleChange}
 						onKeyDown={handleKeyPress}
 						onBlur={handleSubmit}
+						ref={textAreaRef}
 					>
 						{name}
 					</EditableName>

@@ -36,7 +36,7 @@ const Container = styled.div`
 
 const WrapName = styled.div`
 	display: flex;
-	/* flex-grow: 1; */
+	flex-grow: 1;
 	flex-shrink: 0;
 	height: 40px;
 	min-width: 223px;
@@ -145,9 +145,11 @@ const Task = ({
 		setNameValue(e.target.value);
 	};
 
+	const textAreaRef = useRef(null);
 	const handleKeyPress = (e) => {
 		if (e.key === "Enter") {
 			e.preventDefault();
+			textAreaRef.current.blur();
 			handleSubmit();
 			return;
 		}
@@ -203,6 +205,7 @@ const Task = ({
 							onChange={handleChange}
 							onKeyDown={handleKeyPress}
 							onBlur={handleSubmit}
+							ref={textAreaRef}
 						>
 							{name}
 						</Name>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 // services
 import boardService from "../../services/boardService";
@@ -109,6 +109,9 @@ const TextArea = styled.textarea`
 	:focus {
 		border: 0.5px dashed lightgrey;
 	}
+	:disabled {
+		background-color: white;
+	}
 	resize: none;
 `;
 
@@ -141,9 +144,11 @@ const BoardHeader = ({ data, owner, permitted }) => {
 		setDescriptionValue(e.target.value);
 	};
 
+	const textAreaRef = useRef(null);
 	const handleKeyPress = (e) => {
 		if (e.key === "Enter") {
 			e.preventDefault();
+			textAreaRef.current.blur();
 			handleSubmit();
 			return;
 		}
@@ -197,6 +202,8 @@ const BoardHeader = ({ data, owner, permitted }) => {
 							rows="1"
 							wrap="off"
 							spellCheck="false"
+							ref={textAreaRef}
+							disabled={!owner}
 						>
 							{descriptionValue}
 						</TextArea>

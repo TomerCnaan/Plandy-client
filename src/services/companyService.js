@@ -3,8 +3,11 @@ import http from "./httpService";
 const apiEndpoint = "/companies";
 
 function getCompanyInfo(companyId) {
-	console.log("getting company info");
 	return http.get(`${apiEndpoint}/${companyId}`);
 }
 
-export default { getCompanyInfo };
+function getCompanyName(companyId) {
+	return http.get(`${apiEndpoint}/name/${companyId}`);
+}
+
+export default { getCompanyInfo, getCompanyName };

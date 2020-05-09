@@ -82,6 +82,7 @@ const AddBoardModal = () => {
 				position: toast.POSITION.TOP_RIGHT,
 			});
 			handleClose();
+			window.location = `/board/${board.data._id}`;
 		} catch (ex) {
 			if (ex.response && ex.response.status === 400) {
 				errors.email = ex.response.data;
