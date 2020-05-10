@@ -36,7 +36,7 @@ const Container = styled.div`
 
 const WrapName = styled.div`
 	display: flex;
-	flex-grow: 1;
+	/* flex-grow: 1; */
 	flex-shrink: 0;
 	height: 40px;
 	min-width: 223px;

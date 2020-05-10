@@ -17,7 +17,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { toast } from "react-toastify";
 
 const Board = (props) => {
-	const { name, id, description, user } = props;
+	const { name, id, description, user, owner } = props;
 	const dispatch = useDispatch();
 	const boardsList = useSelector((state) => state.boards.boardsList);
 
@@ -54,7 +54,7 @@ const Board = (props) => {
 			<IconButton
 				aria-label="delete"
 				onClick={() => handleDeleteBoard()}
-				disabled={user.role === "member"}
+				disabled={owner !== user._id}
 			>
 				<DeleteIcon fontSize="small" />
 			</IconButton>

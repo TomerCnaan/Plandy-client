@@ -27,6 +27,7 @@ const Boards = ({ query, user }) => {
 					id={board._id}
 					description={board.description}
 					user={user}
+					owner={board.owner}
 				/>
 			))}
 			<hr style={{ marginTop: "30px", border: "0.5px solid #E1E1E1" }} />
