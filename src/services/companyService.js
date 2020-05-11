@@ -10,4 +10,12 @@ function getCompanyName(companyId) {
 	return http.get(`${apiEndpoint}/name/${companyId}`);
 }
 
-export default { getCompanyInfo, getCompanyName };
+function deleteCompany(companyId) {
+	return http.delete(apiEndpoint, {
+		data: {
+			companyId,
+		},
+	});
+}
+
+export default { getCompanyInfo, getCompanyName, deleteCompany };

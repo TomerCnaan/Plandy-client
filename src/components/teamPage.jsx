@@ -26,11 +26,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import { toast } from "react-toastify";
 
 const PageName = styled.div`
+	display: flex;
+	justify-content: space-between;
 	padding-top: 30px;
 	padding-left: 30px;
+	padding-right: 30px;
 	font-weight: bold;
 	font-size: 22px;
 	color: #3e3e3e;
+	padding-bottom: 10px;
 `;
 
 const Container = styled.div`
@@ -68,6 +72,20 @@ const Users = styled.div`
 	flex-wrap: wrap;
 	padding: 20px 40px;
 	width: 100%;
+`;
+
+const Link = styled.span`
+	color: #f35f0c;
+	transition: background-color 500ms ease-in-out;
+	border: 0.5px solid #f35f0c;
+	font-weight: lighter;
+	padding: 2px 5px;
+	font-size: 18px;
+	:hover {
+		background-color: #f35f0c;
+		color: white;
+		cursor: pointer;
+	}
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -144,11 +162,40 @@ const TeamPage = ({ user }) => {
 		}
 	};
 
+	const handleDeleteCompany = async () => {
+		console.log("handle delete company");
+		const confirmed = window.confirm(
+			"Are you sure that you want to delete this company?"
+		);
+		if (confirmed) {
+			try {
+				await companyService.deleteCompany(companyData.companyId);
+				window.location = "/logout";
+			} catch (ex) {
+				if (ex.response && ex.response.status < 500) {
+					toast.error(ex.response.data);
+				}
+			}
+		}
+	};
+
+	const handleDeleteUser = async () => {
+		console.log("handle delete user");
+		// TODO: server support
+	};
+
 	return (
 		<MainWrapper>
 			<Slider />
 			<MainContent>
-				<PageName>Company Page</PageName>
+				<PageName>
+					<span>Company Page</span>
+					{user && user.role === "supervisor" ? (
+						<Link onClick={handleDeleteCompany}>Delete company</Link>
+					) : user ? (
+						<Link onClick={handleDeleteUser}>Quit company</Link>
+					) : null}
+				</PageName>
 				{companyData && (
 					<Container>
 						<Title>{companyData.companyName}</Title>
