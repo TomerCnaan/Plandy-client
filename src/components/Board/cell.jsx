@@ -4,6 +4,8 @@ import React from "react";
 import TextCell from "../CellTypes/textCell";
 import LinkCell from "../CellTypes/linkCell";
 import PriorityCell from "../CellTypes/priorityCell";
+import NumberCell from "../CellTypes/numberCell";
+import DateCell from "../CellTypes/dateCell";
 
 // libraries
 import { useSelector } from "react-redux";
@@ -76,6 +78,40 @@ const Cell = ({ data, boardColumn, boardId, groupId, taskId, permitted }) => {
 						boardColumnId={columnId}
 						value={value}
 						options={allOptions}
+						permitted={permitted}
+					/>
+				);
+			case STATUS_CELL:
+				return (
+					<PriorityCell
+						boardId={boardId}
+						taskId={taskId}
+						boardColumnId={columnId}
+						value={value}
+						options={allOptions}
+						permitted={permitted}
+						status={true}
+					/>
+				);
+			case NUMBER_CELL:
+				return (
+					<NumberCell
+						boardId={boardId}
+						groupId={groupId}
+						taskId={taskId}
+						boardColumnId={columnId}
+						value={value}
+						permitted={permitted}
+					/>
+				);
+			case DUE_DATE_CELL:
+				return (
+					<DateCell
+						boardId={boardId}
+						groupId={groupId}
+						taskId={taskId}
+						boardColumnId={columnId}
+						value={value}
 						permitted={permitted}
 					/>
 				);

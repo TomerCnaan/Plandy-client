@@ -44,6 +44,7 @@ const PriorityCell = ({
 	options,
 	value,
 	permitted,
+	status = false,
 }) => {
 	const [priorityValue, setPriorityValue] = useState(value ? value : null);
 	const [anchor, setAnchor] = useState(null);
@@ -64,12 +65,21 @@ const PriorityCell = ({
 		setBgColor(option.color);
 
 		try {
-			await cellService.setPriorityCell(
-				boardId,
-				taskId,
-				option.value,
-				boardColumnId
-			);
+			if (!status) {
+				await cellService.setPriorityCell(
+					boardId,
+					taskId,
+					option.value,
+					boardColumnId
+				);
+			} else {
+				await cellService.setStatusCell(
+					boardId,
+					taskId,
+					option.value,
+					boardColumnId
+				);
+			}
 		} catch (ex) {
 			if (ex.response && ex.response.status < 500) {
 				toast.error(ex.response.data);
@@ -95,7 +105,7 @@ const PriorityCell = ({
 				bg={bgColor}
 				value={priorityValue}
 				onClick={(e) => setAnchor(e.currentTarget)}
-				title="Click to change the priority"
+				title="Click to change the value"
 				disabled={!permitted}
 			>
 				<span>{priorityValue}</span>
