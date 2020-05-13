@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -6,10 +6,15 @@ import "../style/form-elements.css";
 
 const ReuseableDatePicker = ({ dateValue, handlePick }) => {
 	const [selectedDate, setSelectedDate] = useState(dateValue);
+	const dateRef = useRef(null);
 
 	useEffect(() => {
 		handlePick(selectedDate);
 	}, [selectedDate]);
+
+	const handleKeyPress = (e) => {
+		dateRef.current.blur();
+	};
 
 	return (
 		<div>
@@ -19,6 +24,8 @@ const ReuseableDatePicker = ({ dateValue, handlePick }) => {
 				dateFormat="dd/MM/yyyy"
 				minDate={new Date()}
 				isClearable={dateValue}
+				onKeyDown={handleKeyPress}
+				ref={dateRef}
 			/>
 		</div>
 	);

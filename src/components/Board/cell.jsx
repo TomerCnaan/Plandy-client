@@ -6,6 +6,7 @@ import LinkCell from "../CellTypes/linkCell";
 import PriorityCell from "../CellTypes/priorityCell";
 import NumberCell from "../CellTypes/numberCell";
 import DateCell from "../CellTypes/dateCell";
+import AssignCell from "../CellTypes/assignCell";
 
 // libraries
 import { useSelector } from "react-redux";
@@ -115,6 +116,8 @@ const Cell = ({ data, boardColumn, boardId, groupId, taskId, permitted }) => {
 						permitted={permitted}
 					/>
 				);
+			case ASSIGN_CELL:
+				return <AssignCell />;
 			default:
 				break;
 		}

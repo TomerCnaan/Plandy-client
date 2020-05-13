@@ -6,6 +6,7 @@ import Slider from "./slider";
 // services
 import companyService from "../services/companyService";
 import userService from "../services/userService";
+import randomColor from "../util/randomColor";
 
 // style
 import styled from "styled-components";
@@ -120,18 +121,6 @@ const TeamPage = ({ user }) => {
 				toast.error(ex.response.data);
 			}
 		}
-	};
-
-	const randomColor = () => {
-		const colors = [
-			"#E94B56",
-			"#EAA89C",
-			"#1976D2",
-			"#30AA8D",
-			"#2D59A2",
-			"#C83772",
-		];
-		return colors[Math.floor(Math.random() * colors.length)];
 	};
 
 	const handleRoleChange = async (e, compUser) => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import moment from "moment";
 
@@ -37,7 +37,7 @@ const Text = styled.div`
 	height: 75%;
 	font-weight: lighter;
 	font-size: 14px;
-	color: #5a5a5a;
+	color: lightcoral;
 	border: 1px solid transparent;
 	padding: 0 2px;
 `;
@@ -46,8 +46,10 @@ const DateCell = ({ boardId, groupId, taskId, boardColumnId, value }) => {
 	const [dateValue, setDateValue] = useState(value ? new Date(value) : "");
 	const [hovered, setHovered] = useState(false);
 	const [focused, setFocused] = useState(false);
+	const dateRef = useRef(null);
 
 	const handlePick = async (date) => {
+		dateRef.current.blur();
 		if (date === dateValue) return;
 		setDateValue(date);
 		const originalDate = value;
@@ -74,6 +76,7 @@ const DateCell = ({ boardId, groupId, taskId, boardColumnId, value }) => {
 			onMouseLeave={() => setHovered(false)}
 			onClick={() => setFocused(true)}
 			onBlur={() => setFocused(false)}
+			ref={dateRef}
 		>
 			<Text hovered={hovered} focused={focused}>
 				<span style={{ whiteSpace: "nowrap" }}>

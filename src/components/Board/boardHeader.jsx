@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 // services
 import boardService from "../../services/boardService";
-import boardInfo from "../../text/boardInfo";
+import boardInfo from "../../util/boardInfo";
 
 // libraries
 import { useSelector, useDispatch } from "react-redux";
