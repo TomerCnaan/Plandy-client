@@ -1,3 +1,12 @@
+Plandy-client:
+
+The front-end of plandy.online.
+The code is written using React (JS framework).
+
+The code is written in the src folder.
+
+File Tree:
+
 |-- README.md        
 |-- package-lock.json
 |-- package.json     
